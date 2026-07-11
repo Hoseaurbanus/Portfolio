@@ -1,0 +1,181 @@
+import { useState, type FormEvent } from 'react'
+import { motion } from 'motion/react'
+import { Mail, Linkedin, Github, ArrowRight, CheckCircle2, Loader2 } from 'lucide-react'
+import { RevealGroup } from '../shared/RevealGroup'
+import { fadeUp } from '../shared/Reveal'
+import { SectionLabel } from '../shared/SectionLabel'
+import { sendContactEmail } from '@/lib/emailjs'
+
+export default function Contact() {
+  const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    setStatus('loading')
+
+    const success = await sendContactEmail(form)
+
+    if (success) {
+      setStatus('success')
+      setForm({ name: '', email: '', message: '' })
+      setTimeout(() => setStatus('idle'), 5000)
+    } else {
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 3000)
+    }
+  }
+
+  return (
+    <section id="contact" className="py-32 border-t border-border">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <RevealGroup>
+          <SectionLabel>Contact</SectionLabel>
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+            <div>
+              <motion.h2
+                variants={fadeUp}
+                className="font-serif text-4xl lg:text-[3.25rem] font-bold text-foreground mb-6 leading-[1.1]"
+              >
+                Let&apos;s build something great.
+              </motion.h2>
+              <motion.p
+                variants={fadeUp}
+                className="text-muted-foreground leading-[1.8] text-[0.95rem] mb-10"
+              >
+                Whether you have a project in mind, a role to fill, or simply
+                want to connect — I read every message and respond within 24
+                hours.
+              </motion.p>
+              <motion.div variants={fadeUp} className="space-y-4">
+                {[
+                  {
+                    Icon: Mail,
+                    label: 'Email',
+                    value: 'hosea.audu@gmail.com',
+                    href: 'mailto:hosea.audu@gmail.com',
+                  },
+                  {
+                    Icon: Linkedin,
+                    label: 'LinkedIn',
+                    value: 'linkedin.com/in/hoseaaudu',
+                    href: 'https://linkedin.com/in/hoseaaudu',
+                  },
+                  {
+                    Icon: Github,
+                    label: 'GitHub',
+                    value: 'github.com/hoseaaudu',
+                    href: 'https://github.com/hoseaaudu',
+                  },
+                ].map(({ Icon, label, value, href }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target={href.startsWith('http') ? '_blank' : undefined}
+                    rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="flex items-center gap-4 group"
+                  >
+                    <div className="p-2.5 rounded-lg border border-border bg-card group-hover:border-accent/40 group-hover:bg-accent/5 transition-all duration-200">
+                      <Icon
+                        size={15}
+                        className="text-muted-foreground group-hover:text-accent transition-colors duration-200"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
+                        {label}
+                      </p>
+                      <p className="text-sm text-foreground">{value}</p>
+                    </div>
+                  </a>
+                ))}
+              </motion.div>
+            </div>
+
+            <motion.form
+              variants={fadeUp}
+              onSubmit={handleSubmit}
+              className="space-y-4"
+            >
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="contact-name" className="block text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">
+                    Name
+                  </label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    required
+                    placeholder="Your name"
+                    className="w-full px-4 py-3 bg-card border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-200"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="contact-email" className="block text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">
+                    Email
+                  </label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    required
+                    placeholder="your@email.com"
+                    className="w-full px-4 py-3 bg-card border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-200"
+                  />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="contact-message" className="block text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">
+                  Message
+                </label>
+                <textarea
+                  id="contact-message"
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  required
+                  rows={6}
+                  placeholder="Tell me about your project or opportunity..."
+                  className="w-full px-4 py-3 bg-card border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-200 resize-none"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="w-full py-3 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent/90 active:scale-[0.99] transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {status === 'loading' ? (
+                  <>
+                    <Loader2 size={15} className="animate-spin" />
+                    Sending...
+                  </>
+                ) : status === 'success' ? (
+                  <>
+                    <CheckCircle2 size={15} />
+                    Message sent — I&apos;ll be in touch soon.
+                  </>
+                ) : status === 'error' ? (
+                  <>
+                    Something went wrong. Try again.
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <ArrowRight size={15} />
+                  </>
+                )}
+              </button>
+              {status === 'error' && (
+                <p className="text-xs text-destructive text-center">
+                  Failed to send message. Please try again or email me directly.
+                </p>
+              )}
+            </motion.form>
+          </div>
+        </RevealGroup>
+      </div>
+    </section>
+  )
+}
