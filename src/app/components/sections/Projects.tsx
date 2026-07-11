@@ -58,7 +58,7 @@ const projects: Project[] = [
     tech: ['Tech 1', 'Tech 2', 'Tech 3'],
     outcome:
       'Describe the measurable outcome or impact of this project.',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=880&h=520&fit=crop&auto=format',
+    image: '',
     github: 'https://github.com/Hoseaurbanus',
     demo: '#',
   },
@@ -76,7 +76,7 @@ const projects: Project[] = [
     tech: ['Tech 1', 'Tech 2', 'Tech 3'],
     outcome:
       'Describe the measurable outcome or impact of this project.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=880&h=520&fit=crop&auto=format',
+    image: '',
     github: 'https://github.com/Hoseaurbanus',
     demo: '#',
   },
@@ -119,14 +119,20 @@ export default function Projects() {
               >
                 <div className="grid sm:grid-cols-[1fr] lg:grid-cols-[380px_1fr] gap-0">
                   <div className="relative h-48 sm:h-52 lg:h-56 overflow-hidden bg-muted shrink-0">
-                    <motion.img
-                      src={p.image}
-                      alt={p.name}
-                      loading="lazy"
-                      whileHover={{ scale: 1.04 }}
-                      transition={{ duration: 0.5, ease }}
-                      className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
-                    />
+                    {p.image ? (
+                      <motion.img
+                        src={p.image}
+                        alt={p.name}
+                        loading="lazy"
+                        whileHover={{ scale: 1.04 }}
+                        transition={{ duration: 0.5, ease }}
+                        className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-accent/10 via-accent/5 to-muted flex items-center justify-center">
+                        <span className="text-3xl font-serif font-bold text-accent/20">{p.index}</span>
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-card hidden sm:block" />
                     <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent sm:hidden" />
                   </div>

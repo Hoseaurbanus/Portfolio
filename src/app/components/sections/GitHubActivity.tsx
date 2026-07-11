@@ -17,10 +17,10 @@ const levelClasses = [
 
 export default function GitHubActivity() {
   const [stats, setStats] = useState<GitHubStats>({
-    publicRepos: 24,
-    totalStars: 1200,
-    contributions: 847,
-    pullRequestsMerged: 120,
+    publicRepos: 0,
+    totalStars: 0,
+    contributions: 0,
+    pullRequestsMerged: 0,
   })
   const [weeks, setWeeks] = useState<GitHubDay[][]>([])
   const [loading, setLoading] = useState(true)
@@ -58,7 +58,6 @@ export default function GitHubActivity() {
 
   const statItems = [
     { value: stats.publicRepos, label: 'Public Repos' },
-    { value: Math.round(stats.totalStars / 100) / 10, suffix: 'k', label: 'Total Stars' },
     { value: stats.contributions, label: `Contributions (${new Date().getFullYear()})` },
     { value: stats.pullRequestsMerged, suffix: '+', label: 'Pull Requests Merged' },
   ]
@@ -84,7 +83,7 @@ export default function GitHubActivity() {
 
           <motion.div
             variants={fadeUp}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mb-8 lg:mb-10 pb-8 lg:pb-10 border-b border-border"
+            className="grid grid-cols-3 gap-6 sm:gap-8 mb-8 lg:mb-10 pb-8 lg:pb-10 border-b border-border"
           >
             {statItems.map(({ value, suffix = '', label }) => (
               <div key={label}>

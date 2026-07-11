@@ -1,4 +1,4 @@
-import { useEffect, Component, type ReactNode } from 'react'
+import { useEffect, useState, useCallback, Component, type ReactNode } from 'react'
 import Nav from './components/layout/Nav'
 import Hero from './components/sections/Hero'
 import About from './components/sections/About'
@@ -12,6 +12,7 @@ import GitHubActivity from './components/sections/GitHubActivity'
 import Contact from './components/sections/Contact'
 import Footer from './components/sections/Footer'
 import BackToTop from './components/shared/BackToTop'
+import Preloader from './components/shared/Preloader'
 
 class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
   state = { hasError: false }
@@ -44,12 +45,16 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boole
 }
 
 export default function App() {
+  const [loaded, setLoaded] = useState(false)
+  const handleComplete = useCallback(() => setLoaded(true), [])
+
   useEffect(() => {
     document.documentElement.classList.add('dark')
   }, [])
 
   return (
     <ErrorBoundary>
+      <Preloader onComplete={handleComplete} />
       <div className="min-h-screen bg-background text-foreground antialiased">
         <a
           href="#main-content"

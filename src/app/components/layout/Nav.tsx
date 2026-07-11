@@ -191,6 +191,17 @@ export default function Nav() {
               >
                 Hire Me
               </motion.button>
+              <motion.a
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.52 }}
+                href="/Hosea_Urbanus_Audu_CV.pdf"
+                download
+                className="mt-3 px-6 py-3 border border-border text-foreground text-base font-medium rounded-md w-full min-h-[44px] flex items-center justify-center gap-2 hover:bg-card transition-all duration-200"
+              >
+                <Download size={15} />
+                Download CV
+              </motion.a>
             </motion.div>
           </>
         )}

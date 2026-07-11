@@ -27,7 +27,7 @@ export default function GlowOrb({
         const wasVisible = isVisible.current
         isVisible.current = entry.isIntersecting
         if (!wasVisible && entry.isIntersecting) {
-          startTime.current = Date.now() - startTime.current
+          startTime.current = Date.now()
           frameRef.current = requestAnimationFrame(animate)
         }
       },

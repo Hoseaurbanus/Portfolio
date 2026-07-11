@@ -47,14 +47,14 @@ export default function Services() {
             What I deliver.
           </motion.h2>
 
-          <div className="grid sm:grid-cols-2 gap-px bg-border rounded-2xl overflow-hidden">
+          <div className="grid sm:grid-cols-2 gap-3">
             {services.map(({ Icon, title, body, tags }) => (
               <motion.div
                 key={title}
                 variants={fadeUp}
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3, ease }}
-                className="group p-6 sm:p-8 lg:p-10 bg-background hover:bg-card transition-colors duration-300"
+                className="group p-6 sm:p-8 lg:p-10 bg-card border border-border rounded-2xl hover:border-accent/25 transition-all duration-300"
               >
                 <motion.div
                   whileHover={{ scale: 1.15, rotate: 8 }}

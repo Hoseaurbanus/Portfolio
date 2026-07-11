@@ -242,7 +242,7 @@ export default function Hero() {
                   src="/photo.jpg"
                   alt="Hosea Urbanus Audu — portrait"
                   fetchPriority="high"
-                  className="w-full h-full object-cover opacity-55 mix-blend-luminosity"
+                  className="w-full h-full object-cover opacity-75"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/8 to-transparent" />
@@ -280,13 +280,14 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.5, ease }}
-            className="lg:hidden flex justify-center -mt-4"
-          >
-            <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-2xl border border-border overflow-hidden bg-muted">
-              <img
-                src="/photo.jpg"
-                alt="Hosea Urbanus Audu — portrait"
-                className="w-full h-full object-cover opacity-55 mix-blend-luminosity"
+              className="lg:hidden flex justify-center -mt-4"
+            >
+              <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-2xl border border-border overflow-hidden bg-muted">
+                <img
+                  src="/photo.jpg"
+                  alt="Hosea Urbanus Audu — portrait"
+                  fetchPriority="high"
+                  className="w-full h-full object-cover opacity-75"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
             </div>
