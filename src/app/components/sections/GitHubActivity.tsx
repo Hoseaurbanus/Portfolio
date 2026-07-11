@@ -4,6 +4,7 @@ import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
 import { SectionLabel } from '../shared/SectionLabel'
 import { fetchGitHubStats, fetchGitHubActivity } from '@/lib/github'
+import AnimatedCounter from '../shared/AnimatedCounter'
 import type { GitHubStats, GitHubDay } from '@/types'
 
 const levelClasses = [
@@ -37,20 +38,27 @@ export default function GitHubActivity() {
     load()
   }, [])
 
+  const statItems = [
+    { value: stats.publicRepos, label: 'Public Repos' },
+    { value: Math.round(stats.totalStars / 100) / 10, suffix: 'k', label: 'Total Stars' },
+    { value: stats.contributions, label: `Contributions (${new Date().getFullYear()})` },
+    { value: stats.pullRequestsMerged, suffix: '+', label: 'Pull Requests Merged' },
+  ]
+
   return (
-    <section id="opensource" className="py-32 border-t border-border">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <section id="opensource" className="py-20 md:py-32 border-t border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <RevealGroup>
           <SectionLabel>Open Source & GitHub</SectionLabel>
           <motion.h2
             variants={fadeUp}
-            className="font-serif text-4xl lg:text-[3.25rem] font-bold text-foreground mb-4 leading-[1.1]"
+            className="font-serif text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-4 leading-[1.1]"
           >
             Built in public.
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="text-muted-foreground max-w-xl mb-10 leading-[1.75] text-[0.95rem]"
+            className="text-muted-foreground max-w-xl mb-8 lg:mb-10 leading-[1.75] text-[0.95rem]"
           >
             Consistent contribution to open source and personal tools.
             Every square represents a commit.
@@ -58,43 +66,49 @@ export default function GitHubActivity() {
 
           <motion.div
             variants={fadeUp}
-            className="flex flex-wrap gap-8 mb-10 pb-10 border-b border-border"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mb-8 lg:mb-10 pb-8 lg:pb-10 border-b border-border"
           >
-            {[
-              { value: stats.publicRepos.toString(), label: 'Public Repos' },
-              { value: stats.totalStars >= 1000 ? `${(stats.totalStars / 1000).toFixed(1)}k` : stats.totalStars.toString(), label: 'Total Stars' },
-              { value: stats.contributions.toString(), label: `Contributions (${new Date().getFullYear()})` },
-              { value: `${stats.pullRequestsMerged}+`, label: 'Pull Requests Merged' },
-            ].map(({ value, label }) => (
+            {statItems.map(({ value, suffix = '', label }) => (
               <div key={label}>
-                <p className="font-serif text-3xl font-bold text-foreground">
-                  {loading ? '—' : value}
+                <p className="font-serif text-2xl sm:text-3xl font-bold text-foreground">
+                  {loading ? (
+                    '—'
+                  ) : (
+                    <AnimatedCounter value={value} suffix={suffix} duration={2} />
+                  )}
                 </p>
-                <p className="text-xs font-mono text-muted-foreground mt-0.5">
+                <p className="text-[10px] sm:text-xs font-mono text-muted-foreground mt-0.5">
                   {label}
                 </p>
               </div>
             ))}
           </motion.div>
 
-          <motion.div variants={fadeUp} className="overflow-x-auto pb-2">
+          <motion.div variants={fadeUp} className="overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
             <div className="flex gap-1 min-w-max">
               {weeks.map((week, wi) => (
-                <div key={wi} className="flex flex-col gap-1">
+                <motion.div
+                  key={wi}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: Math.min(wi * 0.01, 0.5) }}
+                  className="flex flex-col gap-1"
+                >
                   {week.map((day, di) => (
                     <div
                       key={di}
-                      className={`w-3 h-3 rounded-[3px] ${levelClasses[day.level]} hover:ring-1 hover:ring-accent/40 transition-all cursor-default`}
+                      className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-[3px] ${levelClasses[day.level]} hover:ring-1 hover:ring-accent/40 transition-all cursor-default`}
                       title={day.date ? `${day.count} contribution${day.count !== 1 ? 's' : ''} on ${day.date}` : ''}
                     />
                   ))}
-                </div>
+                </motion.div>
               ))}
             </div>
             <div className="flex items-center gap-2 mt-3 text-[10px] font-mono text-muted-foreground">
               <span>Less</span>
               {levelClasses.map((cls, i) => (
-                <div key={i} className={`w-3 h-3 rounded-[3px] ${cls}`} />
+                <div key={i} className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-[3px] ${cls}`} />
               ))}
               <span>More</span>
             </div>

@@ -7,6 +7,8 @@ import {
   Server,
   BookOpen,
 } from 'lucide-react'
+
+const ease = [0.22, 1, 0.36, 1] as const
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
 import { SectionLabel } from '../shared/SectionLabel'
@@ -46,19 +48,19 @@ const principles = [
 
 export default function Philosophy() {
   return (
-    <section id="philosophy" className="py-32 border-t border-border">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <section id="philosophy" className="py-20 md:py-32 border-t border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <RevealGroup>
           <SectionLabel>Engineering Philosophy</SectionLabel>
           <motion.h2
             variants={fadeUp}
-            className="font-serif text-4xl lg:text-[3.25rem] font-bold text-foreground mb-4 leading-[1.1] max-w-2xl"
+            className="font-serif text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-4 leading-[1.1] max-w-2xl"
           >
             How I think about building software.
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="text-muted-foreground max-w-xl mb-14 leading-[1.75] text-[0.95rem]"
+            className="text-muted-foreground max-w-xl mb-10 lg:mb-14 leading-[1.75] text-[0.95rem]"
           >
             These are not aspirations. They are constraints I impose on every
             project I touch — from architecture to code review to deployment.
@@ -69,11 +71,17 @@ export default function Philosophy() {
               <motion.div
                 key={title}
                 variants={fadeUp}
-                className="group p-8 bg-background hover:bg-card transition-colors duration-300"
+                whileHover={{ y: -6, backgroundColor: 'rgba(17, 17, 22, 1)' }}
+                transition={{ duration: 0.3, ease }}
+                className="group p-6 sm:p-8 bg-background transition-colors duration-300"
               >
-                <div className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center mb-5 group-hover:bg-accent/20 transition-colors duration-300">
+                <motion.div
+                  whileHover={{ rotate: 12, scale: 1.1 }}
+                  transition={{ duration: 0.3, ease }}
+                  className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center mb-5 group-hover:bg-accent/20 transition-colors duration-300"
+                >
                   <Icon size={16} className="text-accent" />
-                </div>
+                </motion.div>
                 <h3 className="font-serif text-lg font-bold text-foreground mb-3">
                   {title}
                 </h3>

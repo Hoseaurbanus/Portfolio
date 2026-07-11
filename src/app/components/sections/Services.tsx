@@ -1,5 +1,7 @@
 import { motion } from 'motion/react'
 import { Globe, BarChart3, Server, Briefcase } from 'lucide-react'
+
+const ease = [0.22, 1, 0.36, 1] as const
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
 import { SectionLabel } from '../shared/SectionLabel'
@@ -34,29 +36,37 @@ const services: Service[] = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-32 border-t border-border">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <section id="services" className="py-20 md:py-32 border-t border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <RevealGroup>
           <SectionLabel>Services</SectionLabel>
           <motion.h2
             variants={fadeUp}
-            className="font-serif text-4xl lg:text-[3.25rem] font-bold text-foreground mb-14 leading-[1.1]"
+            className="font-serif text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-10 lg:mb-14 leading-[1.1]"
           >
             What I deliver.
           </motion.h2>
 
-          <div className="grid md:grid-cols-2 gap-px bg-border rounded-2xl overflow-hidden">
+          <div className="grid sm:grid-cols-2 gap-px bg-border rounded-2xl overflow-hidden">
             {services.map(({ Icon, title, body, tags }) => (
               <motion.div
                 key={title}
                 variants={fadeUp}
-                className="group p-8 lg:p-10 bg-background hover:bg-card transition-colors duration-300"
+                whileHover={{ y: -4, backgroundColor: 'rgba(17, 17, 22, 1)' }}
+                transition={{ duration: 0.3, ease }}
+                className="group p-6 sm:p-8 lg:p-10 bg-background transition-colors duration-300"
               >
-                <Icon size={22} className="text-accent mb-6" />
-                <h3 className="font-serif text-xl font-bold text-foreground mb-3">
+                <motion.div
+                  whileHover={{ scale: 1.15, rotate: 8 }}
+                  transition={{ duration: 0.3 }}
+                  className="inline-block mb-5 lg:mb-6"
+                >
+                  <Icon size={22} className="text-accent" />
+                </motion.div>
+                <h3 className="font-serif text-lg sm:text-xl font-bold text-foreground mb-3">
                   {title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-[1.75] mb-5">
+                <p className="text-sm text-muted-foreground leading-[1.75] mb-4 lg:mb-5">
                   {body}
                 </p>
                 <div className="flex flex-wrap gap-2">

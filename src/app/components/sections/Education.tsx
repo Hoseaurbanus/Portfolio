@@ -30,27 +30,32 @@ const certifications: Certification[] = [
 
 export default function Education() {
   return (
-    <section id="education" className="py-32 border-t border-border">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20">
+    <section id="education" className="py-20 md:py-32 border-t border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 lg:gap-20">
           <RevealGroup>
             <SectionLabel>Education</SectionLabel>
             <motion.h2
               variants={fadeUp}
-              className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-10 leading-[1.1]"
+              className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-8 lg:mb-10 leading-[1.1]"
             >
               Academic background.
             </motion.h2>
             <motion.div
               variants={fadeUp}
-              className="p-6 lg:p-8 border border-border rounded-xl bg-card"
+              whileHover={{ borderColor: 'rgba(99, 102, 241, 0.2)' }}
+              className="p-5 sm:p-6 lg:p-8 border border-border rounded-xl bg-card transition-colors duration-300"
             >
               <div className="flex items-start gap-4">
-                <div className="p-2.5 rounded-lg bg-accent/10 border border-accent/20 shrink-0">
+                <motion.div
+                  whileHover={{ rotate: 12, scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                  className="p-2.5 rounded-lg bg-accent/10 border border-accent/20 shrink-0"
+                >
                   <GraduationCap size={20} className="text-accent" />
-                </div>
+                </motion.div>
                 <div>
-                  <h3 className="font-serif text-xl font-bold text-foreground">
+                  <h3 className="font-serif text-lg sm:text-xl font-bold text-foreground">
                     B.Sc. Physics
                   </h3>
                   <p className="text-accent font-mono text-sm mt-0.5">
@@ -73,7 +78,7 @@ export default function Education() {
             <SectionLabel>Certifications</SectionLabel>
             <motion.h2
               variants={fadeUp}
-              className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-10 leading-[1.1]"
+              className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-8 lg:mb-10 leading-[1.1]"
             >
               Professional credentials.
             </motion.h2>
@@ -82,11 +87,17 @@ export default function Education() {
                 <motion.div
                   key={i}
                   variants={fadeUp}
-                  className="flex items-center gap-4 p-4 border border-border rounded-xl bg-card hover:border-accent/30 transition-colors duration-200"
+                  whileHover={{ x: 4, borderColor: 'rgba(99, 102, 241, 0.2)' }}
+                  transition={{ duration: 0.2 }}
+                  className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 border border-border rounded-xl bg-card transition-colors duration-200"
                 >
-                  <div className="p-2 rounded-lg bg-accent/10 border border-accent/20 shrink-0">
+                  <motion.div
+                    whileHover={{ rotate: 15 }}
+                    transition={{ duration: 0.3 }}
+                    className="p-2 rounded-lg bg-accent/10 border border-accent/20 shrink-0"
+                  >
                     <Award size={15} className="text-accent" />
-                  </div>
+                  </motion.div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-foreground truncate">
                       {cert.name}

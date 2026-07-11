@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
-import { motion } from 'motion/react'
-import { Mail, Linkedin, Github, ArrowRight, CheckCircle2, Loader2 } from 'lucide-react'
+import { motion, AnimatePresence } from 'motion/react'
+import { Mail, Linkedin, Github, ArrowRight, CheckCircle2, Loader2, XCircle } from 'lucide-react'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
 import { SectionLabel } from '../shared/SectionLabel'
@@ -13,9 +13,7 @@ export default function Contact() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setStatus('loading')
-
     const success = await sendContactEmail(form)
-
     if (success) {
       setStatus('success')
       setForm({ name: '', email: '', message: '' })
@@ -27,27 +25,27 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-32 border-t border-border">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <section id="contact" className="py-20 md:py-32 border-t border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <RevealGroup>
           <SectionLabel>Contact</SectionLabel>
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 lg:gap-24">
             <div>
               <motion.h2
                 variants={fadeUp}
-                className="font-serif text-4xl lg:text-[3.25rem] font-bold text-foreground mb-6 leading-[1.1]"
+                className="font-serif text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-5 lg:mb-6 leading-[1.1]"
               >
                 Let&apos;s build something great.
               </motion.h2>
               <motion.p
                 variants={fadeUp}
-                className="text-muted-foreground leading-[1.8] text-[0.95rem] mb-10"
+                className="text-muted-foreground leading-[1.8] text-[0.95rem] mb-8 lg:mb-10"
               >
                 Whether you have a project in mind, a role to fill, or simply
                 want to connect — I read every message and respond within 24
                 hours.
               </motion.p>
-              <motion.div variants={fadeUp} className="space-y-4">
+              <motion.div variants={fadeUp} className="space-y-3 sm:space-y-4">
                 {[
                   {
                     Icon: Mail,
@@ -68,11 +66,13 @@ export default function Contact() {
                     href: 'https://github.com/hoseaaudu',
                   },
                 ].map(({ Icon, label, value, href }) => (
-                  <a
+                  <motion.a
                     key={label}
                     href={href}
                     target={href.startsWith('http') ? '_blank' : undefined}
                     rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.2 }}
                     className="flex items-center gap-4 group"
                   >
                     <div className="p-2.5 rounded-lg border border-border bg-card group-hover:border-accent/40 group-hover:bg-accent/5 transition-all duration-200">
@@ -87,7 +87,7 @@ export default function Contact() {
                       </p>
                       <p className="text-sm text-foreground">{value}</p>
                     </div>
-                  </a>
+                  </motion.a>
                 ))}
               </motion.div>
             </div>
@@ -97,33 +97,35 @@ export default function Contact() {
               onSubmit={handleSubmit}
               className="space-y-4"
             >
-              <div className="grid sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="contact-name" className="block text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">
                     Name
                   </label>
-                  <input
+                  <motion.input
+                    whileFocus={{ borderColor: 'rgba(99, 102, 241, 0.5)', boxShadow: '0 0 0 3px rgba(99, 102, 241, 0.1)' }}
                     id="contact-name"
                     type="text"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     required
                     placeholder="Your name"
-                    className="w-full px-4 py-3 bg-card border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-200"
+                    className="w-full px-4 py-3 bg-card border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none transition-all duration-200"
                   />
                 </div>
                 <div>
                   <label htmlFor="contact-email" className="block text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">
                     Email
                   </label>
-                  <input
+                  <motion.input
+                    whileFocus={{ borderColor: 'rgba(99, 102, 241, 0.5)', boxShadow: '0 0 0 3px rgba(99, 102, 241, 0.1)' }}
                     id="contact-email"
                     type="email"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     required
                     placeholder="your@email.com"
-                    className="w-full px-4 py-3 bg-card border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-200"
+                    className="w-full px-4 py-3 bg-card border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none transition-all duration-200"
                   />
                 </div>
               </div>
@@ -131,47 +133,48 @@ export default function Contact() {
                 <label htmlFor="contact-message" className="block text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">
                   Message
                 </label>
-                <textarea
+                <motion.textarea
+                  whileFocus={{ borderColor: 'rgba(99, 102, 241, 0.5)', boxShadow: '0 0 0 3px rgba(99, 102, 241, 0.1)' }}
                   id="contact-message"
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   required
-                  rows={6}
+                  rows={5}
                   placeholder="Tell me about your project or opportunity..."
-                  className="w-full px-4 py-3 bg-card border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-200 resize-none"
+                  className="w-full px-4 py-3 bg-card border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none transition-all duration-200 resize-none"
                 />
               </div>
-              <button
+              <motion.button
                 type="submit"
                 disabled={status === 'loading'}
-                className="w-full py-3 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent/90 active:scale-[0.99] transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                whileHover={{ scale: status === 'loading' ? 1 : 1.02 }}
+                whileTap={{ scale: status === 'loading' ? 1 : 0.98 }}
+                className="w-full py-3 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent/90 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {status === 'loading' ? (
-                  <>
-                    <Loader2 size={15} className="animate-spin" />
-                    Sending...
-                  </>
-                ) : status === 'success' ? (
-                  <>
-                    <CheckCircle2 size={15} />
-                    Message sent — I&apos;ll be in touch soon.
-                  </>
-                ) : status === 'error' ? (
-                  <>
-                    Something went wrong. Try again.
-                  </>
-                ) : (
-                  <>
-                    Send Message
-                    <ArrowRight size={15} />
-                  </>
-                )}
-              </button>
-              {status === 'error' && (
-                <p className="text-xs text-destructive text-center">
-                  Failed to send message. Please try again or email me directly.
-                </p>
-              )}
+                <AnimatePresence mode="wait">
+                  {status === 'loading' ? (
+                    <motion.div key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2">
+                      <Loader2 size={15} className="animate-spin" />
+                      Sending...
+                    </motion.div>
+                  ) : status === 'success' ? (
+                    <motion.div key="success" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2">
+                      <CheckCircle2 size={15} />
+                      Sent! I&apos;ll reply soon.
+                    </motion.div>
+                  ) : status === 'error' ? (
+                    <motion.div key="error" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2">
+                      <XCircle size={15} />
+                      Failed. Try again.
+                    </motion.div>
+                  ) : (
+                    <motion.div key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2">
+                      Send Message
+                      <ArrowRight size={15} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.button>
             </motion.form>
           </div>
         </RevealGroup>

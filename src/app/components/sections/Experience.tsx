@@ -1,5 +1,7 @@
 import { motion } from 'motion/react'
 import { CheckCircle2 } from 'lucide-react'
+
+const ease = [0.22, 1, 0.36, 1] as const
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
 import { SectionLabel } from '../shared/SectionLabel'
@@ -52,27 +54,36 @@ const experience: Experience[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-32 border-t border-border">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <section id="experience" className="py-20 md:py-32 border-t border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <RevealGroup>
           <SectionLabel>Experience</SectionLabel>
           <motion.h2
             variants={fadeUp}
-            className="font-serif text-4xl lg:text-[3.25rem] font-bold text-foreground mb-14 leading-[1.1]"
+            className="font-serif text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-10 lg:mb-14 leading-[1.1]"
           >
             Where I&apos;ve worked.
           </motion.h2>
 
           <div className="relative">
-            <div className="absolute left-0 md:left-[11rem] top-3 bottom-3 w-px bg-border hidden md:block" />
+            {/* Timeline spine — animated */}
+            <motion.div
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute left-0 md:left-[11rem] top-3 bottom-3 w-px bg-border hidden md:block"
+              style={{ transformOrigin: 'top' }}
+            />
 
-            <div className="space-y-8">
+            <div className="space-y-6 lg:space-y-8">
               {experience.map((job, i) => (
                 <motion.div
                   key={i}
                   variants={fadeUp}
-                  className="md:grid md:grid-cols-[11rem_1fr] gap-10"
+                  className="md:grid md:grid-cols-[11rem_1fr] gap-8 lg:gap-10"
                 >
+                  {/* Period column — desktop */}
                   <div className="hidden md:flex flex-col items-end pr-10 pt-1 relative">
                     <p className="text-xs font-mono text-muted-foreground text-right leading-[1.6]">
                       {job.period}
@@ -80,16 +91,30 @@ export default function Experience() {
                     <p className="text-[10px] font-mono text-muted-foreground/60 text-right">
                       {job.location}
                     </p>
-                    <div className="absolute right-[-4.5px] top-1.5 w-2 h-2 rounded-full bg-accent border-2 border-background" />
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.2 + i * 0.15, ease }}
+                      className="absolute right-[-4.5px] top-1.5 w-2 h-2 rounded-full bg-accent border-2 border-background"
+                    />
                   </div>
 
-                  <div className="p-6 lg:p-8 rounded-xl border border-border bg-card hover:border-accent/25 transition-colors duration-300">
-                    <div className="md:hidden mb-2">
-                      <p className="text-[10px] font-mono text-muted-foreground">
-                        {job.period} · {job.location}
-                      </p>
+                  {/* Card */}
+                  <motion.div
+                    whileHover={{ borderColor: 'rgba(99, 102, 241, 0.2)' }}
+                    className="p-5 sm:p-6 lg:p-8 rounded-xl border border-border bg-card transition-colors duration-300"
+                  >
+                    {/* Mobile period badge */}
+                    <div className="flex items-center gap-2 mb-2 md:hidden">
+                      <span className="inline-flex items-center px-2.5 py-1 text-[10px] font-mono text-muted-foreground bg-muted rounded-full border border-border">
+                        {job.period}
+                      </span>
+                      <span className="text-[10px] font-mono text-muted-foreground/60">
+                        {job.location}
+                      </span>
                     </div>
-                    <h3 className="font-serif text-xl font-bold text-foreground">
+                    <h3 className="font-serif text-lg sm:text-xl font-bold text-foreground">
                       {job.role}
                     </h3>
                     <p className="text-accent font-mono text-sm mt-0.5 mb-3">
@@ -98,7 +123,7 @@ export default function Experience() {
                     <p className="text-sm text-muted-foreground leading-[1.75] mb-4">
                       {job.description}
                     </p>
-                    <ul className="space-y-2 mb-5">
+                    <ul className="space-y-2 mb-4 lg:mb-5">
                       {job.highlights.map((h, j) => (
                         <li
                           key={j}
@@ -122,7 +147,7 @@ export default function Experience() {
                         </span>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
                 </motion.div>
               ))}
             </div>

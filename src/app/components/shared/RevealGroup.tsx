@@ -9,7 +9,7 @@ interface RevealGroupProps {
 
 export function RevealGroup({ children, className = '' }: RevealGroupProps) {
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: true, margin: '-20px' })
   return (
     <motion.div
       ref={ref}
