@@ -260,19 +260,6 @@ export default function Hero() {
                   Best Graduating Student
                 </p>
               </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 1.1, ease }}
-                whileHover={{ scale: 1.05, y: -4 }}
-                className="absolute -right-8 top-14 bg-card/95 backdrop-blur-sm border border-border rounded-xl px-4 py-3 shadow-2xl"
-              >
-                <p className="font-serif text-2xl font-bold text-foreground">First</p>
-                <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
-                  Class Honours
-                </p>
-              </motion.div>
             </motion.div>
           </motion.div>
 
