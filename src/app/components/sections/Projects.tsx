@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import { Github, ExternalLink, ChevronRight } from 'lucide-react'
+import { ExternalLink, ChevronRight } from 'lucide-react'
 
 const ease = [0.22, 1, 0.36, 1] as const
 import { RevealGroup } from '../shared/RevealGroup'
@@ -12,59 +12,38 @@ const projects: Project[] = [
   {
     id: 1,
     index: '01',
-    name: 'Sentinel Analytics',
-    tagline: 'Real-time business intelligence at scale',
+    name: 'SMUG Flex Multi-School',
+    tagline: 'Multi-school management platform for SMUGFlex Venture',
     overview:
-      'A full-stack analytics platform that transforms raw data streams into actionable insights for enterprise teams — updating live as events arrive.',
+      'A full-stack multi-school management system serving educational institutions in Lagos, Nigeria. Built with role-based access control for administrators, teachers, and students.',
     problem:
-      'Business teams waited 8+ hours for overnight batch reports, causing slow decisions and missed opportunities.',
+      'Schools in Nigeria needed a centralized platform to manage multiple institutions, student records, and administrative workflows efficiently.',
     solution:
-      'Built a streaming pipeline with WebSocket-powered dashboards that update in real time as events arrive, eliminating batch latency entirely.',
-    tech: ['React', 'FastAPI', 'PostgreSQL', 'Redis', 'WebSockets', 'Docker'],
+      'Developed a scalable multi-school management platform with role-based dashboards (Admin, Teacher, Student), real-time notifications, and comprehensive reporting capabilities.',
+    tech: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'Vercel'],
     outcome:
-      'Reduced average reporting latency from 8 hours to under 30 seconds for 50+ enterprise clients. 60% reduction in infrastructure cost through query optimisation.',
-    image:
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=880&h=520&fit=crop&auto=format',
-    github: 'https://github.com/hoseaaudu',
-    demo: 'https://example.com',
+      'Live production system managing multiple schools in Lagos, Nigeria. Trusted by SMUGFlex Venture for their multi-school operations.',
+    image: '/smugflex.jpg',
+    github: 'https://github.com/Hoseaurbanus',
+    demo: 'https://smug-flex-multi-school-o3to.vercel.app/',
   },
   {
     id: 2,
     index: '02',
-    name: 'PhysicsEngine.js',
-    tagline: 'Open-source 2D physics simulation for the browser',
+    name: 'Graceland Royal Academy',
+    tagline: 'School website and management portal',
     overview:
-      'A TypeScript physics simulation library blending computational physics with real-time WebGL rendering. Built for accuracy, not just performance.',
+      'A complete web presence and management system for Graceland Royal Academy, providing an online portal for students and parents alongside administrative tools.',
     problem:
-      'Existing browser physics libraries sacrificed simulation accuracy for speed, producing unrealistic results that were unusable for education.',
+      'The academy needed a professional online presence and a digital system to manage school operations, communications, and student data.',
     solution:
-      'Developed a custom constraint solver using Verlet integration and spatial hashing for broad-phase collision detection. Runs at 60fps in the browser.',
-    tech: ['TypeScript', 'WebGL', 'Canvas API', 'Vite', 'Jest'],
+      'Built a responsive school website with integrated management features, including parent/student portals, news updates, and administrative dashboards.',
+    tech: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     outcome:
-      '800+ GitHub stars. Adopted by 12 university physics education platforms across 4 countries.',
-    image:
-      'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=880&h=520&fit=crop&auto=format',
-    github: 'https://github.com/hoseaaudu',
-    demo: 'https://example.com',
-  },
-  {
-    id: 3,
-    index: '03',
-    name: 'TaskFlow',
-    tagline: 'Collaborative project management, redesigned',
-    overview:
-      'A modern team collaboration tool with real-time sync, task dependencies, and integrated time tracking — all in a keyboard-first interface.',
-    problem:
-      'Teams context-switched between 4+ tools for tasks, communication, planning, and time tracking — losing hours of productive time weekly.',
-    solution:
-      'Unified all workflows into one keyboard-first interface with real-time collaboration powered by Pusher. Zero context-switching.',
-    tech: ['Next.js', 'tRPC', 'Prisma', 'PostgreSQL', 'Pusher', 'Tailwind'],
-    outcome:
-      'Adopted by 500+ teams. 92% weekly active user retention at 90 days — significantly above industry average.',
-    image:
-      'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=880&h=520&fit=crop&auto=format',
-    github: 'https://github.com/hoseaaudu',
-    demo: 'https://example.com',
+      'Live at gracelandroyalacademy.com.ng — serving the academy with a professional web presence and operational management tools.',
+    image: '/graceland.jpg',
+    github: 'https://github.com/Hoseaurbanus',
+    demo: 'https://gracelandroyalacademy.com.ng/',
   },
 ]
 
@@ -86,7 +65,7 @@ export default function Projects() {
             variants={fadeUp}
             className="text-muted-foreground max-w-xl mb-10 lg:mb-14 leading-[1.75] text-[0.95rem]"
           >
-            Selected projects presented as product case studies — from the
+            Real-world projects built and deployed to production — from the
             problem statement to the measurable outcome.
           </motion.p>
 
@@ -166,7 +145,7 @@ export default function Projects() {
                         </div>
                         <div>
                           <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-[0.18em] mb-3">
-                            Problem → Solution
+                            Problem &rarr; Solution
                           </p>
                           <p className="text-sm text-muted-foreground leading-[1.75] mb-3">
                             {p.problem}
@@ -190,9 +169,9 @@ export default function Projects() {
                               rel="noopener noreferrer"
                               whileHover={{ scale: 1.04 }}
                               whileTap={{ scale: 0.96 }}
-                              className="flex items-center gap-2 px-4 py-2 border border-border rounded-md text-xs text-muted-foreground hover:text-foreground hover:border-border/80 transition-all"
+                              className="flex items-center gap-2 px-4 py-2 bg-accent text-white rounded-md text-xs hover:bg-accent/90 transition-all"
                             >
-                              <Github size={13} /> Code
+                              Code
                             </motion.a>
                             <motion.a
                               href={p.demo}
@@ -201,9 +180,9 @@ export default function Projects() {
                               rel="noopener noreferrer"
                               whileHover={{ scale: 1.04 }}
                               whileTap={{ scale: 0.96 }}
-                              className="flex items-center gap-2 px-4 py-2 bg-accent text-white rounded-md text-xs hover:bg-accent/90 transition-all"
+                              className="flex items-center gap-2 px-4 py-2 border border-border rounded-md text-xs text-muted-foreground hover:text-foreground hover:border-border/80 transition-all"
                             >
-                              <ExternalLink size={13} /> Demo
+                              <ExternalLink size={13} /> Live Demo
                             </motion.a>
                           </div>
                         </div>

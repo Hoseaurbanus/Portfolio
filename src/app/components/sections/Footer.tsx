@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { Github, Linkedin, Twitter } from 'lucide-react'
+import { Github, Twitter, MessageCircle } from 'lucide-react'
 import type { NavLink } from '@/types'
 
 const navLinks: NavLink[] = [
@@ -39,9 +39,9 @@ export default function Footer() {
 
         <div className="flex items-center gap-1">
           {[
-            { Icon: Github, href: 'https://github.com/hoseaaudu', label: 'GitHub' },
-            { Icon: Linkedin, href: 'https://linkedin.com/in/hoseaaudu', label: 'LinkedIn' },
-            { Icon: Twitter, href: 'https://twitter.com/hoseaaudu', label: 'Twitter' },
+            { Icon: Github, href: 'https://github.com/Hoseaurbanus', label: 'GitHub' },
+            { Icon: Twitter, href: 'https://twitter.com/AuduHosea38095', label: 'Twitter' },
+            { Icon: MessageCircle, href: 'https://wa.me/2349030031278', label: 'WhatsApp' },
           ].map(({ Icon, href, label }) => (
             <motion.a
               key={label}

@@ -2,11 +2,11 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'motion/react'
 import {
   Github,
-  Linkedin,
   Twitter,
   Mail,
   ArrowRight,
   MapPin,
+  MessageCircle,
 } from 'lucide-react'
 import GlowOrb from '../shared/GlowOrb'
 
@@ -55,7 +55,6 @@ export default function Hero() {
       onMouseMove={handleMouseMove}
       className="relative min-h-screen flex flex-col justify-center overflow-hidden"
     >
-      {/* Ambient background gradients */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_50%,rgba(99,102,241,0.07)_0%,transparent_65%),radial-gradient(ellipse_50%_50%_at_80%_20%,rgba(99,102,241,0.04)_0%,transparent_55%)]" />
       <div
         className="absolute inset-0 opacity-[0.015]"
@@ -65,7 +64,6 @@ export default function Hero() {
         }}
       />
 
-      {/* Floating glow orbs */}
       <GlowOrb
         className="top-1/4 left-[10%]"
         color="rgba(99, 102, 241, 0.1)"
@@ -82,7 +80,6 @@ export default function Hero() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-28 pb-20 w-full">
         <div className="grid lg:grid-cols-[1fr_360px] gap-12 lg:gap-16 items-center">
           <div>
-            {/* Availability badge */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -98,7 +95,6 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            {/* Name — word-by-word reveal */}
             <h1
               className="font-serif font-bold leading-[0.92] tracking-tight text-foreground mb-6 lg:mb-8"
               style={{ fontSize: 'clamp(2.5rem, 9vw, 7.5rem)' }}
@@ -123,7 +119,6 @@ export default function Hero() {
               ))}
             </h1>
 
-            {/* Cycling role */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -144,19 +139,17 @@ export default function Hero() {
               </AnimatePresence>
             </motion.div>
 
-            {/* Statement */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 1.0, ease }}
               className="text-base lg:text-lg text-muted-foreground max-w-[520px] leading-[1.75] mb-8 lg:mb-10"
             >
-              I engineer software that scales. With a foundation in physics and
-              a passion for data-driven systems, I build full-stack products
-              that are fast, maintainable, and designed to last.
+              Physics graduate turned software engineer. I build full-stack
+              applications with clean architecture, scalable infrastructure,
+              and data-driven insights.
             </motion.p>
 
-            {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -175,17 +168,19 @@ export default function Hero() {
                   className="group-hover:translate-x-1 transition-transform duration-200"
                 />
               </motion.button>
-              <motion.button
+              <motion.a
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => scrollTo('#contact')}
-                className="flex items-center gap-2 px-6 py-3 border border-border text-foreground text-sm font-medium rounded-md hover:bg-card hover:border-border/60 transition-all duration-200"
+                href="https://wa.me/2349030031278"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white text-sm font-medium rounded-md hover:bg-emerald-700 transition-all duration-200"
               >
-                Get in Touch
-              </motion.button>
+                <MessageCircle size={15} />
+                WhatsApp
+              </motion.a>
             </motion.div>
 
-            {/* Social links */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -193,10 +188,9 @@ export default function Hero() {
               className="flex items-center gap-1"
             >
               {[
-                { Icon: Github, label: 'GitHub', href: 'https://github.com/hoseaaudu' },
-                { Icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com/in/hoseaaudu' },
-                { Icon: Twitter, label: 'Twitter', href: 'https://twitter.com/hoseaaudu' },
-                { Icon: Mail, label: 'Email', href: 'mailto:hosea.audu@gmail.com' },
+                { Icon: Github, label: 'GitHub', href: 'https://github.com/Hoseaurbanus' },
+                { Icon: Twitter, label: 'Twitter', href: 'https://twitter.com/AuduHosea38095' },
+                { Icon: Mail, label: 'Email', href: 'mailto:hoseaurbanusaudu1@gmail.com' },
               ].map(({ Icon, label, href }, i) => (
                 <motion.a
                   key={label}
@@ -217,7 +211,6 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Portrait — desktop */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -239,7 +232,6 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/8 to-transparent" />
               </div>
 
-              {/* Floating stat — bottom left */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -247,13 +239,12 @@ export default function Hero() {
                 whileHover={{ scale: 1.05, y: -4 }}
                 className="absolute -left-8 bottom-14 bg-card/95 backdrop-blur-sm border border-border rounded-xl px-4 py-3 shadow-2xl"
               >
-                <p className="font-serif text-2xl font-bold text-foreground">3+</p>
+                <p className="font-serif text-2xl font-bold text-foreground">B.Sc.</p>
                 <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
-                  Years Experience
+                  Best Graduating Student
                 </p>
               </motion.div>
 
-              {/* Floating stat — top right */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -261,7 +252,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.05, y: -4 }}
                 className="absolute -right-8 top-14 bg-card/95 backdrop-blur-sm border border-border rounded-xl px-4 py-3 shadow-2xl"
               >
-                <p className="font-serif text-2xl font-bold text-foreground">20+</p>
+                <p className="font-serif text-2xl font-bold text-foreground">2+</p>
                 <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
                   Projects Shipped
                 </p>
@@ -269,7 +260,6 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Portrait — mobile (compact) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -288,7 +278,6 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Mobile stats row */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -296,8 +285,8 @@ export default function Hero() {
           className="lg:hidden flex gap-4 justify-center mt-8"
         >
           {[
+            { value: '2+', label: 'Projects' },
             { value: '3+', label: 'Years Exp.' },
-            { value: '20+', label: 'Projects' },
           ].map(({ value, label }) => (
             <div
               key={label}
@@ -312,7 +301,6 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll cue */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -9,7 +9,6 @@ import Services from './components/sections/Services'
 import Experience from './components/sections/Experience'
 import Education from './components/sections/Education'
 import GitHubActivity from './components/sections/GitHubActivity'
-import Testimonials from './components/sections/Testimonials'
 import Contact from './components/sections/Contact'
 import Footer from './components/sections/Footer'
 
@@ -37,7 +36,6 @@ export default function App() {
         <Experience />
         <Education />
         <GitHubActivity />
-        <Testimonials />
         <Contact />
       </main>
       <Footer />

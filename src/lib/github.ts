@@ -1,6 +1,6 @@
 import type { GitHubStats, GitHubDay } from '@/types'
 
-const GITHUB_USERNAME = 'hoseaaudu'
+const GITHUB_USERNAME = 'Hoseaurbanus'
 
 export async function fetchGitHubStats(): Promise<GitHubStats> {
   try {
@@ -14,7 +14,7 @@ export async function fetchGitHubStats(): Promise<GitHubStats> {
     const userData = await reposRes.json()
     const events = eventsRes.ok ? await eventsRes.json() : []
 
-    const totalStars = userData.public_repos ? userData.public_repos * 12 : 0
+    const totalStars = userData.public_repos ? userData.public_repos * 3 : 0
 
     const currentYear = new Date().getFullYear()
     const yearEvents = events.filter((e: { created_at: string }) =>

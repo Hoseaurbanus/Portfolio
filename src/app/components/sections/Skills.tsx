@@ -9,6 +9,7 @@ import {
   Terminal,
   Database,
   Cpu,
+  PenTool,
 } from 'lucide-react'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
@@ -17,34 +18,39 @@ import type { SkillGroup } from '@/types'
 
 const skillGroups: SkillGroup[] = [
   {
-    label: 'Languages',
+    label: 'Programming Languages',
     Icon: Terminal,
-    skills: ['Python', 'TypeScript', 'JavaScript', 'Java', 'C++', 'SQL', 'Bash'],
+    skills: ['Python', 'Java', 'C++', 'SQL', 'Bash', 'HTML/CSS'],
+  },
+  {
+    label: 'Data Analysis',
+    Icon: BarChart3,
+    skills: ['Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Statistical Modeling', 'Data Visualization'],
   },
   {
     label: 'Frontend',
     Icon: Globe,
-    skills: ['React', 'Next.js', 'Vue.js', 'Tailwind CSS', 'HTML5', 'Framer Motion'],
+    skills: ['React', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML5'],
   },
   {
     label: 'Backend',
     Icon: Server,
-    skills: ['FastAPI', 'Node.js', 'Django', 'Express.js', 'GraphQL', 'REST APIs', 'tRPC'],
+    skills: ['Node.js', 'REST APIs', 'Express.js', 'PostgreSQL', 'MongoDB'],
   },
   {
-    label: 'Data & ML',
-    Icon: BarChart3,
-    skills: ['Pandas', 'NumPy', 'Scikit-learn', 'Matplotlib', 'Seaborn', 'Jupyter'],
-  },
-  {
-    label: 'Databases',
-    Icon: Database,
-    skills: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Prisma', 'SQLAlchemy'],
-  },
-  {
-    label: 'Cloud & DevOps',
+    label: 'Tools & DevOps',
     Icon: Cpu,
-    skills: ['AWS', 'Docker', 'Vercel', 'GitHub Actions', 'Linux', 'Nginx'],
+    skills: ['Git/GitHub', 'VS Code', 'Linux', 'Agile/Scrum', 'CI/CD'],
+  },
+  {
+    label: 'QA & Testing',
+    Icon: Database,
+    skills: ['Manual Testing', 'Bug Tracking', 'Test Reporting', 'Documentation'],
+  },
+  {
+    label: 'Content & Communication',
+    Icon: PenTool,
+    skills: ['Technical Writing', 'Physics Blogging', 'Content Creation', 'Virtual Assistance'],
   },
 ]
 

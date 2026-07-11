@@ -1,46 +1,23 @@
 import { motion } from 'motion/react'
-import { GraduationCap, Award } from 'lucide-react'
+import { GraduationCap } from 'lucide-react'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
 import { SectionLabel } from '../shared/SectionLabel'
-import type { Certification } from '@/types'
-
-const certifications: Certification[] = [
-  {
-    name: 'AWS Certified Developer — Associate',
-    issuer: 'Amazon Web Services',
-    year: '2023',
-  },
-  {
-    name: 'Google Data Analytics Professional Certificate',
-    issuer: 'Google / Coursera',
-    year: '2022',
-  },
-  {
-    name: 'Meta Front-End Developer Certificate',
-    issuer: 'Meta / Coursera',
-    year: '2022',
-  },
-  {
-    name: 'freeCodeCamp Full Stack Certification',
-    issuer: 'freeCodeCamp',
-    year: '2021',
-  },
-]
 
 export default function Education() {
   return (
     <section id="education" className="py-20 md:py-32 border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 lg:gap-20">
-          <RevealGroup>
-            <SectionLabel>Education</SectionLabel>
-            <motion.h2
-              variants={fadeUp}
-              className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-8 lg:mb-10 leading-[1.1]"
-            >
-              Academic background.
-            </motion.h2>
+        <RevealGroup>
+          <SectionLabel>Education</SectionLabel>
+          <motion.h2
+            variants={fadeUp}
+            className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-8 lg:mb-10 leading-[1.1]"
+          >
+            Academic background.
+          </motion.h2>
+
+          <div className="space-y-4">
             <motion.div
               variants={fadeUp}
               whileHover={{ borderColor: 'rgba(99, 102, 241, 0.2)' }}
@@ -59,61 +36,52 @@ export default function Education() {
                     B.Sc. Physics
                   </h3>
                   <p className="text-accent font-mono text-sm mt-0.5">
-                    University of Abuja
+                    Gombe State University
                   </p>
-                  <p className="text-[11px] font-mono text-muted-foreground mt-1 mb-4">
-                    2015 — 2019 · Honours
+                  <p className="text-[11px] font-mono text-muted-foreground mt-1 mb-3">
+                    2020 — 2024 · Best Graduating Student
                   </p>
                   <p className="text-sm text-muted-foreground leading-[1.75]">
-                    Final year project: Computational modelling of
-                    electromagnetic field distributions in irregular geometries
-                    using finite element methods.
+                    Graduated with First Class Honours. Awarded Best Graduating
+                    Physics Student for outstanding academic performance and
+                    research contributions.
                   </p>
                 </div>
               </div>
             </motion.div>
-          </RevealGroup>
 
-          <RevealGroup>
-            <SectionLabel>Certifications</SectionLabel>
-            <motion.h2
+            <motion.div
               variants={fadeUp}
-              className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-8 lg:mb-10 leading-[1.1]"
+              whileHover={{ borderColor: 'rgba(99, 102, 241, 0.2)' }}
+              className="p-5 sm:p-6 lg:p-8 border border-border rounded-xl bg-card transition-colors duration-300"
             >
-              Professional credentials.
-            </motion.h2>
-            <div className="space-y-3">
-              {certifications.map((cert, i) => (
+              <div className="flex items-start gap-4">
                 <motion.div
-                  key={i}
-                  variants={fadeUp}
-                  whileHover={{ x: 4, borderColor: 'rgba(99, 102, 241, 0.2)' }}
-                  transition={{ duration: 0.2 }}
-                  className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 border border-border rounded-xl bg-card transition-colors duration-200"
+                  whileHover={{ rotate: 12, scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                  className="p-2.5 rounded-lg bg-accent/10 border border-accent/20 shrink-0"
                 >
-                  <motion.div
-                    whileHover={{ rotate: 15 }}
-                    transition={{ duration: 0.3 }}
-                    className="p-2 rounded-lg bg-accent/10 border border-accent/20 shrink-0"
-                  >
-                    <Award size={15} className="text-accent" />
-                  </motion.div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-foreground truncate">
-                      {cert.name}
-                    </p>
-                    <p className="text-[11px] text-muted-foreground font-mono">
-                      {cert.issuer}
-                    </p>
-                  </div>
-                  <span className="text-[11px] font-mono text-muted-foreground shrink-0">
-                    {cert.year}
-                  </span>
+                  <GraduationCap size={20} className="text-accent" />
                 </motion.div>
-              ))}
-            </div>
-          </RevealGroup>
-        </div>
+                <div>
+                  <h3 className="font-serif text-lg sm:text-xl font-bold text-foreground">
+                    Diploma in Computer Science
+                  </h3>
+                  <p className="text-accent font-mono text-sm mt-0.5">
+                    Dynamic Computer Centre
+                  </p>
+                  <p className="text-[11px] font-mono text-muted-foreground mt-1 mb-3">
+                    2008
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-[1.75]">
+                    Foundation in computer science principles, programming
+                    fundamentals, and software applications.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </RevealGroup>
       </div>
     </section>
   )

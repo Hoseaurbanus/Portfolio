@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import { Mail, Linkedin, Github, ArrowRight, CheckCircle2, Loader2, XCircle } from 'lucide-react'
+import { Mail, Github, Twitter, ArrowRight, CheckCircle2, Loader2, XCircle, MessageCircle, Phone } from 'lucide-react'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
 import { SectionLabel } from '../shared/SectionLabel'
@@ -50,20 +50,32 @@ export default function Contact() {
                   {
                     Icon: Mail,
                     label: 'Email',
-                    value: 'hosea.audu@gmail.com',
-                    href: 'mailto:hosea.audu@gmail.com',
+                    value: 'hoseaurbanusaudu1@gmail.com',
+                    href: 'mailto:hoseaurbanusaudu1@gmail.com',
                   },
                   {
-                    Icon: Linkedin,
-                    label: 'LinkedIn',
-                    value: 'linkedin.com/in/hoseaaudu',
-                    href: 'https://linkedin.com/in/hoseaaudu',
+                    Icon: Phone,
+                    label: 'Phone',
+                    value: '+234 (0) 9030031278',
+                    href: 'tel:+2349030031278',
+                  },
+                  {
+                    Icon: MessageCircle,
+                    label: 'WhatsApp',
+                    value: '+234 9030031278',
+                    href: 'https://wa.me/2349030031278',
                   },
                   {
                     Icon: Github,
                     label: 'GitHub',
-                    value: 'github.com/hoseaaudu',
-                    href: 'https://github.com/hoseaaudu',
+                    value: 'github.com/Hoseaurbanus',
+                    href: 'https://github.com/Hoseaurbanus',
+                  },
+                  {
+                    Icon: Twitter,
+                    label: 'Twitter / X',
+                    value: '@AuduHosea38095',
+                    href: 'https://twitter.com/AuduHosea38095',
                   },
                 ].map(({ Icon, label, value, href }) => (
                   <motion.a

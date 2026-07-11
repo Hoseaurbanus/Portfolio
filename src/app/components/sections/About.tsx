@@ -6,8 +6,8 @@ import { SectionLabel } from '../shared/SectionLabel'
 import AnimatedCounter from '../shared/AnimatedCounter'
 
 const statCards = [
-  { value: 3, suffix: '+', label: 'Years of Experience' },
-  { value: 20, suffix: '+', label: 'Projects Delivered' },
+  { value: 2, suffix: '+', label: 'Projects Delivered' },
+  { value: 3, suffix: '+', label: 'Years Experience' },
   { value: 7, suffix: '+', label: 'Technologies Mastered' },
 ]
 
@@ -31,20 +31,21 @@ export default function About() {
               className="space-y-5 text-muted-foreground leading-[1.8] text-[0.95rem]"
             >
               <p>
-                My path into software began with physics — a discipline that
-                rewards rigorous thinking, precise modelling, and comfort with
-                ambiguity. That foundation shapes everything I build today.
+                I&apos;m a Physics graduate from Gombe State University (Best
+                Graduating Student) who turned a passion for problem-solving
+                into a career in software development and data analysis.
               </p>
               <p>
-                I approach software development as an engineering discipline.
-                Every architectural decision has consequences. Every abstraction
-                carries a cost. I write code that respects future engineers as
-                much as present requirements.
+                As a Data Analyst &amp; QA Specialist, I build Python
+                automation tools, maintain critical infrastructure, and
+                perform statistical analysis using Pandas, NumPy, and
+                Matplotlib. My freelance work as a Virtual Assistant has
+                sharpened my ability to deliver under pressure.
               </p>
               <p>
-                Beyond the technical, I care deeply about user experience,
-                accessibility, and the measurable human impact of the systems I
-                build. Good software solves real problems without creating new ones.
+                I also run a physics research blog where I break down complex
+                scientific topics for a wider audience, blending
+                communication skills with technical depth.
               </p>
             </motion.div>
             <motion.div
@@ -72,7 +73,6 @@ export default function About() {
                 </p>
               </motion.div>
             ))}
-            {/* Education card */}
             <motion.div
               variants={fadeUp}
               whileHover={{ scale: 1.03, y: -4 }}
@@ -82,7 +82,7 @@ export default function About() {
                 B.Sc.
               </p>
               <p className="text-[10px] sm:text-xs font-mono text-muted-foreground uppercase tracking-wider">
-                Physics — Honours
+                Best Graduating Student
               </p>
             </motion.div>
           </div>

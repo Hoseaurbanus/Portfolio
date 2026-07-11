@@ -38,19 +38,6 @@ export interface Experience {
   tech: string[]
 }
 
-export interface Certification {
-  name: string
-  issuer: string
-  year: string
-}
-
-export interface Testimonial {
-  quote: string
-  author: string
-  role: string
-  initials: string
-}
-
 export interface NavLink {
   label: string
   href: string
