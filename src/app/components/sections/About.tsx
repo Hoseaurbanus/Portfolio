@@ -42,11 +42,6 @@ export default function About() {
                 Matplotlib. My freelance work as a Virtual Assistant has
                 sharpened my ability to deliver under pressure.
               </p>
-              <p>
-                I also run a physics research blog where I break down complex
-                scientific topics for a wider audience, blending
-                communication skills with technical depth.
-              </p>
             </motion.div>
             <motion.div
               variants={fadeUp}
@@ -76,9 +71,9 @@ export default function About() {
             <motion.div
               variants={fadeUp}
               whileHover={{ scale: 1.03, y: -4 }}
-              className="p-5 sm:p-6 border border-border rounded-xl bg-card hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 group cursor-default"
+              className="p-5 sm:p-6 border border-accent/20 rounded-xl bg-accent/5 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/10 transition-all duration-300 group cursor-default"
             >
-              <p className="font-serif text-3xl sm:text-4xl font-bold text-foreground mb-2 group-hover:text-accent transition-colors duration-300">
+              <p className="font-serif text-3xl sm:text-4xl font-bold text-accent mb-2">
                 B.Sc.
               </p>
               <p className="text-[10px] sm:text-xs font-mono text-muted-foreground uppercase tracking-wider">

@@ -6,11 +6,10 @@ import {
   Mail,
   ArrowRight,
   MapPin,
-  MessageCircle,
+  Download,
 } from 'lucide-react'
 import GlowOrb from '../shared/GlowOrb'
-
-const ease = [0.22, 1, 0.36, 1] as const
+import { ease } from '@/lib/constants'
 
 const roles = [
   'Full Stack Software Developer',
@@ -45,11 +44,17 @@ export default function Hero() {
 
   useEffect(() => {
     if (shouldReduceMotion) return
-    const id = setInterval(
-      () => setRoleIdx((i) => (i + 1) % roles.length),
-      2800
-    )
-    return () => clearInterval(id)
+    let intervalId: ReturnType<typeof setInterval>
+    const timer = setTimeout(() => {
+      intervalId = setInterval(
+        () => setRoleIdx((i) => (i + 1) % roles.length),
+        2800
+      )
+    }, 2000)
+    return () => {
+      clearTimeout(timer)
+      if (intervalId !== undefined) clearInterval(intervalId)
+    }
   }, [shouldReduceMotion])
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -183,13 +188,12 @@ export default function Hero() {
               <motion.a
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                href="https://wa.me/2349030031278"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white text-sm font-medium rounded-md hover:bg-emerald-700 transition-all duration-200 min-h-[44px]"
+                href="/Hosea_Urbanus_Audu_CV.pdf"
+                download
+                className="flex items-center gap-2 px-6 py-3 border border-border text-foreground text-sm font-medium rounded-md hover:bg-card hover:border-border/60 transition-all duration-200 min-h-[44px]"
               >
-                <MessageCircle size={15} />
-                WhatsApp
+                <Download size={15} />
+                Download CV
               </motion.a>
             </motion.div>
 
@@ -264,9 +268,9 @@ export default function Hero() {
                 whileHover={{ scale: 1.05, y: -4 }}
                 className="absolute -right-8 top-14 bg-card/95 backdrop-blur-sm border border-border rounded-xl px-4 py-3 shadow-2xl"
               >
-                <p className="font-serif text-2xl font-bold text-foreground">2+</p>
+                <p className="font-serif text-2xl font-bold text-foreground">First</p>
                 <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
-                  Projects Shipped
+                  Class Honours
                 </p>
               </motion.div>
             </motion.div>
@@ -278,7 +282,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.5, ease }}
             className="lg:hidden flex justify-center -mt-4"
           >
-            <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-2xl border border-border overflow-hidden bg-muted">
+            <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-2xl border border-border overflow-hidden bg-muted">
               <img
                 src="/photo.jpg"
                 alt="Hosea Urbanus Audu — portrait"
@@ -296,7 +300,7 @@ export default function Hero() {
           className="lg:hidden flex gap-4 justify-center mt-8"
         >
           {[
-            { value: '2+', label: 'Projects' },
+            { value: 'B.Sc.', label: 'Physics' },
             { value: '3+', label: 'Years Exp.' },
           ].map(({ value, label }) => (
             <div

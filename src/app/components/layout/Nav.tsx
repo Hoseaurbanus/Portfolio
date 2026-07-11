@@ -1,9 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Download } from 'lucide-react'
+import { ease } from '@/lib/constants'
 import type { NavLink } from '@/types'
-
-const ease = [0.22, 1, 0.36, 1] as const
 
 const navLinks: NavLink[] = [
   { label: 'About', href: '#about' },
@@ -104,12 +103,22 @@ export default function Nav() {
             })}
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-3">
+            <motion.a
+              href="/Hosea_Urbanus_Audu_CV.pdf"
+              download
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium border border-border text-foreground rounded-md hover:bg-card transition-all duration-200 min-h-[44px]"
+            >
+              <Download size={14} />
+              CV
+            </motion.a>
             <motion.button
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               onClick={() => handleNav('#contact')}
-              className="px-4 py-2 text-sm font-medium bg-accent text-white rounded-md hover:bg-accent/90 transition-all duration-200"
+              className="px-4 py-2 text-sm font-medium bg-accent text-white rounded-md hover:bg-accent/90 transition-all duration-200 min-h-[44px]"
             >
               Hire Me
             </motion.button>

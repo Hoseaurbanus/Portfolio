@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hosea-u-audu.vercel.app/sitemap.xml

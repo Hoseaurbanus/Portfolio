@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { ExternalLink, ChevronRight } from 'lucide-react'
-
-const ease = [0.22, 1, 0.36, 1] as const
+import { ease } from '@/lib/constants'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
 import { SectionLabel } from '../shared/SectionLabel'
@@ -40,10 +39,46 @@ const projects: Project[] = [
       'Built a responsive school website with integrated management features, including parent/student portals, news updates, and administrative dashboards.',
     tech: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     outcome:
-      'Live at gracelandroyalacademy.com.ng — serving the academy with a professional web presence and operational management tools.',
+      'Live at gracelandroyalacademy.com.ng - serving the academy with a professional web presence and operational management tools.',
     image: '/graceland.jpg',
     github: 'https://github.com/Hoseaurbanus',
     demo: 'https://gracelandroyalacademy.com.ng/',
+  },
+  {
+    id: 3,
+    index: '03',
+    name: '[Your Project Here]',
+    tagline: 'Add a short description of your project',
+    overview:
+      'Replace this with a detailed overview of your project - what it does, who it serves, and what problem it solves.',
+    problem:
+      'Describe the problem or gap this project addresses.',
+    solution:
+      'Explain your technical approach and the key decisions you made.',
+    tech: ['Tech 1', 'Tech 2', 'Tech 3'],
+    outcome:
+      'Describe the measurable outcome or impact of this project.',
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=880&h=520&fit=crop&auto=format',
+    github: 'https://github.com/Hoseaurbanus',
+    demo: '#',
+  },
+  {
+    id: 4,
+    index: '04',
+    name: '[Your Project Here]',
+    tagline: 'Add a short description of your project',
+    overview:
+      'Replace this with a detailed overview of your project - what it does, who it serves, and what problem it solves.',
+    problem:
+      'Describe the problem or gap this project addresses.',
+    solution:
+      'Explain your technical approach and the key decisions you made.',
+    tech: ['Tech 1', 'Tech 2', 'Tech 3'],
+    outcome:
+      'Describe the measurable outcome or impact of this project.',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=880&h=520&fit=crop&auto=format',
+    github: 'https://github.com/Hoseaurbanus',
+    demo: '#',
   },
 ]
 
@@ -65,7 +100,7 @@ export default function Projects() {
             variants={fadeUp}
             className="text-muted-foreground max-w-xl mb-10 lg:mb-14 leading-[1.75] text-base"
           >
-            Real-world projects built and deployed to production — from the
+            Real-world projects built and deployed to production - from the
             problem statement to the measurable outcome.
           </motion.p>
 

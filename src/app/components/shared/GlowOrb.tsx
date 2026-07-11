@@ -24,7 +24,12 @@ export default function GlowOrb({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        const wasVisible = isVisible.current
         isVisible.current = entry.isIntersecting
+        if (!wasVisible && entry.isIntersecting) {
+          startTime.current = Date.now() - startTime.current
+          frameRef.current = requestAnimationFrame(animate)
+        }
       },
       { threshold: 0 }
     )
@@ -36,8 +41,8 @@ export default function GlowOrb({
         const x = Math.sin(t * 0.7) * 30 + Math.cos(t * 0.3) * 15
         const y = Math.cos(t * 0.5) * 25 + Math.sin(t * 0.8) * 10
         el.style.transform = `translate(${x}px, ${y}px)`
+        frameRef.current = requestAnimationFrame(animate)
       }
-      frameRef.current = requestAnimationFrame(animate)
     }
     frameRef.current = requestAnimationFrame(animate)
 

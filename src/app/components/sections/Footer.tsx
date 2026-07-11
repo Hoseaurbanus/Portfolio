@@ -1,12 +1,12 @@
 import { motion } from 'motion/react'
-import { Github, Twitter, MessageCircle } from 'lucide-react'
+import { Github, Twitter, MessageCircle, Download } from 'lucide-react'
+import { ease } from '@/lib/constants'
 import type { NavLink } from '@/types'
 
 const navLinks: NavLink[] = [
   { label: 'About', href: '#about' },
   { label: 'Projects', href: '#projects' },
   { label: 'Skills', href: '#skills' },
-  { label: 'Experience', href: '#experience' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -35,6 +35,14 @@ export default function Footer() {
               {label}
             </button>
           ))}
+          <a
+            href="/Hosea_Urbanus_Audu_CV.pdf"
+            download
+            className="hover:text-foreground transition-colors duration-200 min-h-[44px] flex items-center gap-1"
+          >
+            <Download size={12} />
+            CV
+          </a>
         </nav>
 
         <div className="flex items-center gap-1.5">

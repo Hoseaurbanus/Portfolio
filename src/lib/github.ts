@@ -14,8 +14,6 @@ export async function fetchGitHubStats(): Promise<GitHubStats> {
     const userData = await reposRes.json()
     const events = eventsRes.ok ? await eventsRes.json() : []
 
-    const totalStars = userData.public_repos ? userData.public_repos * 3 : 0
-
     const currentYear = new Date().getFullYear()
     const yearEvents = events.filter((e: { created_at: string }) =>
       new Date(e.created_at).getFullYear() === currentYear
@@ -27,17 +25,17 @@ export async function fetchGitHubStats(): Promise<GitHubStats> {
     )
 
     return {
-      publicRepos: userData.public_repos || 24,
-      totalStars: totalStars || 1200,
-      contributions: contributions || 847,
-      pullRequestsMerged: prEvents.length || 120,
+      publicRepos: userData.public_repos || 0,
+      totalStars: 0,
+      contributions: contributions || 0,
+      pullRequestsMerged: prEvents.length || 0,
     }
   } catch {
     return {
-      publicRepos: 24,
-      totalStars: 1200,
-      contributions: 847,
-      pullRequestsMerged: 120,
+      publicRepos: 0,
+      totalStars: 0,
+      contributions: 0,
+      pullRequestsMerged: 0,
     }
   }
 }
@@ -104,14 +102,7 @@ export async function fetchGitHubActivity(): Promise<GitHubDay[][]> {
         }
       }
     } catch {
-      // Fall back to random data
-      for (const week of weeks) {
-        for (const day of week) {
-          const r = Math.random()
-          day.level =
-            r < 0.34 ? 0 : r < 0.54 ? 1 : r < 0.74 ? 2 : r < 0.9 ? 3 : 4
-        }
-      }
+      // Leave at level 0 — no fabricated data
     }
 
     return weeks
@@ -120,13 +111,7 @@ export async function fetchGitHubActivity(): Promise<GitHubDay[][]> {
     for (let w = 0; w < 52; w++) {
       const week: GitHubDay[] = []
       for (let d = 0; d < 7; d++) {
-        const r = Math.random()
-        week.push({
-          level:
-            r < 0.34 ? 0 : r < 0.54 ? 1 : r < 0.74 ? 2 : r < 0.9 ? 3 : 4,
-          date: '',
-          count: 0,
-        })
+        week.push({ level: 0, date: '', count: 0 })
       }
       weeks.push(week)
     }

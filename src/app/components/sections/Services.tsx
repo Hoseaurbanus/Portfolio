@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { Globe, BarChart3, Server, Briefcase } from 'lucide-react'
 
-const ease = [0.22, 1, 0.36, 1] as const
+import { ease } from '@/lib/constants'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
 import { SectionLabel } from '../shared/SectionLabel'

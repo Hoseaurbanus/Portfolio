@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 
-const ease = [0.22, 1, 0.36, 1] as const
+import { ease } from '@/lib/constants'
 import {
   Globe,
   Server,

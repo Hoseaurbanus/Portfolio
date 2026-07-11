@@ -8,7 +8,7 @@ import {
   BookOpen,
 } from 'lucide-react'
 
-const ease = [0.22, 1, 0.36, 1] as const
+import { ease } from '@/lib/constants'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
 import { SectionLabel } from '../shared/SectionLabel'
@@ -73,7 +73,7 @@ export default function Philosophy() {
                 variants={fadeUp}
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3, ease }}
-                className="group p-6 sm:p-8 bg-background hover:bg-card transition-colors duration-300"
+                className="group p-6 sm:p-8 lg:p-10 bg-background hover:bg-card transition-colors duration-300"
               >
                 <motion.div
                   whileHover={{ rotate: 12, scale: 1.1 }}
