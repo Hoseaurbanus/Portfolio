@@ -52,9 +52,9 @@ export default function Services() {
               <motion.div
                 key={title}
                 variants={fadeUp}
-                whileHover={{ y: -4, backgroundColor: 'rgba(17, 17, 22, 1)' }}
+                whileHover={{ y: -4 }}
                 transition={{ duration: 0.3, ease }}
-                className="group p-6 sm:p-8 lg:p-10 bg-background transition-colors duration-300"
+                className="group p-6 sm:p-8 lg:p-10 bg-background hover:bg-card transition-colors duration-300"
               >
                 <motion.div
                   whileHover={{ scale: 1.15, rotate: 8 }}

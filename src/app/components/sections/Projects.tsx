@@ -63,13 +63,13 @@ export default function Projects() {
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="text-muted-foreground max-w-xl mb-10 lg:mb-14 leading-[1.75] text-[0.95rem]"
+            className="text-muted-foreground max-w-xl mb-10 lg:mb-14 leading-[1.75] text-base"
           >
             Real-world projects built and deployed to production — from the
             problem statement to the measurable outcome.
           </motion.p>
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             {projects.map((p) => (
               <motion.article
                 key={p.id}
@@ -77,15 +77,19 @@ export default function Projects() {
                 whileHover={{ borderColor: 'rgba(99, 102, 241, 0.2)' }}
                 className="group rounded-2xl border border-border bg-card overflow-hidden cursor-pointer"
                 onClick={() => setExpanded(expanded === p.id ? null : p.id)}
+                role="button"
+                aria-expanded={expanded === p.id}
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpanded(expanded === p.id ? null : p.id) } }}
               >
-                <div className="grid sm:grid-cols-[280px_1fr] lg:grid-cols-[380px_1fr] gap-0">
+                <div className="grid sm:grid-cols-[1fr] lg:grid-cols-[380px_1fr] gap-0">
                   <div className="relative h-48 sm:h-52 lg:h-56 overflow-hidden bg-muted shrink-0">
                     <motion.img
                       src={p.image}
                       alt={p.name}
                       loading="lazy"
-                      whileHover={{ scale: 1.06 }}
-                      transition={{ duration: 0.6, ease }}
+                      whileHover={{ scale: 1.04 }}
+                      transition={{ duration: 0.5, ease }}
                       className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-card hidden sm:block" />
@@ -131,10 +135,10 @@ export default function Projects() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                       className="overflow-hidden border-t border-border"
                     >
-                      <div className="p-5 sm:p-8 lg:p-10 grid sm:grid-cols-1 md:grid-cols-3 gap-6 lg:gap-12">
+                      <div className="p-5 sm:p-8 lg:p-10 grid md:grid-cols-3 gap-6 lg:gap-12">
                         <div>
                           <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-[0.18em] mb-3">
                             Overview
@@ -169,7 +173,7 @@ export default function Projects() {
                               rel="noopener noreferrer"
                               whileHover={{ scale: 1.04 }}
                               whileTap={{ scale: 0.96 }}
-                              className="flex items-center gap-2 px-4 py-2 bg-accent text-white rounded-md text-xs hover:bg-accent/90 transition-all"
+                              className="flex items-center gap-2 px-4 py-2 bg-accent text-white rounded-md text-xs hover:bg-accent/90 transition-all min-h-[44px]"
                             >
                               Code
                             </motion.a>
@@ -180,7 +184,7 @@ export default function Projects() {
                               rel="noopener noreferrer"
                               whileHover={{ scale: 1.04 }}
                               whileTap={{ scale: 0.96 }}
-                              className="flex items-center gap-2 px-4 py-2 border border-border rounded-md text-xs text-muted-foreground hover:text-foreground hover:border-border/80 transition-all"
+                              className="flex items-center gap-2 px-4 py-2 border border-border rounded-md text-xs text-muted-foreground hover:text-foreground hover:border-border/80 transition-all min-h-[44px]"
                             >
                               <ExternalLink size={13} /> Live Demo
                             </motion.a>

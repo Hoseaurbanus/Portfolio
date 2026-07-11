@@ -28,7 +28,7 @@ export default function About() {
             </motion.h2>
             <motion.div
               variants={fadeUp}
-              className="space-y-5 text-muted-foreground leading-[1.8] text-[0.95rem]"
+              className="space-y-5 text-muted-foreground leading-[1.75] text-base"
             >
               <p>
                 I&apos;m a Physics graduate from Gombe State University (Best

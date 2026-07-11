@@ -70,10 +70,9 @@ export default function Skills() {
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="text-muted-foreground max-w-xl mb-10 lg:mb-14 leading-[1.75] text-[0.95rem]"
+            className="text-muted-foreground max-w-xl mb-10 lg:mb-14 leading-[1.75] text-base"
           >
-            Technologies I work with daily, organized by domain. Tap a
-            category on mobile to explore it.
+            Technologies I work with daily, organized by domain.
           </motion.p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -82,8 +81,6 @@ export default function Skills() {
                 key={label}
                 variants={fadeUp}
                 whileHover={{ scale: 1.02 }}
-                onMouseEnter={() => setActive(label)}
-                onMouseLeave={() => setActive(null)}
                 onClick={() => setActive(active === label ? null : label)}
                 className={`p-5 sm:p-6 rounded-xl border transition-all duration-300 cursor-default ${
                   active === label
@@ -113,8 +110,9 @@ export default function Skills() {
                     {skills.map((skill, i) => (
                       <motion.span
                         key={skill}
-                        initial={active === label ? { opacity: 0, scale: 0.8 } : false}
+                        initial={active === label ? { opacity: 0, scale: 0.8 } : { opacity: 1, scale: 1 }}
                         animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
                         transition={{ duration: 0.2, delay: active === label ? i * 0.03 : 0 }}
                         className={`px-2.5 py-1 text-xs rounded-md transition-all duration-200 ${
                           active === label

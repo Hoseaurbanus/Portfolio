@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'motion/react'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
@@ -24,6 +24,8 @@ export default function GitHubActivity() {
   })
   const [weeks, setWeeks] = useState<GitHubDay[][]>([])
   const [loading, setLoading] = useState(true)
+  const gridRef = useRef<HTMLDivElement>(null)
+  const [gridVisible, setGridVisible] = useState(false)
 
   useEffect(() => {
     async function load() {
@@ -36,6 +38,22 @@ export default function GitHubActivity() {
       setLoading(false)
     }
     load()
+  }, [])
+
+  useEffect(() => {
+    const el = gridRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setGridVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
   }, [])
 
   const statItems = [
@@ -58,7 +76,7 @@ export default function GitHubActivity() {
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="text-muted-foreground max-w-xl mb-8 lg:mb-10 leading-[1.75] text-[0.95rem]"
+            className="text-muted-foreground max-w-xl mb-8 lg:mb-10 leading-[1.75] text-base"
           >
             Consistent contribution to open source and personal tools.
             Every square represents a commit.
@@ -85,14 +103,16 @@ export default function GitHubActivity() {
           </motion.div>
 
           <motion.div variants={fadeUp} className="overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
-            <div className="flex gap-1 min-w-max">
+            <div ref={gridRef} className="flex gap-1 min-w-max">
               {weeks.map((week, wi) => (
                 <motion.div
                   key={wi}
                   initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: Math.min(wi * 0.01, 0.5) }}
+                  animate={gridVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.5 * (1 - Math.exp(-wi * 0.08)),
+                  }}
                   className="flex flex-col gap-1"
                 >
                   {week.map((day, di) => (

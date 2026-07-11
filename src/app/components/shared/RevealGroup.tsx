@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'motion/react'
+import { motion, useInView, useReducedMotion } from 'motion/react'
 import { staggerGroup } from './Reveal'
 
 interface RevealGroupProps {
@@ -10,12 +10,14 @@ interface RevealGroupProps {
 export function RevealGroup({ children, className = '' }: RevealGroupProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-20px' })
+  const shouldReduceMotion = useReducedMotion()
+
   return (
     <motion.div
       ref={ref}
       variants={staggerGroup}
-      initial="hidden"
-      animate={inView ? 'visible' : 'hidden'}
+      initial={shouldReduceMotion ? false : 'hidden'}
+      animate={inView ? 'visible' : shouldReduceMotion ? 'visible' : 'hidden'}
       className={className}
     >
       {children}

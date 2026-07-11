@@ -92,10 +92,10 @@ export default function Experience() {
                     className="p-5 sm:p-6 lg:p-8 rounded-xl border border-border bg-card transition-colors duration-300"
                   >
                     <div className="flex items-center gap-2 mb-2 md:hidden">
-                      <span className="inline-flex items-center px-2.5 py-1 text-[10px] font-mono text-muted-foreground bg-muted rounded-full border border-border">
+                      <span className="inline-flex items-center px-2.5 py-1 text-[11px] font-mono text-muted-foreground bg-muted rounded-full border border-border">
                         {job.period}
                       </span>
-                      <span className="text-[10px] font-mono text-muted-foreground/60">
+                      <span className="text-[11px] font-mono text-muted-foreground/60">
                         {job.location}
                       </span>
                     </div>

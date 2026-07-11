@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useInView, useMotionValue, useTransform, animate, motion } from 'motion/react'
+import { useInView, useMotionValue, useTransform, animate, motion, useReducedMotion } from 'motion/react'
 
 interface AnimatedCounterProps {
   value: number
@@ -18,10 +18,15 @@ export default function AnimatedCounter({
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
+  const shouldReduceMotion = useReducedMotion()
   const count = useMotionValue(0)
   const rounded = useTransform(count, (v) => `${prefix}${Math.round(v)}${suffix}`)
 
   useEffect(() => {
+    if (shouldReduceMotion) {
+      count.set(value)
+      return
+    }
     if (inView) {
       const controls = animate(count, value, {
         duration,
@@ -29,7 +34,7 @@ export default function AnimatedCounter({
       })
       return controls.stop
     }
-  }, [inView, value, duration, count])
+  }, [inView, value, duration, count, shouldReduceMotion])
 
   return <motion.span ref={ref} className={className} style={{}} children={rounded} />
 }

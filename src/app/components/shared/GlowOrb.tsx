@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect } from 'react'
 
 interface GlowOrbProps {
   className?: string
@@ -14,21 +14,37 @@ export default function GlowOrb({
   speed = 0.0005,
 }: GlowOrbProps) {
   const ref = useRef<HTMLDivElement>(null)
-  const [pos, setPos] = useState({ x: 0, y: 0 })
   const frameRef = useRef<number>(0)
   const startTime = useRef(Date.now())
+  const isVisible = useRef(true)
 
   useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible.current = entry.isIntersecting
+      },
+      { threshold: 0 }
+    )
+    observer.observe(el)
+
     const animate = () => {
-      const t = (Date.now() - startTime.current) * speed
-      setPos({
-        x: Math.sin(t * 0.7) * 30 + Math.cos(t * 0.3) * 15,
-        y: Math.cos(t * 0.5) * 25 + Math.sin(t * 0.8) * 10,
-      })
+      if (isVisible.current) {
+        const t = (Date.now() - startTime.current) * speed
+        const x = Math.sin(t * 0.7) * 30 + Math.cos(t * 0.3) * 15
+        const y = Math.cos(t * 0.5) * 25 + Math.sin(t * 0.8) * 10
+        el.style.transform = `translate(${x}px, ${y}px)`
+      }
       frameRef.current = requestAnimationFrame(animate)
     }
     frameRef.current = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(frameRef.current)
+
+    return () => {
+      cancelAnimationFrame(frameRef.current)
+      observer.disconnect()
+    }
   }, [speed])
 
   return (
@@ -39,7 +55,6 @@ export default function GlowOrb({
         width: size,
         height: size,
         background: `radial-gradient(circle, ${color} 0%, transparent 70%)`,
-        transform: `translate(${pos.x}px, ${pos.y}px)`,
         willChange: 'transform',
       }}
     />

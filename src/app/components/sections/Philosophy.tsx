@@ -60,7 +60,7 @@ export default function Philosophy() {
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="text-muted-foreground max-w-xl mb-10 lg:mb-14 leading-[1.75] text-[0.95rem]"
+            className="text-muted-foreground max-w-xl mb-10 lg:mb-14 leading-[1.75] text-base"
           >
             These are not aspirations. They are constraints I impose on every
             project I touch — from architecture to code review to deployment.
@@ -71,9 +71,9 @@ export default function Philosophy() {
               <motion.div
                 key={title}
                 variants={fadeUp}
-                whileHover={{ y: -6, backgroundColor: 'rgba(17, 17, 22, 1)' }}
+                whileHover={{ y: -4 }}
                 transition={{ duration: 0.3, ease }}
-                className="group p-6 sm:p-8 bg-background transition-colors duration-300"
+                className="group p-6 sm:p-8 bg-background hover:bg-card transition-colors duration-300"
               >
                 <motion.div
                   whileHover={{ rotate: 12, scale: 1.1 }}

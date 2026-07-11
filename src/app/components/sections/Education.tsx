@@ -12,7 +12,7 @@ export default function Education() {
           <SectionLabel>Education</SectionLabel>
           <motion.h2
             variants={fadeUp}
-            className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-8 lg:mb-10 leading-[1.1]"
+            className="font-serif text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-8 lg:mb-10 leading-[1.1]"
           >
             Academic background.
           </motion.h2>

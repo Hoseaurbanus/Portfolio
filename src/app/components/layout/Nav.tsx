@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Menu, X } from 'lucide-react'
 import type { NavLink } from '@/types'
@@ -20,11 +20,32 @@ function scrollTo(href: string) {
 export default function Nav() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
 
   useEffect(() => {
     const handle = () => setScrolled(window.scrollY > 48)
     window.addEventListener('scroll', handle, { passive: true })
     return () => window.removeEventListener('scroll', handle)
+  }, [])
+
+  useEffect(() => {
+    const sectionIds = navLinks.map((l) => l.href.replace('#', ''))
+    const observers: IntersectionObserver[] = []
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id)
+      if (!el) return
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id)
+        },
+        { rootMargin: '-40% 0px -55% 0px' }
+      )
+      observer.observe(el)
+      observers.push(observer)
+    })
+
+    return () => observers.forEach((o) => o.disconnect())
   }, [])
 
   useEffect(() => {
@@ -36,10 +57,10 @@ export default function Nav() {
     return () => { document.body.style.overflow = '' }
   }, [open])
 
-  const handleNav = (href: string) => {
+  const handleNav = useCallback((href: string) => {
     setOpen(false)
-    setTimeout(() => scrollTo(href), 100)
-  }
+    setTimeout(() => scrollTo(href), 350)
+  }, [])
 
   return (
     <>
@@ -47,7 +68,7 @@ export default function Nav() {
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.15, ease }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter,border-color,box-shadow] duration-300 ${
           scrolled
             ? 'bg-background/80 backdrop-blur-xl border-b border-border shadow-lg shadow-black/5'
             : ''
@@ -62,16 +83,25 @@ export default function Nav() {
           </button>
 
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map(({ label, href }) => (
-              <button
-                key={label}
-                onClick={() => handleNav(href)}
-                className="relative text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 group"
-              >
-                {label}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
-              </button>
-            ))}
+            {navLinks.map(({ label, href }) => {
+              const isActive = activeSection === href.replace('#', '')
+              return (
+                <button
+                  key={label}
+                  onClick={() => handleNav(href)}
+                  className={`relative text-sm transition-colors duration-200 group ${
+                    isActive ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {label}
+                  <span
+                    className={`absolute -bottom-1 left-0 h-px bg-accent transition-all duration-300 ${
+                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`}
+                  />
+                </button>
+              )
+            })}
           </div>
 
           <div className="hidden md:block">
@@ -86,7 +116,7 @@ export default function Nav() {
           </div>
 
           <button
-            className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
+            className="md:hidden p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
@@ -122,28 +152,33 @@ export default function Nav() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: '100%' }}
               transition={{ duration: 0.35, ease }}
-              className="fixed inset-y-0 right-0 z-40 w-[75%] max-w-sm bg-background/95 backdrop-blur-xl border-l border-border flex flex-col px-8 pt-24 md:hidden"
+              className="fixed inset-y-0 right-0 z-40 w-[75%] max-w-sm bg-background/95 backdrop-blur-xl border-l border-border flex flex-col px-8 pt-20 md:hidden"
             >
-              <div className="flex flex-col gap-2">
-                {navLinks.map(({ label, href }, i) => (
-                  <motion.button
-                    key={label}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: 0.1 + i * 0.06 }}
-                    onClick={() => handleNav(href)}
-                    className="text-left text-2xl sm:text-3xl font-serif font-bold text-foreground hover:text-accent transition-colors py-2"
-                  >
-                    {label}
-                  </motion.button>
-                ))}
+              <div className="flex flex-col gap-1">
+                {navLinks.map(({ label, href }, i) => {
+                  const isActive = activeSection === href.replace('#', '')
+                  return (
+                    <motion.button
+                      key={label}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: 0.1 + i * 0.06 }}
+                      onClick={() => handleNav(href)}
+                      className={`text-left text-2xl sm:text-3xl font-serif font-bold transition-colors py-3 min-h-[44px] flex items-center ${
+                        isActive ? 'text-accent' : 'text-foreground hover:text-accent'
+                      }`}
+                    >
+                      {label}
+                    </motion.button>
+                  )
+                })}
               </div>
               <motion.button
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.45 }}
                 onClick={() => handleNav('#contact')}
-                className="mt-10 px-6 py-3 bg-accent text-white text-base font-medium rounded-md w-full sm:w-auto"
+                className="mt-8 px-6 py-3 bg-accent text-white text-base font-medium rounded-md w-full min-h-[44px]"
               >
                 Hire Me
               </motion.button>
