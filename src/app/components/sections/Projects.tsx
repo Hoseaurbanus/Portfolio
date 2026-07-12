@@ -65,20 +65,20 @@ const projects: Project[] = [
   {
     id: 4,
     index: '04',
-    name: '[Your Project Here]',
-    tagline: 'Add a short description of your project',
+    name: 'CampusFund',
+    tagline: 'Campus fundraising and donation management system',
     overview:
-      'Replace this with a detailed overview of your project - what it does, who it serves, and what problem it solves.',
+      'A full-stack platform connecting students in financial hardship with donors. Manages the entire lifecycle from assistance request submission, through administrative approval, to donor-funded disbursement.',
     problem:
-      'Describe the problem or gap this project addresses.',
+      'Students at Graceland Royal Academy needed a structured, transparent digital platform to request financial assistance, while donors needed a reliable way to contribute and track their impact.',
     solution:
-      'Explain your technical approach and the key decisions you made.',
-    tech: ['Tech 1', 'Tech 2', 'Tech 3'],
+      'Built a custom PHP micro-framework backend with JWT auth and a React/TypeScript frontend. Features include Paystack payments, manual bank transfer verification, in-app notifications, analytics dashboards, and role-based access for Students, Donors, and Admins.',
+    tech: ['React', 'TypeScript', 'Tailwind CSS', 'PHP', 'MySQL', 'Paystack'],
     outcome:
-      'Describe the measurable outcome or impact of this project.',
-    image: '',
-    github: 'https://github.com/Hoseaurbanus',
-    demo: '#',
+      'Live production system at anns.com.gracelandroyalacademy.com.ng, enabling transparent fundraising and disbursement for students in need.',
+    image: '/FUND.jpg',
+    github: 'https://github.com/Hoseaurbanus/FUND-RAISING',
+    demo: 'https://anns.com.gracelandroyalacademy.com.ng',
   },
 ]
 
