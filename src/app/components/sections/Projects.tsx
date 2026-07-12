@@ -118,7 +118,7 @@ export default function Projects() {
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpanded(expanded === p.id ? null : p.id) } }}
               >
                 <div className="grid sm:grid-cols-[1fr] lg:grid-cols-[380px_1fr] gap-0">
-                  <div className="relative h-48 sm:h-52 lg:h-56 overflow-hidden bg-muted shrink-0">
+                  <div className="relative h-48 sm:h-52 lg:h-56 overflow-hidden bg-[#0f172a] shrink-0">
                     {p.image ? (
                       <motion.img
                         src={p.image}
@@ -126,7 +126,7 @@ export default function Projects() {
                         loading="lazy"
                         whileHover={{ scale: 1.04 }}
                         transition={{ duration: 0.5, ease }}
-                        className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+                        className="w-full h-full object-cover opacity-75 group-hover:opacity-90 transition-opacity duration-500"
                       />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-accent/10 via-accent/5 to-muted flex items-center justify-center">
