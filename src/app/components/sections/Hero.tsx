@@ -6,7 +6,7 @@ import { ease } from '@/lib/constants'
 const roles = [
   'Full Stack Software Developer',
   'Data Analyst',
-  'Physics Graduate',
+  'Physicist',
 ]
 
 const nameWords = ['HOSEA', 'URBANUS', 'AUDU']
@@ -149,7 +149,7 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.8, ease }}
               className="text-base lg:text-lg text-muted-foreground max-w-xl leading-relaxed mb-8 lg:mb-10"
             >
-              Physics graduate turned software engineer. I build full-stack
+              Physicist turned software engineer. I build full-stack
               applications with clean architecture, scalable infrastructure,
               and data-driven insights.
             </motion.p>
