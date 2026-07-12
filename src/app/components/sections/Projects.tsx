@@ -47,20 +47,20 @@ const projects: Project[] = [
   {
     id: 3,
     index: '03',
-    name: '[Your Project Here]',
-    tagline: 'Add a short description of your project',
+    name: 'PAJUMA School Portal',
+    tagline: 'Full-stack school management ERP for ECWA PAJUMA Christian Academy',
     overview:
-      'Replace this with a detailed overview of your project - what it does, who it serves, and what problem it solves.',
+      'Comprehensive ERP-style platform managing student enrollment, academic scoring, fee payments, CBT exams, attendance, and parent communication for a K-12 school in Gombe State, Nigeria.',
     problem:
-      'Describe the problem or gap this project addresses.',
+      'The school needed a centralized digital system to replace manual record-keeping across 65 database tables, serving 5 user roles (Admin, Teacher, Accountant, Parent, Student).',
     solution:
-      'Explain your technical approach and the key decisions you made.',
-    tech: ['Tech 1', 'Tech 2', 'Tech 3'],
+      'Built a custom PHP MVC backend with JWT auth and a React/TypeScript frontend. Features include auto-migration, SSE real-time notifications, Paystack payments, PDF report cards with QR codes, and an anti-cheating CBT exam engine.',
+    tech: ['React', 'TypeScript', 'Tailwind CSS', 'PHP', 'MySQL', 'Vite'],
     outcome:
-      'Describe the measurable outcome or impact of this project.',
-    image: '',
-    github: 'https://github.com/Hoseaurbanus',
-    demo: '#',
+      'Live production system managing all school operations — enrollment, grading, payments, exams, and parent portal — for ECWA PAJUMA Christian Academy.',
+    image: '/PAJUMA.jpg',
+    github: 'https://github.com/Hoseaurbanus/PAJUMA',
+    demo: 'https://pajuma-m6gj.vercel.app/',
   },
   {
     id: 4,
