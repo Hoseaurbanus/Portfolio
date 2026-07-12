@@ -62,7 +62,7 @@ const projects: Project[] = [
     outcome: 'Live production system at anns.com.gracelandroyalacademy.com.ng, enabling transparent fundraising and disbursement for students in need.',
     image: '/FUND.jpg',
     github: 'https://github.com/Hoseaurbanus/FUND-RAISING',
-    demo: 'https://anns.com.gracelandroyalacademy.com.ng',
+    demo: 'https://fund-raising-git-main-hosea-urbanus-audus-projects.vercel.app/',
   },
 ]
 
