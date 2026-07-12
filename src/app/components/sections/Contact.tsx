@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react'
 import { Mail, Github, Twitter, ArrowRight, CheckCircle2, Loader2, XCircle, MessageCircle, Phone } from 'lucide-react'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
-import { SectionLabel } from '../shared/SectionLabel'
+import { SectionNumber } from '../shared/SectionNumber'
 import { sendContactEmail } from '@/lib/emailjs'
 
 export default function Contact() {
@@ -34,21 +34,21 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-20 md:py-32 border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+    <section id="contact" className="relative py-20 md:py-32">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <SectionNumber number="08" label="Contact" />
         <RevealGroup>
-          <SectionLabel>Contact</SectionLabel>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24">
             <div>
               <motion.h2
                 variants={fadeUp}
-                className="font-serif text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-5 lg:mb-6 leading-[1.1]"
+                className="font-display text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-5 lg:mb-6 leading-[1.1] tracking-tight"
               >
                 Let&apos;s build something great.
               </motion.h2>
               <motion.p
                 variants={fadeUp}
-                className="text-muted-foreground leading-[1.75] text-base mb-8 lg:mb-10"
+                className="text-muted-foreground leading-relaxed text-base mb-8 lg:mb-10"
               >
                 Whether you have a project in mind, a role to fill, or simply
                 want to connect — I read every message and respond within 24
@@ -124,7 +124,7 @@ export default function Contact() {
                     Name
                   </label>
                   <motion.input
-                    whileFocus={{ borderColor: 'rgba(99, 102, 241, 0.5)', boxShadow: '0 0 0 3px rgba(99, 102, 241, 0.1)' }}
+                    whileFocus={{ borderColor: 'rgba(232, 168, 56, 0.5)', boxShadow: '0 0 0 3px rgba(232, 168, 56, 0.1)' }}
                     id="contact-name"
                     type="text"
                     value={form.name}
@@ -139,7 +139,7 @@ export default function Contact() {
                     Email
                   </label>
                   <motion.input
-                    whileFocus={{ borderColor: 'rgba(99, 102, 241, 0.5)', boxShadow: '0 0 0 3px rgba(99, 102, 241, 0.1)' }}
+                    whileFocus={{ borderColor: 'rgba(232, 168, 56, 0.5)', boxShadow: '0 0 0 3px rgba(232, 168, 56, 0.1)' }}
                     id="contact-email"
                     type="email"
                     value={form.email}
@@ -155,7 +155,7 @@ export default function Contact() {
                   Message
                 </label>
                 <motion.textarea
-                  whileFocus={{ borderColor: 'rgba(99, 102, 241, 0.5)', boxShadow: '0 0 0 3px rgba(99, 102, 241, 0.1)' }}
+                  whileFocus={{ borderColor: 'rgba(232, 168, 56, 0.5)', boxShadow: '0 0 0 3px rgba(232, 168, 56, 0.1)' }}
                   id="contact-message"
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
@@ -171,7 +171,7 @@ export default function Contact() {
                   disabled={status === 'loading'}
                   whileHover={{ scale: status === 'loading' ? 1 : 1.02 }}
                   whileTap={{ scale: status === 'loading' ? 1 : 0.98 }}
-                  className="w-full py-3 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent/90 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed min-h-[44px]"
+                  className="w-full py-3 bg-accent text-accent-foreground text-sm font-medium rounded-lg hover:bg-accent/90 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed min-h-[44px]"
                 >
                   <AnimatePresence mode="wait">
                     {status === 'loading' ? (

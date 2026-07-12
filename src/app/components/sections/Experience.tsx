@@ -1,10 +1,9 @@
 import { motion } from 'motion/react'
 import { CheckCircle2 } from 'lucide-react'
-
 import { ease } from '@/lib/constants'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
-import { SectionLabel } from '../shared/SectionLabel'
+import { SectionNumber } from '../shared/SectionNumber'
 import type { Experience } from '@/types'
 
 const experience: Experience[] = [
@@ -43,13 +42,13 @@ const experience: Experience[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-20 md:py-32 border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+    <section id="experience" className="relative py-20 md:py-32">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <SectionNumber number="05" label="Experience" />
         <RevealGroup>
-          <SectionLabel>Experience</SectionLabel>
           <motion.h2
             variants={fadeUp}
-            className="font-serif text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-10 lg:mb-14 leading-[1.1]"
+            className="font-display text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-10 lg:mb-14 leading-[1.1] tracking-tight"
           >
             Where I&apos;ve worked.
           </motion.h2>
@@ -88,7 +87,7 @@ export default function Experience() {
                   </div>
 
                   <motion.div
-                    whileHover={{ borderColor: 'rgba(99, 102, 241, 0.2)' }}
+                    whileHover={{ borderColor: 'rgba(232, 168, 56, 0.15)' }}
                     className="p-5 sm:p-6 lg:p-8 rounded-xl border border-border bg-card transition-colors duration-300"
                   >
                     <div className="flex items-center gap-2 mb-2 md:hidden">
@@ -99,13 +98,13 @@ export default function Experience() {
                         {job.location}
                       </span>
                     </div>
-                    <h3 className="font-serif text-lg sm:text-xl font-bold text-foreground">
+                    <h3 className="font-display text-lg sm:text-xl font-bold text-foreground">
                       {job.role}
                     </h3>
                     <p className="text-accent font-mono text-sm mt-0.5 mb-3">
                       {job.company}
                     </p>
-                    <p className="text-sm text-muted-foreground leading-[1.75] mb-4">
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">
                       {job.description}
                     </p>
                     <ul className="space-y-2 mb-4 lg:mb-5">

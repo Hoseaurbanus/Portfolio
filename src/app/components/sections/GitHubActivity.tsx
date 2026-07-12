@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion } from 'motion/react'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
-import { SectionLabel } from '../shared/SectionLabel'
+import { SectionNumber } from '../shared/SectionNumber'
 import { fetchGitHubStats, fetchGitHubActivity } from '@/lib/github'
 import AnimatedCounter from '../shared/AnimatedCounter'
 import type { GitHubStats, GitHubDay } from '@/types'
@@ -63,19 +63,19 @@ export default function GitHubActivity() {
   ]
 
   return (
-    <section id="opensource" className="py-20 md:py-32 border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+    <section id="opensource" className="relative py-20 md:py-32">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <SectionNumber number="07" label="Open Source & GitHub" />
         <RevealGroup>
-          <SectionLabel>Open Source & GitHub</SectionLabel>
           <motion.h2
             variants={fadeUp}
-            className="font-serif text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-4 leading-[1.1]"
+            className="font-display text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-4 leading-[1.1] tracking-tight"
           >
             Built in public.
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="text-muted-foreground max-w-xl mb-8 lg:mb-10 leading-[1.75] text-base"
+            className="text-muted-foreground max-w-xl mb-8 lg:mb-10 leading-relaxed text-base"
           >
             Consistent contribution to open source and personal tools.
             Every square represents a commit.
@@ -87,7 +87,7 @@ export default function GitHubActivity() {
           >
             {statItems.map(({ value, suffix = '', label }) => (
               <div key={label}>
-                <p className="font-serif text-2xl sm:text-3xl font-bold text-foreground">
+                <p className="font-display text-2xl sm:text-3xl font-bold text-foreground">
                   {loading ? (
                     '—'
                   ) : (

@@ -9,10 +9,12 @@ export function SectionLabel({ children }: SectionLabelProps) {
   return (
     <motion.div
       variants={fadeUp}
-      className="inline-flex items-center gap-2 text-[10px] font-mono tracking-[0.2em] uppercase text-accent mb-5"
+      className="inline-flex items-center gap-3 mb-5"
     >
-      <span className="w-5 h-px bg-accent" />
-      {children}
+      <div className="w-8 h-px bg-accent" />
+      <span className="text-[10px] sm:text-xs font-mono tracking-[0.25em] uppercase text-accent">
+        {children}
+      </span>
     </motion.div>
   )
 }

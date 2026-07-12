@@ -1,76 +1,39 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-
 import { ease } from '@/lib/constants'
-import {
-  Globe,
-  Server,
-  BarChart3,
-  Terminal,
-  Database,
-  Cpu,
-  PenTool,
-} from 'lucide-react'
+import { Globe, Server, BarChart3, Terminal, Database, Cpu, PenTool } from 'lucide-react'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
-import { SectionLabel } from '../shared/SectionLabel'
+import { SectionNumber } from '../shared/SectionNumber'
 import type { SkillGroup } from '@/types'
 
 const skillGroups: SkillGroup[] = [
-  {
-    label: 'Programming Languages',
-    Icon: Terminal,
-    skills: ['Python', 'Java', 'C++', 'SQL', 'Bash', 'HTML/CSS'],
-  },
-  {
-    label: 'Data Analysis',
-    Icon: BarChart3,
-    skills: ['Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Statistical Modeling', 'Data Visualization'],
-  },
-  {
-    label: 'Frontend',
-    Icon: Globe,
-    skills: ['React', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML5'],
-  },
-  {
-    label: 'Backend',
-    Icon: Server,
-    skills: ['Node.js', 'REST APIs', 'Express.js', 'PostgreSQL', 'MongoDB'],
-  },
-  {
-    label: 'Tools & DevOps',
-    Icon: Cpu,
-    skills: ['Git/GitHub', 'VS Code', 'Linux', 'Agile/Scrum', 'CI/CD'],
-  },
-  {
-    label: 'QA & Testing',
-    Icon: Database,
-    skills: ['Manual Testing', 'Bug Tracking', 'Test Reporting', 'Documentation'],
-  },
-  {
-    label: 'Content & Communication',
-    Icon: PenTool,
-    skills: ['Technical Writing', 'Physics Blogging', 'Content Creation', 'Virtual Assistance'],
-  },
+  { label: 'Programming Languages', Icon: Terminal, skills: ['Python', 'Java', 'C++', 'SQL', 'Bash', 'HTML/CSS'] },
+  { label: 'Data Analysis', Icon: BarChart3, skills: ['Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Statistical Modeling', 'Data Visualization'] },
+  { label: 'Frontend', Icon: Globe, skills: ['React', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML5'] },
+  { label: 'Backend', Icon: Server, skills: ['Node.js', 'REST APIs', 'Express.js', 'PostgreSQL', 'MongoDB'] },
+  { label: 'Tools & DevOps', Icon: Cpu, skills: ['Git/GitHub', 'VS Code', 'Linux', 'Agile/Scrum', 'CI/CD'] },
+  { label: 'QA & Testing', Icon: Database, skills: ['Manual Testing', 'Bug Tracking', 'Test Reporting', 'Documentation'] },
+  { label: 'Content & Communication', Icon: PenTool, skills: ['Technical Writing', 'Physics Blogging', 'Content Creation', 'Virtual Assistance'] },
 ]
 
 export default function Skills() {
   const [active, setActive] = useState<string | null>(null)
 
   return (
-    <section id="skills" className="py-20 md:py-32 border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+    <section id="skills" className="relative py-20 md:py-32">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <SectionNumber number="03" label="Technical Skills" />
         <RevealGroup>
-          <SectionLabel>Technical Skills</SectionLabel>
           <motion.h2
             variants={fadeUp}
-            className="font-serif text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-4 leading-[1.1]"
+            className="font-display text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-4 leading-[1.1] tracking-tight"
           >
             The toolkit.
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="text-muted-foreground max-w-xl mb-10 lg:mb-14 leading-[1.75] text-base"
+            className="text-muted-foreground max-w-xl mb-10 lg:mb-14 leading-relaxed text-base"
           >
             Technologies I work with daily, organized by domain.
           </motion.p>
@@ -96,12 +59,9 @@ export default function Skills() {
                       active === label ? 'bg-accent/20' : 'bg-muted'
                     }`}
                   >
-                    <Icon
-                      size={15}
-                      className={active === label ? 'text-accent' : 'text-muted-foreground'}
-                    />
+                    <Icon size={15} className={active === label ? 'text-accent' : 'text-muted-foreground'} />
                   </motion.div>
-                  <h3 className="text-sm font-mono font-medium text-foreground tracking-wide">
+                  <h3 className="text-sm font-display font-medium text-foreground tracking-wide">
                     {label}
                   </h3>
                 </div>

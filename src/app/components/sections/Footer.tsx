@@ -1,6 +1,5 @@
 import { motion } from 'motion/react'
 import { Github, Twitter, MessageCircle, Download } from 'lucide-react'
-import { ease } from '@/lib/constants'
 import type { NavLink } from '@/types'
 
 const navLinks: NavLink[] = [
@@ -18,7 +17,7 @@ function scrollTo(href: string) {
 export default function Footer() {
   return (
     <footer className="py-8 lg:py-10 border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
         <div className="text-center sm:text-left">
           <p className="font-mono text-sm font-bold text-foreground">HUA</p>
           <p className="text-xs text-muted-foreground font-mono mt-0.5">

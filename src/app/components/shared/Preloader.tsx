@@ -121,7 +121,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
             {/* Name reveal - word by word */}
             <div className="overflow-hidden mb-4 sm:mb-6">
               <motion.h1
-                className="font-serif text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1]"
+                className="font-display text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1]"
                 initial={{ y: 100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8, ease }}

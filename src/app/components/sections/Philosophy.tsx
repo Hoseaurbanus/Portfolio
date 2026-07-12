@@ -7,11 +7,10 @@ import {
   Server,
   BookOpen,
 } from 'lucide-react'
-
 import { ease } from '@/lib/constants'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
-import { SectionLabel } from '../shared/SectionLabel'
+import { SectionNumber } from '../shared/SectionNumber'
 
 const principles = [
   {
@@ -48,19 +47,19 @@ const principles = [
 
 export default function Philosophy() {
   return (
-    <section id="philosophy" className="py-20 md:py-32 border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+    <section id="philosophy" className="relative py-20 md:py-32">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <SectionNumber number="09" label="Engineering Philosophy" />
         <RevealGroup>
-          <SectionLabel>Engineering Philosophy</SectionLabel>
           <motion.h2
             variants={fadeUp}
-            className="font-serif text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-4 leading-[1.1] max-w-2xl"
+            className="font-display text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-4 leading-[1.1] tracking-tight max-w-2xl"
           >
             How I think about building software.
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="text-muted-foreground max-w-xl mb-10 lg:mb-14 leading-[1.75] text-base"
+            className="text-muted-foreground max-w-xl mb-10 lg:mb-14 leading-relaxed text-base"
           >
             These are not aspirations. They are constraints I impose on every
             project I touch — from architecture to code review to deployment.
@@ -82,10 +81,10 @@ export default function Philosophy() {
                 >
                   <Icon size={16} className="text-accent" />
                 </motion.div>
-                <h3 className="font-serif text-lg font-bold text-foreground mb-3">
+                <h3 className="font-display text-lg font-bold text-foreground mb-3">
                   {title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-[1.75]">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {body}
                 </p>
               </motion.div>

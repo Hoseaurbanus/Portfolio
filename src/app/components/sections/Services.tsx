@@ -1,48 +1,27 @@
 import { motion } from 'motion/react'
 import { Globe, BarChart3, Server, Briefcase } from 'lucide-react'
-
 import { ease } from '@/lib/constants'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
-import { SectionLabel } from '../shared/SectionLabel'
+import { SectionNumber } from '../shared/SectionNumber'
 import type { Service } from '@/types'
 
 const services: Service[] = [
-  {
-    Icon: Globe,
-    title: 'Full Stack Development',
-    body: 'End-to-end application development from database schema to polished user interface. React, Next.js, FastAPI, and beyond.',
-    tags: ['React', 'Node.js', 'APIs', 'Databases'],
-  },
-  {
-    Icon: BarChart3,
-    title: 'Data Analytics & Visualisation',
-    body: 'Transform raw data into actionable insight. From exploratory analysis to production dashboards with real-time updates.',
-    tags: ['Python', 'SQL', 'Tableau', 'Dashboards'],
-  },
-  {
-    Icon: Server,
-    title: 'API Design & Integration',
-    body: 'RESTful and GraphQL API design with clear contracts, versioning, documentation, and secure authentication.',
-    tags: ['REST', 'GraphQL', 'OpenAPI', 'Auth'],
-  },
-  {
-    Icon: Briefcase,
-    title: 'Technical Consulting',
-    body: 'Architecture review, technology selection, and engineering process recommendations for growing teams.',
-    tags: ['Architecture', 'Code Review', 'Strategy'],
-  },
+  { Icon: Globe, title: 'Full Stack Development', body: 'End-to-end application development from database schema to polished user interface. React, Next.js, FastAPI, and beyond.', tags: ['React', 'Node.js', 'APIs', 'Databases'] },
+  { Icon: BarChart3, title: 'Data Analytics & Visualisation', body: 'Transform raw data into actionable insight. From exploratory analysis to production dashboards with real-time updates.', tags: ['Python', 'SQL', 'Tableau', 'Dashboards'] },
+  { Icon: Server, title: 'API Design & Integration', body: 'RESTful and GraphQL API design with clear contracts, versioning, documentation, and secure authentication.', tags: ['REST', 'GraphQL', 'OpenAPI', 'Auth'] },
+  { Icon: Briefcase, title: 'Technical Consulting', body: 'Architecture review, technology selection, and engineering process recommendations for growing teams.', tags: ['Architecture', 'Code Review', 'Strategy'] },
 ]
 
 export default function Services() {
   return (
-    <section id="services" className="py-20 md:py-32 border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+    <section id="services" className="relative py-20 md:py-32">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <SectionNumber number="04" label="Services" />
         <RevealGroup>
-          <SectionLabel>Services</SectionLabel>
           <motion.h2
             variants={fadeUp}
-            className="font-serif text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-10 lg:mb-14 leading-[1.1]"
+            className="font-display text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-10 lg:mb-14 leading-[1.1] tracking-tight"
           >
             What I deliver.
           </motion.h2>
@@ -63,10 +42,10 @@ export default function Services() {
                 >
                   <Icon size={22} className="text-accent" />
                 </motion.div>
-                <h3 className="font-serif text-lg sm:text-xl font-bold text-foreground mb-3">
+                <h3 className="font-display text-lg sm:text-xl font-bold text-foreground mb-3">
                   {title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-[1.75] mb-4 lg:mb-5">
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4 lg:mb-5">
                   {body}
                 </p>
                 <div className="flex flex-wrap gap-2">
