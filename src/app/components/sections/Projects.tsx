@@ -30,18 +30,18 @@ const projects: Project[] = [
     id: 2,
     index: '02',
     name: 'Graceland Royal Academy',
-    tagline: 'School website and management portal',
+    tagline: 'Full-stack school management ERP with CBT and payment processing',
     overview:
-      'A complete web presence and management system for Graceland Royal Academy, providing an online portal for students and parents alongside administrative tools.',
+      'Comprehensive school management system serving 5 user roles (Admin, Teacher, Accountant, Parent, Student). Features include student lifecycle management, academic scoring with PDF report cards, fee processing via Paystack, CBT exam engine, and real-time SSE notifications.',
     problem:
-      'The academy needed a professional online presence and a digital system to manage school operations, communications, and student data.',
+      'The academy needed a centralized digital platform to replace manual operations across enrollment, grading, fee collection, attendance, and parent communication for a K-12 institution in Gombe State, Nigeria.',
     solution:
-      'Built a responsive school website with integrated management features, including parent/student portals, news updates, and administrative dashboards.',
-    tech: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+      'Built a custom PHP MVC backend with JWT auth, MySQL database (65 tables), and a React/TypeScript frontend with Radix UI. Implemented auto-migration, SSE real-time updates, Paystack payments, jsPDF report cards with QR codes, and an anti-cheating CBT exam engine.',
+    tech: ['React', 'TypeScript', 'Tailwind CSS', 'PHP', 'MySQL', 'Paystack'],
     outcome:
-      'Live at gracelandroyalacademy.com.ng - serving the academy with a professional web presence and operational management tools.',
+      'Live at gracelandroyalacademy.com.ng — managing all school operations including enrollment, grading, payments, exams, and parent portal.',
     image: '/graceland.jpg',
-    github: 'https://github.com/Hoseaurbanus',
+    github: 'https://github.com/Hoseaurbanus/updated-GRA',
     demo: 'https://gracelandroyalacademy.com.ng/',
   },
   {
