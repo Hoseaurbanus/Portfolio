@@ -8,13 +8,13 @@ import { SectionNumber } from '../shared/SectionNumber'
 import type { SkillGroup } from '@/types'
 
 const skillGroups: SkillGroup[] = [
-  { label: 'Programming Languages', Icon: Terminal, skills: ['Python', 'Java', 'C++', 'SQL', 'Bash', 'HTML/CSS'] },
-  { label: 'Data Analysis', Icon: BarChart3, skills: ['Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Statistical Modeling', 'Data Visualization'] },
-  { label: 'Frontend', Icon: Globe, skills: ['React', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML5'] },
-  { label: 'Backend', Icon: Server, skills: ['Node.js', 'REST APIs', 'Express.js', 'PostgreSQL', 'MongoDB'] },
-  { label: 'Tools & DevOps', Icon: Cpu, skills: ['Git/GitHub', 'VS Code', 'Linux', 'Agile/Scrum', 'CI/CD'] },
-  { label: 'QA & Testing', Icon: Database, skills: ['Manual Testing', 'Bug Tracking', 'Test Reporting', 'Documentation'] },
-  { label: 'Content & Communication', Icon: PenTool, skills: ['Technical Writing', 'Physics Blogging', 'Content Creation', 'Virtual Assistance'] },
+  { label: 'Programming Languages', Icon: Terminal, skills: ['TypeScript', 'JavaScript', 'Python', 'PHP', 'SQL', 'HTML/CSS'] },
+  { label: 'Frontend', Icon: Globe, skills: ['React', 'Vite', 'Tailwind CSS', 'Radix UI', 'Framer Motion', 'React Router'] },
+  { label: 'Backend & Databases', Icon: Server, skills: ['PHP', 'Node.js', 'REST APIs', 'MySQL', 'PostgreSQL'] },
+  { label: 'Data & Visualization', Icon: BarChart3, skills: ['Pandas', 'NumPy', 'Matplotlib', 'Recharts', 'Data Visualization'] },
+  { label: 'Tools & Platforms', Icon: Cpu, skills: ['Git/GitHub', 'Vercel', 'VS Code', 'Linux', 'Paystack'] },
+  { label: 'QA & Documentation', Icon: Database, skills: ['Manual Testing', 'Bug Tracking', 'jsPDF', 'Test Reporting'] },
+  { label: 'Communication', Icon: PenTool, skills: ['Technical Writing', 'Content Creation', 'Virtual Assistance', 'Research'] },
 ]
 
 export default function Skills() {

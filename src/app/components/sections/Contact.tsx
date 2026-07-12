@@ -124,7 +124,7 @@ export default function Contact() {
                     Name
                   </label>
                   <motion.input
-                    whileFocus={{ borderColor: 'rgba(232, 168, 56, 0.5)', boxShadow: '0 0 0 3px rgba(232, 168, 56, 0.1)' }}
+                    whileFocus={{ borderColor: 'color-mix(in srgb, var(--accent) 50%, transparent)', boxShadow: '0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent)' }}
                     id="contact-name"
                     type="text"
                     value={form.name}
@@ -139,7 +139,7 @@ export default function Contact() {
                     Email
                   </label>
                   <motion.input
-                    whileFocus={{ borderColor: 'rgba(232, 168, 56, 0.5)', boxShadow: '0 0 0 3px rgba(232, 168, 56, 0.1)' }}
+                    whileFocus={{ borderColor: 'color-mix(in srgb, var(--accent) 50%, transparent)', boxShadow: '0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent)' }}
                     id="contact-email"
                     type="email"
                     value={form.email}
@@ -155,7 +155,7 @@ export default function Contact() {
                   Message
                 </label>
                 <motion.textarea
-                  whileFocus={{ borderColor: 'rgba(232, 168, 56, 0.5)', boxShadow: '0 0 0 3px rgba(232, 168, 56, 0.1)' }}
+                  whileFocus={{ borderColor: 'color-mix(in srgb, var(--accent) 50%, transparent)', boxShadow: '0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent)' }}
                   id="contact-message"
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}

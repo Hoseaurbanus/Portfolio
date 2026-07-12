@@ -6,9 +6,9 @@ import { SectionNumber } from '../shared/SectionNumber'
 import AnimatedCounter from '../shared/AnimatedCounter'
 
 const statCards = [
-  { value: 2, suffix: '+', label: 'Projects Delivered' },
+  { value: 4, suffix: '+', label: 'Projects Delivered' },
   { value: 3, suffix: '+', label: 'Years Experience' },
-  { value: 7, suffix: '+', label: 'Technologies Mastered' },
+  { value: 15, suffix: '+', label: 'Technologies Used' },
 ]
 
 export default function About() {

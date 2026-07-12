@@ -87,7 +87,7 @@ export default function Experience() {
                   </div>
 
                   <motion.div
-                    whileHover={{ borderColor: 'rgba(232, 168, 56, 0.15)' }}
+                    whileHover={{ borderColor: 'color-mix(in srgb, var(--accent) 15%, transparent)' }}
                     className="p-5 sm:p-6 lg:p-8 rounded-xl border border-border bg-card transition-colors duration-300"
                   >
                     <div className="flex items-center gap-2 mb-2 md:hidden">

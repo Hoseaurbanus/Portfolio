@@ -26,7 +26,7 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boole
       return (
         <div className="min-h-screen flex items-center justify-center bg-background text-foreground p-8">
           <div className="text-center max-w-md">
-            <h2 className="font-serif text-2xl font-bold mb-4">Something went wrong</h2>
+            <h2 className="font-display text-2xl font-bold mb-4">Something went wrong</h2>
             <p className="text-muted-foreground text-sm mb-6">
               An unexpected error occurred. Please refresh the page or try again later.
             </p>
@@ -66,7 +66,6 @@ export default function App() {
         <main id="main-content">
           <Hero />
           <About />
-          <Philosophy />
           <Projects />
           <Skills />
           <Services />
@@ -74,6 +73,7 @@ export default function App() {
           <Education />
           <GitHubActivity />
           <Contact />
+          <Philosophy />
         </main>
         <Footer />
         <BackToTop />

@@ -16,7 +16,7 @@ const projects: Project[] = [
     overview: 'A full-stack multi-school management system serving educational institutions in Lagos, Nigeria. Built with role-based access control for administrators, teachers, and students.',
     problem: 'Schools in Nigeria needed a centralized platform to manage multiple institutions, student records, and administrative workflows efficiently.',
     solution: 'Developed a scalable multi-school management platform with role-based dashboards (Admin, Teacher, Student), real-time notifications, and comprehensive reporting capabilities.',
-    tech: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'Vercel'],
+    tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'React Router', 'jsPDF'],
     outcome: 'Live production system managing multiple schools in Lagos, Nigeria. Trusted by SMUGFlex Venture for their multi-school operations.',
     image: '/smugflex.jpg',
     github: 'https://github.com/Hoseaurbanus',
@@ -30,10 +30,10 @@ const projects: Project[] = [
     overview: 'Comprehensive school management system serving 5 user roles (Admin, Teacher, Accountant, Parent, Student). Features include student lifecycle management, academic scoring with PDF report cards, fee processing via Paystack, CBT exam engine, and real-time SSE notifications.',
     problem: 'The academy needed a centralized digital platform to replace manual operations across enrollment, grading, fee collection, attendance, and parent communication for a K-12 institution in Gombe State, Nigeria.',
     solution: 'Built a custom PHP MVC backend with JWT auth, MySQL database (65 tables), and a React/TypeScript frontend with Radix UI. Implemented auto-migration, SSE real-time updates, Paystack payments, jsPDF report cards with QR codes, and an anti-cheating CBT exam engine.',
-    tech: ['React', 'TypeScript', 'Tailwind CSS', 'PHP', 'MySQL', 'Paystack'],
+    tech: ['React', 'TypeScript', 'Vite', 'Radix UI', 'Tailwind CSS', 'jsPDF'],
     outcome: 'Live at gracelandroyalacademy.com.ng — managing all school operations including enrollment, grading, payments, exams, and parent portal.',
     image: '/graceland.jpg',
-    github: 'https://github.com/Hoseaurbanus/updated-GRA',
+    github: 'https://github.com/Hoseaurbanus/graceland-academy-website',
     demo: 'https://gracelandroyalacademy.com.ng/',
   },
   {
@@ -44,7 +44,7 @@ const projects: Project[] = [
     overview: 'Comprehensive ERP-style platform managing student enrollment, academic scoring, fee payments, CBT exams, attendance, and parent communication for a K-12 school in Gombe State, Nigeria.',
     problem: 'The school needed a centralized digital system to replace manual record-keeping across 65 database tables, serving 5 user roles (Admin, Teacher, Accountant, Parent, Student).',
     solution: 'Built a custom PHP MVC backend with JWT auth and a React/TypeScript frontend. Features include auto-migration, SSE real-time notifications, Paystack payments, PDF report cards with QR codes, and an anti-cheating CBT exam engine.',
-    tech: ['React', 'TypeScript', 'Tailwind CSS', 'PHP', 'MySQL', 'Vite'],
+    tech: ['React', 'TypeScript', 'Vite', 'Radix UI', 'Recharts', 'Paystack'],
     outcome: 'Live production system managing all school operations — enrollment, grading, payments, exams, and parent portal — for ECWA PAJUMA Christian Academy.',
     image: '/PAJUMA.jpg',
     github: 'https://github.com/Hoseaurbanus/PAJUMA',
@@ -58,7 +58,7 @@ const projects: Project[] = [
     overview: 'A full-stack platform connecting students in financial hardship with donors. Manages the entire lifecycle from assistance request submission, through administrative approval, to donor-funded disbursement.',
     problem: 'Students at Graceland Royal Academy needed a structured, transparent digital platform to request financial assistance, while donors needed a reliable way to contribute and track their impact.',
     solution: 'Built a custom PHP micro-framework backend with JWT auth and a React/TypeScript frontend. Features include Paystack payments, manual bank transfer verification, in-app notifications, analytics dashboards, and role-based access for Students, Donors, and Admins.',
-    tech: ['React', 'TypeScript', 'Tailwind CSS', 'PHP', 'MySQL', 'Paystack'],
+    tech: ['React', 'TypeScript', 'Vite', 'PHP', 'Tailwind CSS', 'Paystack'],
     outcome: 'Live production system at anns.com.gracelandroyalacademy.com.ng, enabling transparent fundraising and disbursement for students in need.',
     image: '/FUND.jpg',
     github: 'https://github.com/Hoseaurbanus/FUND-RAISING',
@@ -93,7 +93,7 @@ export default function Projects() {
               <motion.article
                 key={p.id}
                 variants={fadeUp}
-                whileHover={{ borderColor: 'rgba(232, 168, 56, 0.15)' }}
+                whileHover={{ borderColor: 'color-mix(in srgb, var(--accent) 15%, transparent)' }}
                 className="group rounded-2xl border border-border bg-card overflow-hidden cursor-pointer"
                 onClick={() => setExpanded(expanded === p.id ? null : p.id)}
                 role="button"
