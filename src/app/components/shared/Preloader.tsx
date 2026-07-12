@@ -14,8 +14,8 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
     }
     const timer = setTimeout(() => {
       setShow(false)
-      setTimeout(onComplete, 700)
-    }, 2800)
+      setTimeout(onComplete, 800)
+    }, 3200)
     return () => clearTimeout(timer)
   }, [onComplete, shouldReduceMotion])
 
@@ -27,138 +27,223 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
         <motion.div
           className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-background overflow-hidden"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.7, ease }}
+          transition={{ duration: 0.8, ease }}
         >
-          {/* Background accent lines */}
+          {/* Animated background grid */}
           <motion.div
             className="absolute inset-0 pointer-events-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
+            transition={{ duration: 1.5, delay: 0.2 }}
           >
-            <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent -translate-y-1/2" />
-            <div className="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-transparent via-accent/15 to-transparent -translate-x-1/2" />
+            {/* Horizontal lines */}
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={`h-${i}`}
+                className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/10 to-transparent"
+                style={{ top: `${20 + i * 15}%` }}
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 2, delay: 0.3 + i * 0.1, ease }}
+              />
+            ))}
+            {/* Vertical lines */}
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={`v-${i}`}
+                className="absolute top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-accent/8 to-transparent"
+                style={{ left: `${20 + i * 15}%` }}
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ duration: 2, delay: 0.4 + i * 0.1, ease }}
+              />
+            ))}
           </motion.div>
 
-          {/* Corner accents */}
+          {/* Corner brackets */}
           <motion.div
-            className="absolute top-8 left-8 w-12 h-12 border-l-2 border-t-2 border-accent/30"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.4, ease }}
-          />
+            className="absolute top-6 left-6 sm:top-10 sm:left-10 w-10 h-10 sm:w-14 sm:h-14"
+            initial={{ opacity: 0, x: -10, y: -10 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5, ease }}
+          >
+            <div className="absolute top-0 left-0 w-full h-[1.5px] bg-accent/30" />
+            <div className="absolute top-0 left-0 w-[1.5px] h-full bg-accent/30" />
+          </motion.div>
           <motion.div
-            className="absolute bottom-8 right-8 w-12 h-12 border-r-2 border-b-2 border-accent/30"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.5, ease }}
-          />
+            className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 w-10 h-10 sm:w-14 sm:h-14"
+            initial={{ opacity: 0, x: 10, y: 10 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6, ease }}
+          >
+            <div className="absolute bottom-0 right-0 w-full h-[1.5px] bg-accent/30" />
+            <div className="absolute bottom-0 right-0 w-[1.5px] h-full bg-accent/30" />
+          </motion.div>
 
           {/* Main content */}
-          <motion.div className="relative z-10 text-center px-4">
-            {/* Initials monogram */}
+          <div className="relative z-10 text-center px-6 sm:px-8 max-w-2xl mx-auto">
+            {/* Monogram */}
             <motion.div
-              className="mb-8 inline-flex items-center justify-center"
-              initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease }}
+              className="mb-6 sm:mb-10"
+              initial={{ opacity: 0, scale: 0.6 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.9, delay: 0.2, ease }}
             >
-              <div className="w-20 h-20 rounded-full border-2 border-accent/40 flex items-center justify-center bg-accent/5 backdrop-blur-sm">
-                <span className="font-mono text-2xl font-bold tracking-wider text-accent">HUA</span>
+              <div className="relative inline-flex items-center justify-center">
+                {/* Outer ring */}
+                <motion.div
+                  className="absolute w-24 h-24 sm:w-32 sm:h-32 rounded-full border border-accent/25"
+                  initial={{ scale: 0, rotate: -90 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ duration: 1.2, delay: 0.3, ease }}
+                />
+                {/* Inner ring */}
+                <motion.div
+                  className="absolute w-18 h-18 sm:w-24 sm:h-24 rounded-full border border-accent/15"
+                  initial={{ scale: 0, rotate: 90 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ duration: 1, delay: 0.5, ease }}
+                />
+                {/* Core circle */}
+                <motion.div
+                  className="relative w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-accent/8 border border-accent/30 flex items-center justify-center backdrop-blur-sm"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.7, delay: 0.6, ease }}
+                >
+                  <span className="font-mono text-lg sm:text-2xl font-bold tracking-[0.15em] text-accent">
+                    HUA
+                  </span>
+                </motion.div>
               </div>
             </motion.div>
 
-            {/* Name - letter by letter reveal */}
-            <div className="overflow-hidden mb-3">
+            {/* Name reveal - word by word */}
+            <div className="overflow-hidden mb-4 sm:mb-6">
               <motion.h1
-                className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground"
-                initial={{ y: 80 }}
+                className="font-serif text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1]"
+                initial={{ y: 100 }}
                 animate={{ y: 0 }}
-                transition={{ duration: 0.7, delay: 0.3, ease }}
+                transition={{ duration: 0.8, delay: 0.8, ease }}
               >
-                {'Hosea'.split('').map((char, i) => (
-                  <motion.span
-                    key={i}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.35 + i * 0.06, ease }}
-                    className="inline-block"
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-                <span className="inline-block w-3" />
-                {'Urbanus'.split('').map((char, i) => (
-                  <motion.span
-                    key={i}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.65 + i * 0.06, ease }}
-                    className="inline-block"
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-                <span className="inline-block w-3" />
-                {'Audu'.split('').map((char, i) => (
-                  <motion.span
-                    key={i}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 1.0 + i * 0.06, ease }}
-                    className="inline-block"
-                  >
-                    {char}
-                  </motion.span>
-                ))}
+                <motion.span
+                  className="inline-block"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.9, ease }}
+                >
+                  Hosea
+                </motion.span>
+                <span className="inline-block w-2 sm:w-4" />
+                <motion.span
+                  className="inline-block text-accent"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 1.1, ease }}
+                >
+                  Urbanus
+                </motion.span>
+                <span className="inline-block w-2 sm:w-4" />
+                <motion.span
+                  className="inline-block"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 1.3, ease }}
+                >
+                  Audu
+                </motion.span>
               </motion.h1>
             </div>
 
-            {/* Animated underline */}
-            <div className="flex justify-center mb-5">
+            {/* Animated divider */}
+            <div className="flex justify-center mb-5 sm:mb-7">
               <motion.div
-                className="h-[2px] bg-accent rounded-full"
-                initial={{ width: 0 }}
-                animate={{ width: '100%' }}
-                transition={{ duration: 1.2, delay: 1.3, ease }}
-                style={{ maxWidth: '280px' }}
-              />
+                className="flex items-center gap-2 sm:gap-3"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5 }}
+              >
+                <motion.div
+                  className="h-px bg-gradient-to-r from-transparent to-accent/50"
+                  initial={{ width: 0 }}
+                  animate={{ width: '3rem' }}
+                  transition={{ duration: 0.8, delay: 1.5, ease }}
+                />
+                <motion.div
+                  className="w-1.5 h-1.5 rounded-full bg-accent"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.4, delay: 1.7, ease }}
+                />
+                <motion.div
+                  className="h-px bg-gradient-to-l from-transparent to-accent/50"
+                  initial={{ width: 0 }}
+                  animate={{ width: '3rem' }}
+                  transition={{ duration: 0.8, delay: 1.5, ease }}
+                />
+              </motion.div>
             </div>
 
-            {/* Subtitle with stagger */}
-            <motion.div className="overflow-hidden">
+            {/* Subtitle */}
+            <motion.div
+              className="overflow-hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.8 }}
+            >
               <motion.p
-                className="text-xs sm:text-sm font-mono tracking-[0.3em] text-muted-foreground uppercase"
-                initial={{ y: 20, opacity: 0 }}
+                className="text-[10px] sm:text-xs md:text-sm font-mono tracking-[0.25em] sm:tracking-[0.35em] text-muted-foreground uppercase"
+                initial={{ y: 15, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 1.8, ease }}
+                transition={{ duration: 0.6, delay: 1.9, ease }}
               >
                 Full Stack Developer & Data Analyst
               </motion.p>
             </motion.div>
 
-            {/* Loading dots */}
+            {/* Loading indicator */}
             <motion.div
-              className="flex items-center justify-center gap-1.5 mt-8"
+              className="mt-8 sm:mt-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 2.2 }}
+              transition={{ delay: 2.3 }}
             >
-              {[0, 1, 2].map((i) => (
+              <div className="flex items-center justify-center gap-3 sm:gap-4">
+                {/* Animated line */}
                 <motion.div
-                  key={i}
-                  className="w-1.5 h-1.5 rounded-full bg-accent/60"
-                  animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.1, 0.8] }}
-                  transition={{
-                    duration: 1,
-                    repeat: Infinity,
-                    delay: i * 0.15,
-                    ease: 'easeInOut',
-                  }}
+                  className="h-px bg-accent/40"
+                  initial={{ width: 0 }}
+                  animate={{ width: '2.5rem' }}
+                  transition={{ duration: 1.5, delay: 2.4, ease }}
                 />
-              ))}
+                {/* Pulsing dots */}
+                <div className="flex gap-1.5">
+                  {[0, 1, 2].map((i) => (
+                    <motion.div
+                      key={i}
+                      className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-accent/70"
+                      animate={{
+                        opacity: [0.2, 1, 0.2],
+                        scale: [0.7, 1.2, 0.7],
+                      }}
+                      transition={{
+                        duration: 1.2,
+                        repeat: Infinity,
+                        delay: i * 0.2,
+                        ease: 'easeInOut',
+                      }}
+                    />
+                  ))}
+                </div>
+                <motion.div
+                  className="h-px bg-accent/40"
+                  initial={{ width: 0 }}
+                  animate={{ width: '2.5rem' }}
+                  transition={{ duration: 1.5, delay: 2.4, ease }}
+                />
+              </div>
             </motion.div>
-          </motion.div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
