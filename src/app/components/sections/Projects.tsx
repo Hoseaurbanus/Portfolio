@@ -206,30 +206,17 @@ export default function Projects() {
                           <p className="text-sm text-foreground font-medium leading-[1.75] mb-6">
                             {p.outcome}
                           </p>
-                          <div className="flex gap-3">
-                            <motion.a
-                              href={p.github}
-                              onClick={(e) => e.stopPropagation()}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              whileHover={{ scale: 1.04 }}
-                              whileTap={{ scale: 0.96 }}
-                              className="flex items-center gap-2 px-4 py-2 bg-accent text-white rounded-md text-xs hover:bg-accent/90 transition-all min-h-[44px]"
-                            >
-                              Code
-                            </motion.a>
-                            <motion.a
-                              href={p.demo}
-                              onClick={(e) => e.stopPropagation()}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              whileHover={{ scale: 1.04 }}
-                              whileTap={{ scale: 0.96 }}
-                              className="flex items-center gap-2 px-4 py-2 border border-border rounded-md text-xs text-muted-foreground hover:text-foreground hover:border-border/80 transition-all min-h-[44px]"
-                            >
-                              <ExternalLink size={13} /> Live Demo
-                            </motion.a>
-                          </div>
+                          <motion.a
+                            href={p.demo}
+                            onClick={(e) => e.stopPropagation()}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.04 }}
+                            whileTap={{ scale: 0.96 }}
+                            className="flex items-center justify-center gap-2 px-4 py-2 bg-accent text-white rounded-md text-xs hover:bg-accent/90 transition-all min-h-[44px]"
+                          >
+                            <ExternalLink size={13} /> Live Demo
+                          </motion.a>
                         </div>
                       </div>
                     </motion.div>
