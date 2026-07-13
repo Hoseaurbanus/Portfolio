@@ -13,13 +13,13 @@ const experience: Experience[] = [
     period: '2024 — Present',
     location: 'Nigeria',
     description:
-      'Develop Python automation tools, maintain critical infrastructure, and perform statistical analysis. Build dashboards and manage data pipelines using modern analytics tools.',
+      'Develop Python scripts, maintain internal systems, and perform statistical analysis. Build dashboards and manage data using Pandas, NumPy, and Matplotlib.',
     highlights: [
-      'Built Python automation tools using Pandas that cut manual reporting time by 40% for field operations',
-      'Maintained infrastructure uptime above 99% through proactive monitoring and documentation',
+      'Built Python automation tools using Pandas that cut manual reporting time for field operations',
+      'Kept systems running reliably through proactive monitoring and documentation',
       'Developed dashboards tracking financial and operational KPIs across 5 program units',
       'Performed statistical analysis with Pandas and NumPy, delivering monthly reports that guided leadership decisions',
-      'Led QA testing for internal applications, tracking and resolving 50+ bugs to improve system stability',
+      'Tested internal applications, tracking and resolving bugs to improve stability',
     ],
     tech: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'SQL', 'Dashboard Tools'],
   },
@@ -31,7 +31,7 @@ const experience: Experience[] = [
     description:
       'Provided remote administrative, technical, and creative support to multiple clients, managing tasks across social media, research, and data entry.',
     highlights: [
-      'Managed social media accounts for 3 clients, creating content and scheduling posts that increased engagement by 35%',
+      'Managed social media accounts for 3 clients, creating content and scheduling posts that boosted engagement',
       'Conducted research and compiled reports for business development projects',
       'Handled email management, calendar coordination, and travel logistics for busy professionals',
       'Delivered consistently on tight deadlines while maintaining high client satisfaction',

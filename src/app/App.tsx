@@ -2,7 +2,6 @@ import { useEffect, useState, useCallback, Component, type ReactNode } from 'rea
 import Nav from './components/layout/Nav'
 import Hero from './components/sections/Hero'
 import About from './components/sections/About'
-import Philosophy from './components/sections/Philosophy'
 import Projects from './components/sections/Projects'
 import Skills from './components/sections/Skills'
 import Services from './components/sections/Services'
@@ -73,7 +72,6 @@ export default function App() {
           <Education />
           <GitHubActivity />
           <Contact />
-          <Philosophy />
         </main>
         <Footer />
         <BackToTop />

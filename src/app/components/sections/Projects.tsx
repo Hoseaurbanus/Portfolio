@@ -15,7 +15,7 @@ const projects: Project[] = [
     tagline: 'Multi-school management platform for SMUGFlex Venture',
     overview: 'A full-stack multi-school management system serving educational institutions in Lagos, Nigeria. Built with role-based access control for administrators, teachers, and students.',
     problem: 'Schools in Nigeria needed a centralized platform to manage multiple institutions, student records, and administrative workflows efficiently.',
-    solution: 'Developed a scalable multi-school management platform with role-based dashboards (Admin, Teacher, Student), real-time notifications, and comprehensive reporting capabilities.',
+    solution: 'Developed a multi-school management platform with role-based dashboards (Admin, Teacher, Student), real-time notifications, and reporting features.',
     tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'React Router', 'jsPDF'],
     outcome: 'Live production system managing multiple schools in Lagos, Nigeria. Trusted by SMUGFlex Venture for their multi-school operations.',
     image: '/smugflex.jpg',
@@ -56,7 +56,7 @@ const projects: Project[] = [
     name: 'CampusFund',
     tagline: 'Campus fundraising and donation management system',
     overview: 'A full-stack platform connecting students in financial hardship with donors. Manages the entire lifecycle from assistance request submission, through administrative approval, to donor-funded disbursement.',
-    problem: 'Students at Graceland Royal Academy needed a structured, transparent digital platform to request financial assistance, while donors needed a reliable way to contribute and track their impact.',
+    problem: 'Students at Graceland Royal Academy needed a way to request financial assistance digitally, and donors needed a way to contribute and track their impact.',
     solution: 'Built a custom PHP micro-framework backend with JWT auth and a React/TypeScript frontend. Features include Paystack payments, manual bank transfer verification, in-app notifications, analytics dashboards, and role-based access for Students, Donors, and Admins.',
     tech: ['React', 'TypeScript', 'Vite', 'PHP', 'Tailwind CSS', 'Paystack'],
     outcome: 'Live production system at anns.com.gracelandroyalacademy.com.ng, enabling transparent fundraising and disbursement for students in need.',
@@ -84,8 +84,8 @@ export default function Projects() {
             variants={fadeUp}
             className="text-muted-foreground max-w-xl mb-10 lg:mb-14 leading-relaxed text-base"
           >
-            Real-world projects built and deployed to production — from the
-            problem statement to the measurable outcome.
+            Real projects I built and deployed. Click to see the
+            full story behind each one.
           </motion.p>
 
           <div className="space-y-4">

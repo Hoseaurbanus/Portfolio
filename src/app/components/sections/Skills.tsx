@@ -10,7 +10,7 @@ import type { SkillGroup } from '@/types'
 const skillGroups: SkillGroup[] = [
   { label: 'Programming Languages', Icon: Terminal, skills: ['TypeScript', 'JavaScript', 'Python', 'PHP', 'SQL', 'HTML/CSS'] },
   { label: 'Frontend', Icon: Globe, skills: ['React', 'Vite', 'Tailwind CSS', 'Radix UI', 'Framer Motion', 'React Router'] },
-  { label: 'Backend & Databases', Icon: Server, skills: ['PHP', 'Node.js', 'REST APIs', 'MySQL', 'PostgreSQL'] },
+  { label: 'Backend & Databases', Icon: Server, skills: ['PHP', 'MySQL', 'REST APIs'] },
   { label: 'Data & Visualization', Icon: BarChart3, skills: ['Pandas', 'NumPy', 'Matplotlib', 'Recharts', 'Data Visualization'] },
   { label: 'Tools & Platforms', Icon: Cpu, skills: ['Git/GitHub', 'Vercel', 'VS Code', 'Linux', 'Paystack'] },
   { label: 'QA & Documentation', Icon: Database, skills: ['Manual Testing', 'Bug Tracking', 'jsPDF', 'Test Reporting'] },

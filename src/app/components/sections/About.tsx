@@ -6,9 +6,9 @@ import { SectionNumber } from '../shared/SectionNumber'
 import AnimatedCounter from '../shared/AnimatedCounter'
 
 const statCards = [
-  { value: 4, suffix: '+', label: 'Projects Delivered' },
-  { value: 3, suffix: '+', label: 'Years Experience' },
-  { value: 15, suffix: '+', label: 'Technologies Used' },
+  { value: 4, suffix: '+', label: 'Projects Built' },
+  { value: 3, suffix: '+', label: 'Years Working' },
+  { value: 10, suffix: '+', label: 'Tools & Languages' },
 ]
 
 export default function About() {
@@ -22,9 +22,7 @@ export default function About() {
               variants={fadeUp}
               className="font-display text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-6 lg:mb-8 leading-[1.1] tracking-tight"
             >
-              Engineered thinking.
-              <br />
-              <span className="text-accent">Human purpose.</span>
+              Building software that works.
             </motion.h2>
             <motion.div
               variants={fadeUp}
@@ -32,15 +30,15 @@ export default function About() {
             >
               <p>
                 I&apos;m a Physics graduate from Gombe State University (Best
-                Graduating Student) who turned a passion for problem-solving
-                into a career in software development and data analysis.
+                Graduating Student) who studied computer science before
+                physics, and now builds web applications and works
+                with data.
               </p>
               <p>
-                As a Data Analyst &amp; QA Specialist, I build Python
-                automation tools, maintain critical infrastructure, and
-                perform statistical analysis using Pandas, NumPy, and
-                Matplotlib. My freelance work as a Virtual Assistant has
-                sharpened my ability to deliver under pressure.
+                As a Data Analyst &amp; QA Specialist at Sterling One Foundation,
+                I write Python scripts, build dashboards, and test internal
+                tools. I also build school management systems on the side
+                and do freelance virtual assistant work.
               </p>
             </motion.div>
             <motion.div

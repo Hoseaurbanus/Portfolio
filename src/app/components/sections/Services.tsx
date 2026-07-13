@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { Globe, BarChart3, Server, Briefcase } from 'lucide-react'
+import { Globe, BarChart3, Server, FileText } from 'lucide-react'
 import { ease } from '@/lib/constants'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
@@ -7,10 +7,10 @@ import { SectionNumber } from '../shared/SectionNumber'
 import type { Service } from '@/types'
 
 const services: Service[] = [
-  { Icon: Globe, title: 'Full Stack Development', body: 'End-to-end application development from database schema to polished user interface. React, Next.js, FastAPI, and beyond.', tags: ['React', 'Node.js', 'APIs', 'Databases'] },
-  { Icon: BarChart3, title: 'Data Analytics & Visualisation', body: 'Transform raw data into actionable insight. From exploratory analysis to production dashboards with real-time updates.', tags: ['Python', 'SQL', 'Tableau', 'Dashboards'] },
-  { Icon: Server, title: 'API Design & Integration', body: 'RESTful and GraphQL API design with clear contracts, versioning, documentation, and secure authentication.', tags: ['REST', 'GraphQL', 'OpenAPI', 'Auth'] },
-  { Icon: Briefcase, title: 'Technical Consulting', body: 'Architecture review, technology selection, and engineering process recommendations for growing teams.', tags: ['Architecture', 'Code Review', 'Strategy'] },
+  { Icon: Globe, title: 'School Management Systems', body: 'Full-stack web applications for schools — student records, grading, fee payments, CBT exams, and parent portals. Built with React, PHP, MySQL, and Paystack.', tags: ['React', 'PHP', 'MySQL', 'Paystack'] },
+  { Icon: BarChart3, title: 'Data Analysis & Dashboards', body: 'Python-based data analysis with Pandas and NumPy. Dashboards for tracking KPIs, financial data, and operational metrics.', tags: ['Python', 'Pandas', 'NumPy', 'Matplotlib'] },
+  { Icon: Server, title: 'Web Application Development', body: 'Frontend and backend development for business tools, internal systems, and landing pages. React, TypeScript, Tailwind CSS.', tags: ['React', 'TypeScript', 'Tailwind CSS'] },
+  { Icon: FileText, title: 'Virtual Assistance & Admin Support', body: 'Remote administrative support — email management, research, data entry, social media scheduling, and document preparation.', tags: ['Google Workspace', 'Research', 'Data Entry'] },
 ]
 
 export default function Services() {
@@ -23,7 +23,7 @@ export default function Services() {
             variants={fadeUp}
             className="font-display text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-10 lg:mb-14 leading-[1.1] tracking-tight"
           >
-            What I deliver.
+            What I can help with.
           </motion.h2>
 
           <div className="grid sm:grid-cols-2 gap-3">
