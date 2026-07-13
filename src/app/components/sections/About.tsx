@@ -30,9 +30,8 @@ export default function About() {
             >
               <p>
                 I&apos;m a Physics graduate from Gombe State University (Best
-                Graduating Student) who studied computer science before
-                physics, and now builds web applications and works
-                with data.
+                Graduating Student) with a diploma in computer science.
+                I build web applications and work with data.
               </p>
               <p>
                 As a Data Analyst &amp; QA Specialist at Sterling One Foundation,
