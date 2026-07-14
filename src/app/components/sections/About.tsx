@@ -6,7 +6,7 @@ import { SectionNumber } from '../shared/SectionNumber'
 import AnimatedCounter from '../shared/AnimatedCounter'
 
 const statCards = [
-  { value: 4, suffix: '+', label: 'Projects Built' },
+  { value: 5, suffix: '+', label: 'Projects Built' },
   { value: 3, suffix: '+', label: 'Years Working' },
   { value: 10, suffix: '+', label: 'Tools & Languages' },
 ]

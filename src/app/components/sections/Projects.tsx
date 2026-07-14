@@ -64,6 +64,20 @@ const projects: Project[] = [
     github: 'https://github.com/Hoseaurbanus/FUND-RAISING',
     demo: 'https://fund-raising-git-main-hosea-urbanus-audus-projects.vercel.app/',
   },
+  {
+    id: 5,
+    index: '05',
+    name: 'SMUGFLEX POS',
+    tagline: 'Enterprise point of sale system with full inventory and reporting',
+    overview: 'A complete POS system with a React frontend and standalone PHP REST API backend. 35 database tables, 103+ API endpoints, 22 controllers, 8 user roles with 55+ permissions, and a custom JWT authentication system.',
+    problem: 'SmugFlex Ventures needed a full point of sale system to manage sales, inventory, purchases, customers, suppliers, and multi-branch operations — without paying for expensive off-the-shelf software.',
+    solution: 'Built a standalone PHP 8.2 REST API (no Composer, no framework) with a custom regex router and JWT implementation. React frontend with Bootstrap 5.3, dark glassmorphism theme, and full mobile responsiveness. MySQL database with triggers, foreign keys, and seed data.',
+    tech: ['React', 'JavaScript', 'Vite', 'PHP', 'MySQL', 'Bootstrap'],
+    outcome: 'Live POS system at smugflex-pos-mrfb.vercel.app managing sales, inventory, purchases, expenses, and reporting for SmugFlex Ventures.',
+    image: '/POS.jpg',
+    github: 'https://github.com/Hoseaurbanus/SMUGFLEX-POS',
+    demo: 'https://smugflex-pos-mrfb.vercel.app/login',
+  },
 ]
 
 export default function Projects() {
