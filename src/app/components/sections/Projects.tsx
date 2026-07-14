@@ -74,7 +74,7 @@ const projects: Project[] = [
     solution: 'Built a standalone PHP 8.2 REST API (no Composer, no framework) with a custom regex router and JWT implementation. React frontend with Bootstrap 5.3, dark glassmorphism theme, and full mobile responsiveness. MySQL database with triggers, foreign keys, and seed data.',
     tech: ['React', 'JavaScript', 'Vite', 'PHP', 'MySQL', 'Bootstrap'],
     outcome: 'Live POS system at smugflex-pos-mrfb.vercel.app managing sales, inventory, purchases, expenses, and reporting for SmugFlex Ventures.',
-    image: '/POS.jpg',
+    image: '/pos.jpg',
     github: 'https://github.com/Hoseaurbanus/SMUGFLEX-POS',
     demo: 'https://smugflex-pos-mrfb.vercel.app/login',
   },
