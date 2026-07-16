@@ -78,6 +78,20 @@ const projects: Project[] = [
     github: 'https://github.com/Hoseaurbanus/SMUGFLEX-POS',
     demo: 'https://smugflex-pos-mrfb.vercel.app/login',
   },
+  {
+    id: 6,
+    index: '06',
+    name: 'SCPHD',
+    tagline: 'NGO management platform for Springfield Center for Peace and Humanitarian Development',
+    overview: 'A full-stack NGO management platform with a React 19 frontend and PHP CodeIgniter 4 backend. Features role-based dashboards for Super Admin, Administrator, Program Manager, Volunteer Manager, Finance Officer, Editor, Donor, Volunteer, Member, and Viewer roles.',
+    problem: 'An NGO needed a comprehensive digital platform to manage donations, volunteer coordination, programs, events, and reporting — replacing fragmented manual processes with a unified system.',
+    solution: 'Built a React 19 + TypeScript frontend with Vite, Tailwind CSS v4, Framer Motion animations, Recharts, and React Hook Form with Yup validation. Backend powered by PHP CodeIgniter 4 with MySQL, JWT authentication, and a RESTful API with rate limiting and CORS filters.',
+    tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Framer Motion', 'PHP', 'MySQL'],
+    outcome: 'Live at scphd.vercel.app — managing donations, volunteer coordination, programs, events, and multi-role dashboards for the Springfield Center for Peace and Humanitarian Development.',
+    image: '/scphd.jpg',
+    github: 'https://github.com/Hoseaurbanus/SCPHD',
+    demo: 'https://scphd.vercel.app/',
+  },
 ]
 
 export default function Projects() {
