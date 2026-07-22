@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, Component, type ReactNode } from 'react'
+import { useEffect, useCallback, Component, type ReactNode } from 'react'
 import Nav from './components/layout/Nav'
 import Hero from './components/sections/Hero'
 import About from './components/sections/About'
@@ -44,8 +44,7 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boole
 }
 
 export default function App() {
-  const [loaded, setLoaded] = useState(false)
-  const handleComplete = useCallback(() => setLoaded(true), [])
+  const handleComplete = useCallback(() => {}, [])
 
   useEffect(() => {
     document.documentElement.classList.add('dark')

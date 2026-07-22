@@ -3,3 +3,4 @@ build/
 dist/
 PAJUMA/
 updated-GRA/
+.env

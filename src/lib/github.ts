@@ -1,8 +1,41 @@
 import type { GitHubStats, GitHubDay } from '@/types'
 
-const GITHUB_USERNAME = 'Hoseaurbanus'
+const GITHUB_USERNAME = import.meta.env.VITE_GITHUB_USERNAME || 'Hoseaurbanus'
+const CACHE_KEY = 'github_activity_cache'
+const CACHE_DURATION = 30 * 60 * 1000
+
+interface CachedData {
+  stats: GitHubStats
+  activity: GitHubDay[][]
+  timestamp: number
+}
+
+function getCachedData(): CachedData | null {
+  try {
+    const cached = localStorage.getItem(CACHE_KEY)
+    if (!cached) return null
+    const data: CachedData = JSON.parse(cached)
+    if (Date.now() - data.timestamp > CACHE_DURATION) {
+      localStorage.removeItem(CACHE_KEY)
+      return null
+    }
+    return data
+  } catch {
+    return null
+  }
+}
+
+function setCachedData(stats: GitHubStats, activity: GitHubDay[][]) {
+  try {
+    const data: CachedData = { stats, activity, timestamp: Date.now() }
+    localStorage.setItem(CACHE_KEY, JSON.stringify(data))
+  } catch {}
+}
 
 export async function fetchGitHubStats(): Promise<GitHubStats> {
+  const cached = getCachedData()
+  if (cached) return cached.stats
+
   try {
     const [reposRes, eventsRes] = await Promise.all([
       fetch(`https://api.github.com/users/${GITHUB_USERNAME}?per_page=100`),
@@ -24,12 +57,17 @@ export async function fetchGitHubStats(): Promise<GitHubStats> {
       (e: { type: string }) => e.type === 'PullRequestEvent'
     )
 
-    return {
+    const stats: GitHubStats = {
       publicRepos: userData.public_repos || 0,
       totalStars: 0,
       contributions: contributions || 0,
       pullRequestsMerged: prEvents.length || 0,
     }
+
+    const activity = await fetchGitHubActivity()
+    setCachedData(stats, activity)
+
+    return stats
   } catch {
     return {
       publicRepos: 0,
@@ -41,6 +79,9 @@ export async function fetchGitHubStats(): Promise<GitHubStats> {
 }
 
 export async function fetchGitHubActivity(): Promise<GitHubDay[][]> {
+  const cached = getCachedData()
+  if (cached) return cached.activity
+
   try {
     const currentYear = new Date().getFullYear()
     const startOfYear = new Date(currentYear, 0, 1)

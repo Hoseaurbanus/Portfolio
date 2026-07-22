@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { Github, Twitter, MessageCircle, Download } from 'lucide-react'
+import { scrollTo } from '@/lib/utils'
 import type { NavLink } from '@/types'
 
 const navLinks: NavLink[] = [
@@ -7,12 +8,9 @@ const navLinks: NavLink[] = [
   { label: 'Projects', href: '#projects' },
   { label: 'Skills', href: '#skills' },
   { label: 'Experience', href: '#experience' },
+  { label: 'GitHub', href: '#opensource' },
   { label: 'Contact', href: '#contact' },
 ]
-
-function scrollTo(href: string) {
-  document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
-}
 
 export default function Footer() {
   return (

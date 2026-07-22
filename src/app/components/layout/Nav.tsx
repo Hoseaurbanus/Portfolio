@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Menu, X, Download } from 'lucide-react'
 import { ease } from '@/lib/constants'
+import { scrollTo } from '@/lib/utils'
 import type { NavLink } from '@/types'
 
 const navLinks: NavLink[] = [
@@ -9,12 +10,9 @@ const navLinks: NavLink[] = [
   { label: 'Projects', href: '#projects' },
   { label: 'Skills', href: '#skills' },
   { label: 'Experience', href: '#experience' },
+  { label: 'GitHub', href: '#opensource' },
   { label: 'Contact', href: '#contact' },
 ]
-
-function scrollTo(href: string) {
-  document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
-}
 
 export default function Nav() {
   const [open, setOpen] = useState(false)

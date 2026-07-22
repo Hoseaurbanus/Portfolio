@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring, useReducedMotion } from 'motion/react'
 import { Github, Twitter, Mail, ArrowRight, MapPin, Download } from 'lucide-react'
 import { ease } from '@/lib/constants'
+import { scrollTo } from '@/lib/utils'
 
 const roles = [
   'Full Stack Software Developer',
@@ -10,10 +11,6 @@ const roles = [
 ]
 
 const nameWords = ['HOSEA', 'URBANUS', 'AUDU']
-
-function scrollTo(href: string) {
-  document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
-}
 
 function isTouchDevice() {
   if (typeof window === 'undefined') return false
@@ -229,7 +226,7 @@ export default function Hero() {
                   src="/photo.jpg"
                   alt="Hosea Urbanus Audu — portrait"
                   fetchPriority="high"
-                  className="w-full h-full object-cover opacity-80"
+                  className="w-full h-full object-cover object-top opacity-80"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
@@ -257,12 +254,12 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.5, ease }}
             className="lg:hidden flex justify-center -mt-4"
           >
-            <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-2xl border border-border overflow-hidden bg-card">
+            <div className="relative w-44 sm:w-52 aspect-[3/4] rounded-2xl border border-border overflow-hidden bg-card">
               <img
                 src="/photo.jpg"
                 alt="Hosea Urbanus Audu — portrait"
                 fetchPriority="high"
-                className="w-full h-full object-cover opacity-80"
+                className="w-full h-full object-cover object-top opacity-80"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
             </div>
