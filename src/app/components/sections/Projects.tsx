@@ -88,7 +88,7 @@ const projects: Project[] = [
     solution: 'Built a React 19 + TypeScript frontend with Vite, Tailwind CSS v4, Framer Motion animations, Recharts, and React Hook Form with Yup validation. Backend powered by PHP CodeIgniter 4 with MySQL, JWT authentication, and a RESTful API with rate limiting and CORS filters.',
     tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Framer Motion', 'PHP', 'MySQL'],
     outcome: 'Live at scphd.vercel.app — managing donations, volunteer coordination, programs, events, and multi-role dashboards for the Springfield Center for Peace and Humanitarian Development.',
-    image: '/scphd.jpg',
+    image: '/NGO.jpg',
     github: 'https://github.com/Hoseaurbanus/SCPHD',
     demo: 'https://scphd.vercel.app/',
   },
