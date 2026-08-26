@@ -14,21 +14,24 @@ const navLinks: NavLink[] = [
 
 export default function Footer() {
   return (
-    <footer className="py-8 lg:py-10 border-t border-border">
+    <footer className="py-8 lg:py-10 border-t border-border bg-[#0f0f12]/50">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
         <div className="text-center sm:text-left">
           <p className="font-mono text-sm font-bold text-foreground">HUA</p>
           <p className="text-xs text-muted-foreground font-mono mt-0.5">
             &copy; {new Date().getFullYear()} Hosea Urbanus Audu. All rights reserved.
           </p>
+          <p className="text-[11px] text-muted-foreground/60 font-mono mt-1 hidden sm:block">
+            Built with React · TypeScript · Tailwind · Honest work, no shortcuts.
+          </p>
         </div>
 
-        <nav className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs font-mono text-muted-foreground" aria-label="Footer navigation">
+        <nav className="flex flex-wrap justify-center gap-3 sm:gap-5 text-xs font-mono text-muted-foreground" aria-label="Footer navigation">
           {navLinks.map(({ label, href }) => (
             <button
               key={label}
               onClick={() => scrollTo(href)}
-              className="hover:text-foreground transition-colors duration-200 min-h-[44px] flex items-center"
+              className="hover:text-foreground transition-colors duration-200 min-h-[44px] flex items-center px-1"
             >
               {label}
             </button>
@@ -36,7 +39,7 @@ export default function Footer() {
           <a
             href="/Hosea_Urbanus_Audu_CV.pdf"
             download
-            className="hover:text-foreground transition-colors duration-200 min-h-[44px] flex items-center gap-1"
+            className="hover:text-foreground transition-colors duration-200 min-h-[44px] flex items-center gap-1 px-1"
           >
             <Download size={12} />
             CV

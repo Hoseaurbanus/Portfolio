@@ -74,8 +74,8 @@ export default function Hero() {
       <div className="absolute top-1/4 left-[15%] w-[500px] h-[500px] rounded-full bg-accent/[0.04] blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-[10%] w-[400px] h-[400px] rounded-full bg-accent/[0.03] blur-[100px] pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-28 pb-20 w-full">
-        <div className="grid lg:grid-cols-[1fr_360px] gap-12 lg:gap-16 items-center">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-24 sm:pt-28 pb-16 sm:pb-20 w-full">
+        <div className="grid lg:grid-cols-[1fr_360px] gap-8 sm:gap-12 lg:gap-16 items-center">
           <div>
             {/* Status badge */}
             <motion.div
@@ -93,10 +93,10 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            {/* Name */}
+            {/* Name - clamp handles mobile elegantly */}
             <h1
-              className="font-display font-bold leading-[0.9] tracking-tight text-foreground mb-6 lg:mb-8"
-              style={{ fontSize: 'clamp(2.5rem, 8vw, 6.5rem)' }}
+              className="font-display font-bold leading-[0.85] sm:leading-[0.9] tracking-tight text-foreground mb-5 sm:mb-6 lg:mb-8"
+              style={{ fontSize: 'clamp(2.2rem, 10vw, 6.5rem)' }}
             >
               {nameWords.map((word, i) => (
                 <motion.span
@@ -139,40 +139,40 @@ export default function Hero() {
               </AnimatePresence>
             </motion.div>
 
-            {/* Bio */}
+            {/* Bio - honest, no exaggeration */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.8, ease }}
-              className="text-base lg:text-lg text-muted-foreground max-w-xl leading-relaxed mb-8 lg:mb-10"
+              className="text-[15px] sm:text-base lg:text-lg text-muted-foreground max-w-xl leading-relaxed mb-7 sm:mb-8 lg:mb-10"
             >
-              Physicist turned software developer. I build full-stack
+              Physicist turned software developer. I build practical
               web applications for schools and businesses using
-              React, PHP, and Python.
+              React, PHP, and Python — focused on reliability over hype.
             </motion.p>
 
-            {/* CTA buttons */}
+            {/* CTA buttons - full width on tiny screens */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.9, ease }}
-              className="flex flex-wrap gap-3 mb-10 lg:mb-12"
+              className="flex flex-col sm:flex-row gap-3 mb-8 sm:mb-10 lg:mb-12"
             >
               <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => scrollTo('#projects')}
-                className="group flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground text-sm font-medium rounded-lg hover:bg-accent/90 transition-all duration-200 min-h-[44px]"
+                className="group flex items-center justify-center gap-2 px-6 py-3.5 bg-accent text-accent-foreground text-sm font-medium rounded-xl hover:bg-accent/90 transition-all duration-200 min-h-[48px] sm:w-auto w-full"
               >
                 View My Work
                 <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-200" />
               </motion.button>
               <motion.a
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 href="/Hosea_Urbanus_Audu_CV.pdf"
                 download
-                className="flex items-center gap-2 px-6 py-3 border border-border text-foreground text-sm font-medium rounded-lg hover:bg-card hover:border-border/80 transition-all duration-200 min-h-[44px]"
+                className="flex items-center justify-center gap-2 px-6 py-3.5 border border-border bg-card/50 backdrop-blur-sm text-foreground text-sm font-medium rounded-xl hover:bg-card hover:border-accent/20 transition-all duration-200 min-h-[48px] sm:w-auto w-full"
               >
                 <Download size={15} />
                 Download CV
@@ -221,15 +221,17 @@ export default function Hero() {
               className="relative w-full aspect-[3/4]"
               style={!isTouch && !shouldReduceMotion ? { x: springX, y: springY } : undefined}
             >
-              <div className="absolute inset-0 rounded-2xl border border-border overflow-hidden bg-card">
+              <div className="absolute inset-0 rounded-2xl border border-border/60 overflow-hidden bg-card shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
                 <img
                   src="/photo.jpg"
                   alt="Hosea Urbanus Audu — portrait"
                   fetchPriority="high"
-                  className="w-full h-full object-cover object-top opacity-80"
+                  width={360}
+                  height={480}
+                  className="w-full h-full object-cover object-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/15 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.04] to-transparent" />
               </div>
 
               <motion.div
@@ -247,42 +249,49 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Mobile photo */}
+          {/* Mobile photo - centered, balanced, not after CTA wall */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.5, ease }}
-            className="lg:hidden flex justify-center -mt-4"
+            transition={{ duration: 0.7, delay: 0.5, ease }}
+            className="lg:hidden flex justify-center mt-2"
           >
-            <div className="relative w-44 sm:w-52 aspect-[3/4] rounded-2xl border border-border overflow-hidden bg-card">
+            <div className="relative w-[168px] xs:w-44 sm:w-48 aspect-[3/4] rounded-2xl border border-border/60 overflow-hidden bg-card shadow-lg">
               <img
                 src="/photo.jpg"
                 alt="Hosea Urbanus Audu — portrait"
-                fetchPriority="high"
-                className="w-full h-full object-cover object-top opacity-80"
+                loading="lazy"
+                width={192}
+                height={256}
+                className="w-full h-full object-cover object-top"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
+              <div className="absolute bottom-2 left-2 right-2 bg-card/90 backdrop-blur-md border border-border rounded-lg px-2.5 py-2 text-center">
+                <p className="font-display text-xs font-bold text-foreground leading-none">B.Sc. Physics</p>
+                <p className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest">Best Graduating Student</p>
+              </div>
             </div>
           </motion.div>
         </div>
 
-        {/* Mobile stats */}
+        {/* Mobile trust strip - more honest than just B.Sc./3+ */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8, ease }}
-          className="lg:hidden flex gap-4 justify-center mt-8"
+          transition={{ duration: 0.5, delay: 0.9, ease }}
+          className="lg:hidden flex gap-2 justify-center mt-6 flex-wrap px-2"
         >
           {[
+            { value: '6', label: 'Projects Live' },
             { value: 'B.Sc.', label: 'Physics' },
-            { value: '3+', label: 'Years Exp.' },
+            { value: 'Remote', label: 'Worldwide' },
           ].map(({ value, label }) => (
             <div
               key={label}
-              className="px-4 py-2 bg-card/95 backdrop-blur-sm border border-border rounded-xl text-center"
+              className="flex-1 min-w-[84px] max-w-[110px] px-3 py-2.5 bg-card/80 backdrop-blur-sm border border-border rounded-xl text-center"
             >
-              <p className="font-display text-lg font-bold text-foreground">{value}</p>
-              <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
+              <p className="font-display text-sm font-bold text-foreground leading-none">{value}</p>
+              <p className="text-[9px] font-mono text-muted-foreground uppercase tracking-wider mt-1">
                 {label}
               </p>
             </div>
@@ -290,20 +299,20 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - hidden on short viewports to avoid clash */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-6 lg:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        transition={{ delay: 1.6 }}
+        className="hidden sm:flex absolute bottom-5 lg:bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
       >
-        <span className="text-[10px] font-mono tracking-[0.25em] uppercase text-muted-foreground/60">
+        <span className="text-[9px] font-mono tracking-[0.2em] uppercase text-muted-foreground/50">
           Scroll
         </span>
         <motion.div
-          animate={shouldReduceMotion ? {} : { y: [0, 8, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-          className="w-px h-8 bg-gradient-to-b from-accent/40 to-transparent"
+          animate={shouldReduceMotion ? {} : { y: [0, 6, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+          className="w-px h-6 bg-gradient-to-b from-accent/30 to-transparent"
         />
       </motion.div>
     </section>

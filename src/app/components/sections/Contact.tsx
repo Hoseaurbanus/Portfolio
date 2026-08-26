@@ -34,27 +34,25 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-20 md:py-32">
+    <section id="contact" className="relative py-16 sm:py-20 md:py-28">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
         <SectionNumber number="08" label="Contact" />
         <RevealGroup>
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 xl:gap-20">
             <div>
               <motion.h2
                 variants={fadeUp}
-                className="font-display text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-5 lg:mb-6 leading-[1.1] tracking-tight"
+                className="font-display text-[1.75rem] sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-4 sm:mb-5 lg:mb-6 leading-[1.1] tracking-tight"
               >
                 Let&apos;s build something great.
               </motion.h2>
               <motion.p
                 variants={fadeUp}
-                className="text-muted-foreground leading-relaxed text-base mb-8 lg:mb-10"
+                className="text-muted-foreground leading-relaxed text-[15px] sm:text-base mb-6 sm:mb-8 lg:mb-10"
               >
-                Whether you have a project in mind, a role to fill, or simply
-                want to connect — I read every message and respond within 24
-                hours.
+                Have a project, a role, or just want to connect? I read every message and typically reply within 24 hours.
               </motion.p>
-              <motion.div variants={fadeUp} className="space-y-3 sm:space-y-4">
+              <motion.div variants={fadeUp} className="space-y-2 sm:space-y-3">
                 {[
                   {
                     Icon: Mail,
@@ -92,21 +90,21 @@ export default function Contact() {
                     href={href}
                     target={href.startsWith('http') ? '_blank' : undefined}
                     rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    whileHover={{ x: 4 }}
+                    whileHover={{ x: 3 }}
                     transition={{ duration: 0.2 }}
-                    className="flex items-center gap-4 group min-h-[44px]"
+                    className="flex items-center gap-3 sm:gap-4 group min-h-[44px] py-1"
                   >
-                    <div className="p-2.5 rounded-lg border border-border bg-card group-hover:border-accent/40 group-hover:bg-accent/5 transition-all duration-200">
+                    <div className="p-2 sm:p-2.5 rounded-lg border border-border bg-card group-hover:border-accent/30 group-hover:bg-accent/5 transition-all duration-200 shrink-0">
                       <Icon
-                        size={15}
-                        className="text-muted-foreground group-hover:text-accent transition-colors duration-200"
+                        size={14}
+                        className="text-muted-foreground group-hover:text-accent transition-colors duration-200 sm:w-[15px] sm:h-[15px]"
                       />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
                         {label}
                       </p>
-                      <p className="text-sm text-foreground">{value}</p>
+                      <p className="text-sm text-foreground truncate">{value}</p>
                     </div>
                   </motion.a>
                 ))}
@@ -116,62 +114,64 @@ export default function Contact() {
             <motion.form
               variants={fadeUp}
               onSubmit={handleSubmit}
-              className="space-y-4"
+              className="space-y-4 bg-card/50 backdrop-blur-sm border border-border rounded-2xl p-4 sm:p-6"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="contact-name" className="block text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">
                     Name
                   </label>
-                  <motion.input
-                    whileFocus={{ borderColor: 'color-mix(in srgb, var(--accent) 50%, transparent)', boxShadow: '0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent)' }}
+                  <input
                     id="contact-name"
                     type="text"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     required
                     placeholder="Your name"
-                    className="w-full px-4 py-3 bg-card border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none transition-all duration-200 min-h-[44px]"
+                    maxLength={80}
+                    className="w-full px-4 py-3 bg-background border border-border rounded-xl text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent/40 focus:ring-2 focus:ring-accent/10 transition-all duration-200 min-h-[44px]"
                   />
                 </div>
                 <div>
                   <label htmlFor="contact-email" className="block text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">
                     Email
                   </label>
-                  <motion.input
-                    whileFocus={{ borderColor: 'color-mix(in srgb, var(--accent) 50%, transparent)', boxShadow: '0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent)' }}
+                  <input
                     id="contact-email"
                     type="email"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     required
                     placeholder="your@email.com"
-                    className="w-full px-4 py-3 bg-card border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none transition-all duration-200 min-h-[44px]"
+                    className="w-full px-4 py-3 bg-background border border-border rounded-xl text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent/40 focus:ring-2 focus:ring-accent/10 transition-all duration-200 min-h-[44px]"
                   />
                 </div>
               </div>
               <div>
-                <label htmlFor="contact-message" className="block text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">
-                  Message
-                </label>
-                <motion.textarea
-                  whileFocus={{ borderColor: 'color-mix(in srgb, var(--accent) 50%, transparent)', boxShadow: '0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent)' }}
+                <div className="flex items-center justify-between mb-2">
+                  <label htmlFor="contact-message" className="block text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
+                    Message
+                  </label>
+                  <span className="text-[10px] font-mono text-muted-foreground/60">{form.message.length}/500</span>
+                </div>
+                <textarea
                   id="contact-message"
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   required
                   rows={5}
+                  maxLength={500}
                   placeholder="Tell me about your project or opportunity..."
-                  className="w-full px-4 py-3 bg-card border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none transition-all duration-200 resize-none"
+                  className="w-full px-4 py-3 bg-background border border-border rounded-xl text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent/40 focus:ring-2 focus:ring-accent/10 transition-all duration-200 resize-none"
                 />
               </div>
               <div aria-live="polite">
                 <motion.button
                   type="submit"
                   disabled={status === 'loading'}
-                  whileHover={{ scale: status === 'loading' ? 1 : 1.02 }}
-                  whileTap={{ scale: status === 'loading' ? 1 : 0.98 }}
-                  className="w-full py-3 bg-accent text-accent-foreground text-sm font-medium rounded-lg hover:bg-accent/90 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed min-h-[44px]"
+                  whileHover={{ scale: status === 'loading' ? 1 : 1.01 }}
+                  whileTap={{ scale: status === 'loading' ? 1 : 0.99 }}
+                  className="w-full py-3.5 bg-accent text-accent-foreground text-sm font-medium rounded-xl hover:bg-accent/90 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed min-h-[48px] shadow-[0_4px_16px_rgba(232,168,56,0.15)]"
                 >
                   <AnimatePresence mode="wait">
                     {status === 'loading' ? (

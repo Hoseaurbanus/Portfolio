@@ -25,6 +25,8 @@
   --font-weight-normal: 400;
   --ring: rgba(232, 168, 56, 0.4);
   --radius: 0.5rem;
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.35);
+  --shadow-elevated: 0 12px 40px rgba(0, 0, 0, 0.45);
 }
 
 @theme inline {
@@ -86,6 +88,18 @@
     @apply bg-background text-foreground;
     overflow-x: hidden;
     font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Subtle grain for premium dark feel - no extra DOM */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.015;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E");
+    z-index: 9999;
   }
 
   h1, h2, h3, h4, h5, h6 {

@@ -74,7 +74,8 @@ export default function Nav() {
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-14 sm:h-16 flex items-center justify-between">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="font-display text-base font-bold tracking-tight text-foreground hover:text-accent transition-colors duration-200"
+            className="font-display text-base font-bold tracking-tight text-foreground hover:text-accent transition-colors duration-200 min-h-[44px] flex items-center"
+            aria-label="Back to top - Hosea Urbanus Audu"
           >
             H<span className="text-accent">U</span>A
           </button>
@@ -86,7 +87,8 @@ export default function Nav() {
                 <button
                   key={label}
                   onClick={() => handleNav(href)}
-                  className={`relative px-3 py-2 text-[13px] font-medium transition-colors duration-200 rounded-md ${
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`relative px-3 py-2 text-[13px] font-medium transition-colors duration-200 rounded-md min-h-[36px] ${
                     isActive ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >

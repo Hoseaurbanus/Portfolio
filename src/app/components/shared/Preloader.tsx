@@ -12,10 +12,19 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       onComplete()
       return
     }
+    // Skip on revisit within session - professional: don't block returning users
+    try {
+      if (sessionStorage.getItem('preloader_seen')) {
+        setShow(false)
+        onComplete()
+        return
+      }
+    } catch {}
     const timer = setTimeout(() => {
       setShow(false)
-      setTimeout(onComplete, 800)
-    }, 3200)
+      try { sessionStorage.setItem('preloader_seen', '1') } catch {}
+      setTimeout(onComplete, 600)
+    }, 1800)
     return () => clearTimeout(timer)
   }, [onComplete, shouldReduceMotion])
 
@@ -27,7 +36,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
         <motion.div
           className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-background overflow-hidden"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease }}
+          transition={{ duration: 0.5, ease }}
         >
           {/* Animated background grid */}
           <motion.div

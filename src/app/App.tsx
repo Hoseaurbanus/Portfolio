@@ -7,6 +7,7 @@ import Skills from './components/sections/Skills'
 import Services from './components/sections/Services'
 import Experience from './components/sections/Experience'
 import Education from './components/sections/Education'
+import Philosophy from './components/sections/Philosophy'
 import GitHubActivity from './components/sections/GitHubActivity'
 import Contact from './components/sections/Contact'
 import Footer from './components/sections/Footer'
@@ -69,6 +70,7 @@ export default function App() {
           <Services />
           <Experience />
           <Education />
+          <Philosophy />
           <GitHubActivity />
           <Contact />
         </main>

@@ -42,90 +42,94 @@ const experience: Experience[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative py-20 md:py-32">
+    <section id="experience" className="relative py-16 sm:py-20 md:py-28">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
         <SectionNumber number="05" label="Experience" />
         <RevealGroup>
           <motion.h2
             variants={fadeUp}
-            className="font-display text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-10 lg:mb-14 leading-[1.1] tracking-tight"
+            className="font-display text-[1.75rem] sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-7 sm:mb-10 lg:mb-12 leading-[1.1] tracking-tight"
           >
             Where I&apos;ve worked.
           </motion.h2>
 
           <div className="relative">
+            {/* Timeline line - visible on all sizes now */}
             <motion.div
               initial={{ scaleY: 0 }}
               whileInView={{ scaleY: 1 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute left-0 md:left-[11rem] top-3 bottom-3 w-px bg-border hidden md:block"
+              className="absolute left-[7px] md:left-[11rem] top-3 bottom-3 w-px bg-border"
               style={{ transformOrigin: 'top' }}
             />
 
-            <div className="space-y-6 lg:space-y-8">
+            <div className="space-y-5 sm:space-y-6 lg:space-y-8">
               {experience.map((job, i) => (
                 <motion.div
                   key={i}
                   variants={fadeUp}
-                  className="md:grid md:grid-cols-[11rem_1fr] gap-8 lg:gap-10"
+                  className="grid grid-cols-[20px_1fr] md:grid-cols-[11rem_1fr] gap-4 md:gap-8 lg:gap-10"
                 >
-                  <div className="hidden md:flex flex-col items-end pr-10 pt-1 relative">
-                    <p className="text-xs font-mono text-muted-foreground text-right leading-[1.6]">
-                      {job.period}
-                    </p>
-                    <p className="text-[10px] font-mono text-muted-foreground/60 text-right">
-                      {job.location}
-                    </p>
+                  {/* Mobile dot + desktop meta */}
+                  <div className="relative flex md:flex-col md:items-end md:pr-10 pt-1">
                     <motion.div
                       initial={{ scale: 0 }}
                       whileInView={{ scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.2 + i * 0.15, ease }}
-                      className="absolute right-[-4.5px] top-1.5 w-2 h-2 rounded-full bg-accent border-2 border-background"
+                      transition={{ duration: 0.35, delay: 0.15 + i * 0.1, ease }}
+                      className="w-3.5 h-3.5 rounded-full bg-accent border-2 border-background md:absolute md:right-[-7px] md:top-1.5 shrink-0"
                     />
+                    <div className="hidden md:block text-right">
+                      <p className="text-xs font-mono text-muted-foreground leading-[1.6]">
+                        {job.period}
+                      </p>
+                      <p className="text-[10px] font-mono text-muted-foreground/60">
+                        {job.location}
+                      </p>
+                    </div>
                   </div>
 
                   <motion.div
-                    whileHover={{ borderColor: 'color-mix(in srgb, var(--accent) 15%, transparent)' }}
-                    className="p-5 sm:p-6 lg:p-8 rounded-xl border border-border bg-card transition-colors duration-300"
+                    whileHover={{ borderColor: 'color-mix(in srgb, var(--accent) 12%, transparent)' }}
+                    className="p-4 sm:p-5 lg:p-7 rounded-xl border border-border bg-card hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)] transition-all duration-300"
                   >
-                    <div className="flex items-center gap-2 mb-2 md:hidden">
-                      <span className="inline-flex items-center px-2.5 py-1 text-[11px] font-mono text-muted-foreground bg-muted rounded-full border border-border">
+                    <div className="flex flex-wrap items-center gap-2 mb-3 md:hidden">
+                      <span className="inline-flex items-center px-2.5 py-1 text-[10px] sm:text-[11px] font-mono text-muted-foreground bg-muted rounded-full border border-border">
                         {job.period}
                       </span>
-                      <span className="text-[11px] font-mono text-muted-foreground/60">
+                      <span className="text-[10px] font-mono text-muted-foreground/70">
                         {job.location}
                       </span>
                     </div>
-                    <h3 className="font-display text-lg sm:text-xl font-bold text-foreground">
+                    <h3 className="font-display text-base sm:text-lg lg:text-xl font-bold text-foreground leading-tight">
                       {job.role}
                     </h3>
-                    <p className="text-accent font-mono text-sm mt-0.5 mb-3">
+                    <p className="text-accent font-mono text-xs sm:text-sm mt-1 mb-3">
                       {job.company}
                     </p>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-4">
                       {job.description}
                     </p>
-                    <ul className="space-y-2 mb-4 lg:mb-5">
+                    <ul className="space-y-2 sm:space-y-2.5 mb-4">
                       {job.highlights.map((h, j) => (
                         <li
                           key={j}
-                          className="flex items-start gap-3 text-sm text-muted-foreground"
+                          className="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed"
                         >
                           <CheckCircle2
-                            size={13}
+                            size={14}
                             className="text-accent mt-0.5 shrink-0"
                           />
-                          {h}
+                          <span className="flex-1">{h}</span>
                         </li>
                       ))}
                     </ul>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
                       {job.tech.map((t) => (
                         <span
                           key={t}
-                          className="px-2.5 py-1 text-[11px] font-mono bg-background border border-border text-muted-foreground rounded-md"
+                          className="px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-mono bg-background border border-border text-muted-foreground rounded-md"
                         >
                           {t}
                         </span>

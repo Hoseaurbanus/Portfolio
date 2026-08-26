@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#121214"/>
+  <rect x="40" y="40" width="1120" height="550" rx="24" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="60" y="80" font-family="monospace" font-size="12" fill="#e8a838">HOSEA URBANUS AUDU</text>
+  <text x="60" y="260" font-family="sans-serif" font-size="82" font-weight="700" fill="#f0efe9">HOSEA</text>
+  <text x="60" y="340" font-family="sans-serif" font-size="82" font-weight="700" fill="#e8a838">URBANUS</text>
+  <text x="60" y="420" font-family="sans-serif" font-size="82" font-weight="700" fill="#f0efe9">AUDU</text>
+  <text x="60" y="470" font-family="monospace" font-size="16" fill="#71717a">FULL STACK DEVELOPER &amp; DATA ANALYST</text>
+  <line x1="60" y1="500" x2="300" y2="500" stroke="#e8a838" stroke-width="1.5" opacity="0.6"/>
+  <text x="60" y="560" font-family="sans-serif" font-size="18" fill="#a1a1aa">Physicist  React  Python  PHP  School management systems</text>
+  <rect x="920" y="180" width="200" height="280" rx="16" fill="#1a1a1e" stroke="rgba(255,255,255,0.06)"/>
+  <text x="1020" y="320" text-anchor="middle" font-family="sans-serif" font-size="48" font-weight="700" fill="#e8a838">HUA</text>
+</svg>

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { ExternalLink, ChevronRight } from 'lucide-react'
-import { ease } from '@/lib/constants'
 import { RevealGroup } from '../shared/RevealGroup'
 import { fadeUp } from '../shared/Reveal'
 import { SectionNumber } from '../shared/SectionNumber'
@@ -98,86 +97,103 @@ export default function Projects() {
   const [expanded, setExpanded] = useState<number | null>(null)
 
   return (
-    <section id="projects" className="relative py-20 md:py-32">
+    <section id="projects" className="relative py-16 sm:py-20 md:py-28">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
         <SectionNumber number="02" label="Featured Projects" />
         <RevealGroup>
           <motion.h2
             variants={fadeUp}
-            className="font-display text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-4 leading-[1.1] tracking-tight"
+            className="font-display text-[1.75rem] sm:text-4xl lg:text-[3.25rem] font-bold text-foreground mb-3 sm:mb-4 leading-[1.1] tracking-tight"
           >
             Work that speaks.
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="text-muted-foreground max-w-xl mb-10 lg:mb-14 leading-relaxed text-base"
+            className="text-muted-foreground max-w-xl mb-7 sm:mb-10 lg:mb-12 leading-relaxed text-[15px] sm:text-base"
           >
-            Real projects I built and deployed. Click to see the
-            full story behind each one.
+            Real projects I built and deployed. Tap to see details, or open the live demo.
           </motion.p>
 
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {projects.map((p) => (
               <motion.article
                 key={p.id}
                 variants={fadeUp}
-                whileHover={{ borderColor: 'color-mix(in srgb, var(--accent) 15%, transparent)' }}
-                className="group rounded-2xl border border-border bg-card overflow-hidden cursor-pointer"
-                onClick={() => setExpanded(expanded === p.id ? null : p.id)}
-                role="button"
-                aria-expanded={expanded === p.id}
-                tabIndex={0}
-                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpanded(expanded === p.id ? null : p.id) } }}
+                className={`group rounded-2xl border bg-card overflow-hidden transition-all duration-300 ${expanded === p.id ? 'border-accent/25 shadow-[0_8px_32px_rgba(0,0,0,0.4)]' : 'border-border hover:border-accent/15 hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)]'}`}
               >
-                <div className="grid sm:grid-cols-[1fr] lg:grid-cols-[380px_1fr] gap-0">
-                  <div className="relative h-48 sm:h-52 lg:h-56 overflow-hidden bg-[#0f1215] shrink-0">
+                <div className="grid lg:grid-cols-[380px_1fr] gap-0">
+                  <div className="relative h-44 xs:h-48 sm:h-52 lg:h-full lg:min-h-[220px] overflow-hidden bg-[#0f1215] shrink-0">
                     {p.image ? (
-                      <motion.img
+                      <img
                         src={p.image}
                         alt={p.name}
                         loading="lazy"
-                        whileHover={{ scale: 1.04 }}
-                        transition={{ duration: 0.5, ease }}
-                        className="w-full h-full object-cover opacity-80 group-hover:opacity-90 transition-opacity duration-500"
+                        width={380}
+                        height={220}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                       />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-accent/10 via-accent/5 to-card flex items-center justify-center">
                         <span className="text-3xl font-display font-bold text-accent/20">{p.index}</span>
                       </div>
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-card hidden sm:block" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent sm:hidden" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-card/0 lg:to-card hidden lg:block pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent lg:hidden pointer-events-none" />
                   </div>
 
-                  <div className="p-5 sm:p-8 lg:p-10 flex flex-col justify-center">
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-accent">
+                  <div className="p-4 sm:p-6 lg:p-8 flex flex-col justify-center">
+                    <div className="flex items-start justify-between gap-3 mb-2.5 sm:mb-3">
+                      <div className="min-w-0">
+                        <span className="text-[10px] font-mono tracking-[0.18em] sm:tracking-[0.2em] uppercase text-accent">
                           Project {p.index}
                         </span>
-                        <h3 className="font-display text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mt-1">
+                        <h3 className="font-display text-lg sm:text-xl lg:text-2xl font-bold text-foreground mt-1 leading-tight">
                           {p.name}
                         </h3>
                       </div>
-                      <motion.div
-                        animate={{ rotate: expanded === p.id ? 90 : 0 }}
-                        transition={{ duration: 0.3 }}
+                      <button
+                        onClick={() => setExpanded(expanded === p.id ? null : p.id)}
+                        aria-expanded={expanded === p.id}
+                        aria-label={expanded === p.id ? 'Collapse details' : 'Expand details'}
+                        className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-border bg-background flex items-center justify-center hover:border-accent/30 hover:bg-accent/10 transition-colors duration-200 mt-1"
                       >
-                        <ChevronRight size={18} className="text-muted-foreground mt-1.5 shrink-0" />
-                      </motion.div>
+                        <motion.span animate={{ rotate: expanded === p.id ? 90 : 0 }} transition={{ duration: 0.2 }}>
+                          <ChevronRight size={16} className="text-muted-foreground" />
+                        </motion.span>
+                      </button>
                     </div>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-4 lg:mb-5">
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-2">
                       {p.tagline}
                     </p>
-                    <div className="flex flex-wrap gap-2">
-                      {p.tech.map((t) => (
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+                      {p.tech.slice(0, 5).map((t) => (
                         <span
                           key={t}
-                          className="px-2.5 py-1 text-[11px] font-mono bg-background border border-border text-muted-foreground rounded-md"
+                          className="px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-mono bg-background border border-border text-muted-foreground rounded-md"
                         >
                           {t}
                         </span>
                       ))}
+                      {p.tech.length > 5 && (
+                        <span className="px-2 py-1 text-[10px] font-mono text-muted-foreground">+{p.tech.length - 5}</span>
+                      )}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        onClick={() => setExpanded(expanded === p.id ? null : p.id)}
+                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-accent/10 border border-accent/20 text-accent text-xs font-medium rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors duration-200 min-h-[40px]"
+                      >
+                        {expanded === p.id ? 'Hide details' : 'View details'}
+                        <ChevronRight size={13} className={expanded === p.id ? 'rotate-90' : ''} />
+                      </button>
+                      <a
+                        href={p.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-accent text-accent-foreground text-xs font-medium rounded-lg hover:bg-accent/90 transition-colors duration-200 min-h-[40px]"
+                      >
+                        <ExternalLink size={13} /> Live Demo
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -188,12 +204,12 @@ export default function Projects() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                       className="overflow-hidden border-t border-border"
                     >
-                      <div className="p-5 sm:p-8 lg:p-10 grid md:grid-cols-3 gap-6 lg:gap-12">
+                      <div className="p-4 sm:p-6 lg:p-8 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                         <div>
-                          <p className="text-[10px] font-mono text-accent uppercase tracking-[0.18em] mb-3">
+                          <p className="text-[10px] font-mono text-accent uppercase tracking-[0.18em] mb-2.5">
                             Overview
                           </p>
                           <p className="text-sm text-muted-foreground leading-relaxed">
@@ -201,34 +217,23 @@ export default function Projects() {
                           </p>
                         </div>
                         <div>
-                          <p className="text-[10px] font-mono text-accent uppercase tracking-[0.18em] mb-3">
-                            Problem &rarr; Solution
+                          <p className="text-[10px] font-mono text-accent uppercase tracking-[0.18em] mb-2.5">
+                            Problem → Solution
                           </p>
                           <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                             {p.problem}
                           </p>
-                          <p className="text-sm text-foreground leading-relaxed">
+                          <p className="text-sm text-foreground/90 leading-relaxed">
                             {p.solution}
                           </p>
                         </div>
                         <div>
-                          <p className="text-[10px] font-mono text-accent uppercase tracking-[0.18em] mb-3">
+                          <p className="text-[10px] font-mono text-accent uppercase tracking-[0.18em] mb-2.5">
                             Outcome
                           </p>
-                          <p className="text-sm text-foreground font-medium leading-relaxed mb-6">
+                          <p className="text-sm text-foreground leading-relaxed">
                             {p.outcome}
                           </p>
-                          <motion.a
-                            href={p.demo}
-                            onClick={(e) => e.stopPropagation()}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
-                            className="flex items-center justify-center gap-2 px-4 py-2.5 bg-accent text-accent-foreground rounded-lg text-xs font-medium hover:bg-accent/90 transition-all min-h-[44px]"
-                          >
-                            <ExternalLink size={13} /> Live Demo
-                          </motion.a>
                         </div>
                       </div>
                     </motion.div>
