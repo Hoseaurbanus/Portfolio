@@ -1,8 +1,8 @@
 import type { GitHubStats, GitHubDay } from '@/types'
 
 const GITHUB_USERNAME = import.meta.env.VITE_GITHUB_USERNAME || 'Hoseaurbanus'
-const CACHE_KEY = 'github_activity_cache'
-const CACHE_DURATION = 30 * 60 * 1000
+const CACHE_KEY = 'github_activity_cache_v2'
+const CACHE_DURATION = 15 * 60 * 1000
 
 interface CachedData {
   stats: GitHubStats
@@ -37,31 +37,37 @@ export async function fetchGitHubStats(): Promise<GitHubStats> {
   if (cached) return cached.stats
 
   try {
-    const [reposRes, eventsRes] = await Promise.all([
-      fetch(`https://api.github.com/users/${GITHUB_USERNAME}?per_page=100`),
-      fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=100`),
+    const [userRes, reposRes, eventsRes] = await Promise.all([
+      fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, { headers: { Accept: 'application/vnd.github.v3+json' } }),
+      fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100`, { headers: { Accept: 'application/vnd.github.v3+json' } }),
+      fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=100`, { headers: { Accept: 'application/vnd.github.v3+json' } }),
     ])
 
-    if (!reposRes.ok) throw new Error('GitHub API error')
+    if (!userRes.ok) throw new Error('GitHub user API error')
 
-    const userData = await reposRes.json()
+    const userData = await userRes.json()
+    const reposData = reposRes.ok ? await reposRes.json() : []
     const events = eventsRes.ok ? await eventsRes.json() : []
 
+    const totalStars = Array.isArray(reposData)
+      ? reposData.reduce((sum: number, r: { stargazers_count?: number }) => sum + (r.stargazers_count || 0), 0)
+      : 0
+
     const currentYear = new Date().getFullYear()
-    const yearEvents = events.filter((e: { created_at: string }) =>
-      new Date(e.created_at).getFullYear() === currentYear
-    )
+    const yearEvents = Array.isArray(events)
+      ? events.filter((e: { created_at: string }) => new Date(e.created_at).getFullYear() === currentYear)
+      : []
     const contributions = yearEvents.length
 
-    const prEvents = events.filter(
-      (e: { type: string }) => e.type === 'PullRequestEvent'
-    )
+    const prEvents = Array.isArray(events)
+      ? events.filter((e: { type: string }) => e.type === 'PullRequestEvent')
+      : []
 
     const stats: GitHubStats = {
-      publicRepos: userData.public_repos || 0,
-      totalStars: 0,
-      contributions: contributions || 0,
-      pullRequestsMerged: prEvents.length || 0,
+      publicRepos: userData.public_repos ?? (Array.isArray(reposData) ? reposData.length : 0),
+      totalStars,
+      contributions,
+      pullRequestsMerged: prEvents.length,
     }
 
     const activity = await fetchGitHubActivity()

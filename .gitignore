@@ -4,3 +4,5 @@ dist/
 PAJUMA/
 updated-GRA/
 .env
+.vercel
+.env.local

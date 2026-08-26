@@ -25,17 +25,25 @@ export default function GitHubActivity() {
   const [weeks, setWeeks] = useState<GitHubDay[][]>([])
   const [loading, setLoading] = useState(true)
   const gridRef = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
   const [gridVisible, setGridVisible] = useState(false)
 
   useEffect(() => {
     async function load() {
-      const [statsData, activityData] = await Promise.all([
-        fetchGitHubStats(),
-        fetchGitHubActivity(),
-      ])
-      setStats(statsData)
-      setWeeks(activityData)
-      setLoading(false)
+      // Clear stale v1 cache that showed 0 stars
+      try { localStorage.removeItem('github_activity_cache') } catch {}
+      try {
+        const [statsData, activityData] = await Promise.all([
+          fetchGitHubStats(),
+          fetchGitHubActivity(),
+        ])
+        setStats(statsData)
+        setWeeks(activityData)
+      } catch {
+        // keep defaults but stop loading spinner
+      } finally {
+        setLoading(false)
+      }
     }
     load()
   }, [])
@@ -47,6 +55,10 @@ export default function GitHubActivity() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setGridVisible(true)
+          // Auto-scroll to most recent weeks so latest activity is visible
+          if (scrollRef.current) {
+            scrollRef.current.scrollLeft = scrollRef.current.scrollWidth
+          }
           observer.disconnect()
         }
       },
@@ -56,10 +68,17 @@ export default function GitHubActivity() {
     return () => observer.disconnect()
   }, [])
 
-  const statItems = [
+  // Also scroll to end once weeks load
+  useEffect(() => {
+    if (!loading && weeks.length && scrollRef.current) {
+      scrollRef.current.scrollLeft = scrollRef.current.scrollWidth
+    }
+  }, [loading, weeks])
+
+  const statItems: { value: number; label: string; suffix?: string }[] = [
     { value: stats.publicRepos, label: 'Public Repos' },
-    { value: stats.contributions, label: `Contributions (${new Date().getFullYear()})` },
-    { value: stats.pullRequestsMerged, suffix: '+', label: 'Pull Requests Merged' },
+    { value: stats.totalStars, label: 'Stars Earned' },
+    { value: stats.contributions, label: `Public Events (${new Date().getFullYear()})` },
   ]
 
   return (
@@ -100,28 +119,40 @@ export default function GitHubActivity() {
             ))}
           </motion.div>
 
-          <motion.div variants={fadeUp} className="overflow-x-auto pb-2 -mx-5 px-5 sm:mx-0 sm:px-0 scrollbar-thin">
+          <motion.div ref={scrollRef} variants={fadeUp} className="overflow-x-auto pb-2 -mx-5 px-5 sm:mx-0 sm:px-0 scrollbar-thin scroll-smooth">
             <div ref={gridRef} className="flex gap-1 min-w-max pr-4">
-              {weeks.map((week, wi) => (
-                <motion.div
-                  key={wi}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={gridVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-                  transition={{
-                    duration: 0.25,
-                    delay: 0.4 * (1 - Math.exp(-wi * 0.08)),
-                  }}
-                  className="flex flex-col gap-1"
-                >
-                  {week.map((day, di) => (
-                    <div
-                      key={di}
-                      className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-[3px] border border-transparent ${levelClasses[day.level]} hover:ring-1 hover:ring-accent/30 transition-all cursor-default`}
-                      title={day.date ? `${day.count} event${day.count !== 1 ? 's' : ''} on ${day.date}` : ''}
-                    />
+              {loading ? (
+                <div className="flex gap-1">
+                  {Array.from({ length: 20 }).map((_, wi) => (
+                    <div key={wi} className="flex flex-col gap-1">
+                      {Array.from({ length: 7 }).map((__, di) => (
+                        <div key={di} className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-[3px] bg-muted/20 animate-pulse" />
+                      ))}
+                    </div>
                   ))}
-                </motion.div>
-              ))}
+                </div>
+              ) : (
+                weeks.map((week, wi) => (
+                  <motion.div
+                    key={wi}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={gridVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+                    transition={{
+                      duration: 0.25,
+                      delay: 0.4 * (1 - Math.exp(-wi * 0.08)),
+                    }}
+                    className="flex flex-col gap-1"
+                  >
+                    {week.map((day, di) => (
+                      <div
+                        key={di}
+                        className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-[3px] border border-transparent ${levelClasses[day.level]} hover:ring-1 hover:ring-accent/30 transition-all cursor-default`}
+                        title={day.date ? `${day.count} event${day.count !== 1 ? 's' : ''} on ${day.date}` : ''}
+                      />
+                    ))}
+                  </motion.div>
+                ))
+              )}
             </div>
             <div className="flex items-center gap-2 mt-3 text-[10px] font-mono text-muted-foreground">
               <span>Less</span>
@@ -129,10 +160,13 @@ export default function GitHubActivity() {
                 <div key={i} className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-[3px] border border-transparent ${cls}`} />
               ))}
               <span>More</span>
-              <span className="ml-2 hidden sm:inline text-muted-foreground/60">Scroll to see full year →</span>
+              <span className="ml-2 hidden sm:inline text-muted-foreground/60">← scroll for full year | newest on right</span>
             </div>
             <p className="text-[10px] font-mono text-muted-foreground/50 mt-2 leading-relaxed">
-              Based on last 100 public events via GitHub API. For full history, visit <a href="https://github.com/Hoseaurbanus" target="_blank" rel="noopener noreferrer" className="underline hover:text-accent">github.com/Hoseaurbanus</a>.
+              {stats.contributions === 0 && !loading
+                ? 'No public events in the last 90 days — private commits are not counted when repo was private. Now public, future pushes will appear here. '
+                : 'Based on last 100 public events via GitHub API. '}
+              <a href="https://github.com/Hoseaurbanus" target="_blank" rel="noopener noreferrer" className="underline hover:text-accent">View GitHub profile →</a>
             </p>
           </motion.div>
         </RevealGroup>
