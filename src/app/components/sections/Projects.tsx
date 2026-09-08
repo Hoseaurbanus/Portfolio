@@ -122,16 +122,24 @@ export default function Projects() {
                 className={`group rounded-2xl border bg-card overflow-hidden transition-all duration-300 ${expanded === p.id ? 'border-accent/25 shadow-[0_8px_32px_rgba(0,0,0,0.4)]' : 'border-border hover:border-accent/15 hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)]'}`}
               >
                 <div className="grid lg:grid-cols-[380px_1fr] gap-0">
-                  <div className="relative h-44 xs:h-48 sm:h-52 lg:h-full lg:min-h-[220px] overflow-hidden bg-[#0f1215] shrink-0">
+                  <div className="relative h-44 min-[380px]:h-48 sm:h-52 lg:h-full lg:min-h-[220px] overflow-hidden bg-[#0f1215] shrink-0">
                     {p.image ? (
-                      <img
-                        src={p.image}
-                        alt={p.name}
-                        loading="lazy"
-                        width={380}
-                        height={220}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                      />
+                      <picture>
+                        <source
+                          type="image/webp"
+                          srcSet={`${p.image.replace(/\.jpg$/i, '-760.webp')} 760w, ${p.image.replace(/\.jpg$/i, '.webp')} 380w`}
+                          sizes="(min-width: 1024px) 380px, 100vw"
+                        />
+                        <img
+                          src={p.image}
+                          alt={`${p.name} — ${p.tagline}`}
+                          loading="lazy"
+                          decoding="async"
+                          width={380}
+                          height={220}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                        />
+                      </picture>
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-accent/10 via-accent/5 to-card flex items-center justify-center">
                         <span className="text-3xl font-display font-bold text-accent/20">{p.index}</span>

@@ -222,14 +222,18 @@ export default function Hero() {
               style={!isTouch && !shouldReduceMotion ? { x: springX, y: springY } : undefined}
             >
               <div className="absolute inset-0 rounded-2xl border border-border/60 overflow-hidden bg-card shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
-                <img
-                  src="/photo.jpg"
-                  alt="Hosea Urbanus Audu — portrait"
-                  fetchPriority="high"
-                  width={360}
-                  height={480}
-                  className="w-full h-full object-cover object-top"
-                />
+                <picture>
+                  <source type="image/webp" srcSet="/photo-720.webp 720w, /photo.webp 360w" sizes="360px" />
+                  <img
+                    src="/photo.jpg"
+                    alt="Hosea Urbanus Audu — portrait"
+                    fetchPriority="high"
+                    decoding="async"
+                    width={360}
+                    height={480}
+                    className="w-full h-full object-cover object-top"
+                  />
+                </picture>
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/15 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.04] to-transparent" />
               </div>
@@ -256,15 +260,19 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.5, ease }}
             className="lg:hidden flex justify-center mt-2"
           >
-            <div className="relative w-[168px] xs:w-44 sm:w-48 aspect-[3/4] rounded-2xl border border-border/60 overflow-hidden bg-card shadow-lg">
-              <img
-                src="/photo.jpg"
-                alt="Hosea Urbanus Audu — portrait"
-                loading="lazy"
-                width={192}
-                height={256}
-                className="w-full h-full object-cover object-top"
-              />
+            <div className="relative w-[168px] min-[380px]:w-44 sm:w-48 aspect-[3/4] rounded-2xl border border-border/60 overflow-hidden bg-card shadow-lg">
+              <picture>
+                <source type="image/webp" srcSet="/photo-384.webp 384w, /photo.webp 192w" sizes="192px" />
+                <img
+                  src="/photo.jpg"
+                  alt="Hosea Urbanus Audu — portrait"
+                  loading="lazy"
+                  decoding="async"
+                  width={192}
+                  height={256}
+                  className="w-full h-full object-cover object-top"
+                />
+              </picture>
               <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
               <div className="absolute bottom-2 left-2 right-2 bg-card/90 backdrop-blur-md border border-border rounded-lg px-2.5 py-2 text-center">
                 <p className="font-display text-xs font-bold text-foreground leading-none">B.Sc. Physics</p>

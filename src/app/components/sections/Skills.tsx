@@ -48,6 +48,7 @@ export default function Skills() {
                 role="button"
                 tabIndex={0}
                 aria-pressed={active === label}
+                aria-label={`${label}: ${skills.length} skills — ${active === label ? 'expanded' : 'collapsed'}. Press Enter to toggle highlight`}
                 className={`p-4 sm:p-5 lg:p-6 rounded-xl border transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
                   active === label
                     ? 'border-accent/40 bg-accent/[0.06] shadow-[0_8px_24px_rgba(0,0,0,0.3)]'

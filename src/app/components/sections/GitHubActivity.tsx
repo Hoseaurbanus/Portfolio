@@ -120,9 +120,15 @@ export default function GitHubActivity() {
           </motion.div>
 
           <motion.div ref={scrollRef} variants={fadeUp} className="overflow-x-auto pb-2 -mx-5 px-5 sm:mx-0 sm:px-0 scrollbar-thin scroll-smooth">
-            <div ref={gridRef} className="flex gap-1 min-w-max pr-4">
+            <div
+              ref={gridRef}
+              role="grid"
+              aria-label={`GitHub contribution activity for ${new Date().getFullYear()} — ${weeks.length} weeks`}
+              aria-busy={loading}
+              className="flex gap-1 min-w-max pr-4"
+            >
               {loading ? (
-                <div className="flex gap-1">
+                <div className="flex gap-1" aria-hidden="true">
                   {Array.from({ length: 20 }).map((_, wi) => (
                     <div key={wi} className="flex flex-col gap-1">
                       {Array.from({ length: 7 }).map((__, di) => (
@@ -135,6 +141,8 @@ export default function GitHubActivity() {
                 weeks.map((week, wi) => (
                   <motion.div
                     key={wi}
+                    role="row"
+                    aria-label={`Week ${wi + 1}`}
                     initial={{ opacity: 0, y: 8 }}
                     animate={gridVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
                     transition={{
@@ -143,13 +151,21 @@ export default function GitHubActivity() {
                     }}
                     className="flex flex-col gap-1"
                   >
-                    {week.map((day, di) => (
-                      <div
-                        key={di}
-                        className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-[3px] border border-transparent ${levelClasses[day.level]} hover:ring-1 hover:ring-accent/30 transition-all cursor-default`}
-                        title={day.date ? `${day.count} event${day.count !== 1 ? 's' : ''} on ${day.date}` : ''}
-                      />
-                    ))}
+                    {week.map((day, di) => {
+                      const label = day.date
+                        ? `${day.count} contribution${day.count !== 1 ? 's' : ''} on ${day.date}`
+                        : 'No date'
+                      return (
+                        <div
+                          key={di}
+                          role="gridcell"
+                          tabIndex={day.date ? 0 : -1}
+                          aria-label={label}
+                          title={day.date ? `${day.count} event${day.count !== 1 ? 's' : ''} on ${day.date}` : ''}
+                          className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-[3px] border border-transparent ${levelClasses[day.level]} hover:ring-1 hover:ring-accent/30 focus-visible:ring-1 focus-visible:ring-accent focus-visible:outline-none transition-all cursor-default`}
+                        />
+                      )
+                    })}
                   </motion.div>
                 ))
               )}
