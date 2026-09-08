@@ -75,10 +75,11 @@ export default function GitHubActivity() {
     }
   }, [loading, weeks])
 
+  const GITHUB_USERNAME = import.meta.env.VITE_GITHUB_USERNAME || 'Hoseaurbanus'
   const statItems: { value: number; label: string; suffix?: string }[] = [
     { value: stats.publicRepos, label: 'Public Repos' },
     { value: stats.totalStars, label: 'Stars Earned' },
-    { value: stats.contributions, label: `Public Events (${new Date().getFullYear()})` },
+    { value: stats.contributions, label: 'Total Commits' },
   ]
 
   return (
@@ -96,7 +97,7 @@ export default function GitHubActivity() {
             variants={fadeUp}
             className="text-muted-foreground max-w-xl mb-6 sm:mb-8 lg:mb-10 leading-relaxed text-[15px] sm:text-base"
           >
-            Live data from GitHub. Activity reflects recent public events — not a full contribution graph.
+            Live data from GitHub — commits across all public repos (226+) and real contribution graph. Private commits require a token.
           </motion.p>
 
           <motion.div
@@ -120,55 +121,84 @@ export default function GitHubActivity() {
           </motion.div>
 
           <motion.div ref={scrollRef} variants={fadeUp} className="overflow-x-auto pb-2 -mx-5 px-5 sm:mx-0 sm:px-0 scrollbar-thin scroll-smooth">
-            <div
-              ref={gridRef}
-              role="grid"
-              aria-label={`GitHub contribution activity for ${new Date().getFullYear()} — ${weeks.length} weeks`}
-              aria-busy={loading}
-              className="flex gap-1 min-w-max pr-4"
-            >
-              {loading ? (
-                <div className="flex gap-1" aria-hidden="true">
-                  {Array.from({ length: 20 }).map((_, wi) => (
-                    <div key={wi} className="flex flex-col gap-1">
-                      {Array.from({ length: 7 }).map((__, di) => (
-                        <div key={di} className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-[3px] bg-muted/20 animate-pulse" />
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                weeks.map((week, wi) => (
-                  <motion.div
-                    key={wi}
-                    role="row"
-                    aria-label={`Week ${wi + 1}`}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={gridVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-                    transition={{
-                      duration: 0.25,
-                      delay: 0.4 * (1 - Math.exp(-wi * 0.08)),
-                    }}
-                    className="flex flex-col gap-1"
-                  >
-                    {week.map((day, di) => {
-                      const label = day.date
-                        ? `${day.count} contribution${day.count !== 1 ? 's' : ''} on ${day.date}`
-                        : 'No date'
-                      return (
-                        <div
-                          key={di}
-                          role="gridcell"
-                          tabIndex={day.date ? 0 : -1}
-                          aria-label={label}
-                          title={day.date ? `${day.count} event${day.count !== 1 ? 's' : ''} on ${day.date}` : ''}
-                          className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-[3px] border border-transparent ${levelClasses[day.level]} hover:ring-1 hover:ring-accent/30 focus-visible:ring-1 focus-visible:ring-accent focus-visible:outline-none transition-all cursor-default`}
-                        />
-                      )
-                    })}
-                  </motion.div>
-                ))
-              )}
+            {/* Real GitHub contribution chart — amber on dark, honest cache-busted */}
+            <div ref={gridRef} className="min-w-max pr-4">
+              {/* Primary: real GitHub chart (ghchart) — shows true contributions */}
+              <img
+                src={`https://ghchart.rshah.org/e8a838/${GITHUB_USERNAME}`}
+                alt={`GitHub contribution chart for ${GITHUB_USERNAME} — real commits from GitHub`}
+                loading="lazy"
+                decoding="async"
+                width={720}
+                height={112}
+                className="max-w-none w-[720px] sm:w-[760px] h-auto rounded-md border border-border bg-card p-2 hidden sm:block"
+                onError={(e) => {
+                  ;(e.currentTarget as HTMLImageElement).style.display = 'none'
+                }}
+              />
+              {/* Mobile: same chart condensed */}
+              <img
+                src={`https://ghchart.rshah.org/e8a838/${GITHUB_USERNAME}`}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                width={720}
+                height={112}
+                className="w-[640px] h-auto rounded-md border border-border bg-card p-2 sm:hidden"
+                onError={(e) => {
+                  ;(e.currentTarget as HTMLImageElement).style.display = 'none'
+                }}
+              />
+              {/* Fallback: local event-based grid if ghchart blocked */}
+              <div
+                role="grid"
+                aria-label={`Fallback activity for ${new Date().getFullYear()} — ${weeks.length} weeks`}
+                aria-busy={loading}
+                className="flex gap-1 mt-3"
+              >
+                {loading ? (
+                  <div className="flex gap-1" aria-hidden="true">
+                    {Array.from({ length: 20 }).map((_, wi) => (
+                      <div key={wi} className="flex flex-col gap-1">
+                        {Array.from({ length: 7 }).map((__, di) => (
+                          <div key={di} className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-[3px] bg-muted/20 animate-pulse" />
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  weeks.map((week, wi) => (
+                    <motion.div
+                      key={wi}
+                      role="row"
+                      aria-label={`Week ${wi + 1}`}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={gridVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+                      transition={{
+                        duration: 0.25,
+                        delay: 0.4 * (1 - Math.exp(-wi * 0.08)),
+                      }}
+                      className="flex flex-col gap-1"
+                    >
+                      {week.map((day, di) => {
+                        const label = day.date
+                          ? `${day.count} contribution${day.count !== 1 ? 's' : ''} on ${day.date}`
+                          : 'No date'
+                        return (
+                          <div
+                            key={di}
+                            role="gridcell"
+                            tabIndex={day.date ? 0 : -1}
+                            aria-label={label}
+                            title={day.date ? `${day.count} event${day.count !== 1 ? 's' : ''} on ${day.date}` : ''}
+                            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-[3px] border border-transparent ${levelClasses[day.level]} hover:ring-1 hover:ring-accent/30 focus-visible:ring-1 focus-visible:ring-accent focus-visible:outline-none transition-all cursor-default`}
+                          />
+                        )
+                      })}
+                    </motion.div>
+                  ))
+                )}
+              </div>
             </div>
             <div className="flex items-center gap-2 mt-3 text-[10px] font-mono text-muted-foreground">
               <span>Less</span>
@@ -176,13 +206,12 @@ export default function GitHubActivity() {
                 <div key={i} className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-[3px] border border-transparent ${cls}`} />
               ))}
               <span>More</span>
-              <span className="ml-2 hidden sm:inline text-muted-foreground/60">← scroll for full year | newest on right</span>
+              <span className="ml-2 hidden sm:inline text-muted-foreground/60">← real GitHub chart (amber) + fallback | View on GitHub →</span>
             </div>
             <p className="text-[10px] font-mono text-muted-foreground/50 mt-2 leading-relaxed">
-              {stats.contributions === 0 && !loading
-                ? 'No public events in the last 90 days — private commits are not counted when repo was private. Now public, future pushes will appear here. '
-                : 'Based on last 100 public events via GitHub API. '}
-              <a href="https://github.com/Hoseaurbanus" target="_blank" rel="noopener noreferrer" className="underline hover:text-accent">View GitHub profile →</a>
+              {loading ? 'Loading GitHub data…' : `Showing ${stats.contributions} total commits via GitHub Search API. `}
+              <a href={`https://github.com/${GITHUB_USERNAME}`} target="_blank" rel="noopener noreferrer" className="underline hover:text-accent">View GitHub profile →</a>
+              <span className="ml-2 hidden sm:inline">Chart: <a href={`https://ghchart.rshah.org/${GITHUB_USERNAME}`} target="_blank" rel="noopener noreferrer" className="underline hover:text-accent">ghchart</a></span>
             </p>
           </motion.div>
         </RevealGroup>

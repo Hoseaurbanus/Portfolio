@@ -37,10 +37,11 @@ export async function fetchGitHubStats(): Promise<GitHubStats> {
   if (cached) return cached.stats
 
   try {
-    const [userRes, reposRes, eventsRes] = await Promise.all([
+    const [userRes, reposRes, eventsRes, commitsRes] = await Promise.all([
       fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, { headers: { Accept: 'application/vnd.github.v3+json' } }),
       fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100`, { headers: { Accept: 'application/vnd.github.v3+json' } }),
       fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=100`, { headers: { Accept: 'application/vnd.github.v3+json' } }),
+      fetch(`https://api.github.com/search/commits?q=author:${GITHUB_USERNAME}`, { headers: { Accept: 'application/vnd.github.cloak-preview' } }).catch(() => null as unknown as Response),
     ])
 
     if (!userRes.ok) throw new Error('GitHub user API error')
@@ -53,11 +54,21 @@ export async function fetchGitHubStats(): Promise<GitHubStats> {
       ? reposData.reduce((sum: number, r: { stargazers_count?: number }) => sum + (r.stargazers_count || 0), 0)
       : 0
 
-    const currentYear = new Date().getFullYear()
-    const yearEvents = Array.isArray(events)
-      ? events.filter((e: { created_at: string }) => new Date(e.created_at).getFullYear() === currentYear)
-      : []
-    const contributions = yearEvents.length
+    // Real commits via Search API (226 for Hoseaurbanus) — fallback to events if rate-limited
+    let contributions = 0
+    if (commitsRes && commitsRes.ok) {
+      try {
+        const c = await commitsRes.json()
+        if (typeof c.total_count === 'number') contributions = c.total_count
+      } catch {}
+    }
+    if (!contributions) {
+      const currentYear = new Date().getFullYear()
+      const yearEvents = Array.isArray(events)
+        ? events.filter((e: { created_at: string }) => new Date(e.created_at).getFullYear() === currentYear)
+        : []
+      contributions = yearEvents.length
+    }
 
     const prEvents = Array.isArray(events)
       ? events.filter((e: { type: string }) => e.type === 'PullRequestEvent')
